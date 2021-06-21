@@ -1,6 +1,20 @@
 #pragma once
 #include "GameDefine.h"
 
+// Avoid Block
+typedef struct {
+	int x;
+	int y;
+	int act;
+}Block;
+
+typedef struct {
+	int x;
+}Player;
+
+Block block[SCR_WIDTH];
+Player player;
+
 int hydro, oxy, carb;
 int OddEvencheck;
 int hoctemp;
@@ -26,7 +40,15 @@ int DicegameDraw();
 void DicemainDraw();
 int hocDraw();
 void hocmainDraw();
-
+void Block_init();
+int Block_iskeydown(int key);
+void Block_create();
+void Block_move();
+void Block_delete();
+int Block_contain_player();
+void Block_move_player();
+void Block_print_map();
+void Block_Avoid(); // 게임 실행 함수
 
 
 
