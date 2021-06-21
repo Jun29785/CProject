@@ -1,6 +1,13 @@
 #pragma once
 #include "GameDefine.h"
 
+struct SMALL_RECT {
+	SHORT Left;
+	SHORT Top;
+	SHORT Right;
+	SHORT Bottom;
+};
+
 // Avoid Block
 typedef struct {
 	int x;

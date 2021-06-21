@@ -125,7 +125,7 @@ void EntryStory()
 
 void init()
 {
-	system("mode con cols=96 lines=32 | title 30일생존게임");
+	system("mode con:cols=96 lines=30");
 }
 
 int menuDraw()
@@ -416,6 +416,8 @@ void gamemainDraw()
 		RSPmainDraw();
 		break;
 	case 2:
+		hoctemp = hocDraw();
+		Block_Avoid();
 		break;
 	case 3:
 		break;
@@ -679,7 +681,7 @@ void RSPmainDraw()
 	case 0:
 		num = RSP();
 		if (menuCode == num) {
-			printf("비겼습니다.")
+			printf("비겼습니다.");
 		}
 		break;
 	case 1:
