@@ -19,7 +19,9 @@ typedef struct {
 	int x;
 }Player;
 
-Block block[SCR_WIDTH];
+int block_width = SCR_WIDTH/2;
+
+Block block[SCR_WIDTH/2];
 Player player;
 
 int hydro, oxy, carb;
