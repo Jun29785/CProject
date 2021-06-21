@@ -19,7 +19,7 @@ int main()
 	//	system("cls");
 	//	gotoxy(x, y);
 	//	printf("бс");
-	//	printf("TEST");
+	//	printf("TEST");	
 	//}
 	init();
 	while (1) {

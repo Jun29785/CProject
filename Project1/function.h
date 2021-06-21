@@ -8,13 +8,6 @@ int minigamecount1;
 int minigamecount2;
 int minigamecount3;
 
-int BlockNum;
-typedef struct Object {
-	char* image;
-	int X, Y;
-	int height, width;
-}Object;
-
 void gotoxy(int x, int y);
 void HideCursor();
 void EntryStory();
@@ -31,9 +24,18 @@ void Coin(); // 동전 앞뒤
 void RSP(); // 가위바위보 
 int DicegameDraw();
 void DicemainDraw();
-void CreateBlock();
-void PrintBlock();
-void MoveBlock();
-void AvoidBlock();
 int hocDraw();
 void hocmainDraw();
+
+
+
+
+
+
+
+
+
+
+
+
+
