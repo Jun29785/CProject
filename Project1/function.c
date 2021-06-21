@@ -838,3 +838,103 @@ int hocDraw()
 void hocmainDraw()
 {
 }
+
+void Block_init()
+{
+	for (int i = 0; i < SCR_WIDTH; i++)
+		block[i].act = FALSE;
+
+	player.x = SCR_WIDTH / 2;
+}
+
+int Block_iskeydown(int key)
+{
+	return ((GetAsyncKeyState(key) & 0x8000) != 0);
+}
+
+void Block_create()
+{
+	for (int i = 0; i < SCR_WIDTH; i++) {
+		if (!block[i].act) {
+			block[i].x = rand() % SCR_WIDTH;
+			block[i].y = SCR_HEIGHT - 1;
+
+			block[i].act = TRUE;
+			return;
+		}
+	}
+}
+
+void Block_move()
+{
+	for (int i = 0; i < SCR_WIDTH; i++) {
+		if (block[i].act) {
+			block[i].y--;
+		}
+	}
+}
+
+void Block_delete()
+{
+	for (int i = 0; i < SCR_WIDTH; i++) {
+		if (block[i].act && block[i].y < 0) {
+			block[i].act = FALSE;
+		}
+	}
+}
+
+int Block_contain_player()
+{
+	for (int i = 0; i < SCR_WIDTH; i++) {
+		if ((block[i].act) && (block[i].y == 0) && (block[i].x == player.x))
+			return TRUE;
+	}
+	return FALSE;
+}
+
+void Block_move_player()
+{
+	if (Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a'))
+		player.x--;
+	if (Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D'))
+		player.x++;
+
+}
+
+void Block_print_map()
+{
+	system("cls");
+	for (int i = 0; i < SCR_WIDTH; i++) {
+		if (block[i].act) {
+			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
+			printf("¡á");
+		}
+	}
+
+	gotoxy(player.x, SCR_HEIGHT);
+	printf("¿ô");
+
+	gotoxy(0, SCR_HEIGHT + 1);
+	for (int i = 0; i < SCR_HEIGHT; i++)
+		printf("¢Ç");
+}
+
+void Block_Avoid()
+{
+	char key;
+	Block_init();
+
+	do {
+		srand((int)malloc(NULL));
+
+		Block_create();
+		Block_move();
+		Block_delete();
+
+		Block_move_player();
+
+		Block_print_map();
+
+		Sleep(100);
+	} while (!(Block_contain_player()));
+}
