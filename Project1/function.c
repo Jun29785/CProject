@@ -841,10 +841,10 @@ void hocmainDraw()
 
 void Block_init()
 {
-	for (int i = 0; i < SCR_WIDTH; i++)
+	for (int i = 0; i < block_width; i++)
 		block[i].act = FALSE;
 
-	player.x = SCR_WIDTH / 2;
+	player.x = block_width / 2;
 }
 
 int Block_iskeydown(int key)
@@ -854,9 +854,9 @@ int Block_iskeydown(int key)
 
 void Block_create()
 {
-	for (int i = 0; i < SCR_WIDTH; i++) {
+	for (int i = 0; i < block_width; i++) {
 		if (!block[i].act) {
-			block[i].x = rand() % SCR_WIDTH;
+			block[i].x = rand() % block_width;
 			block[i].y = SCR_HEIGHT - 1;
 
 			block[i].act = TRUE;
@@ -867,7 +867,7 @@ void Block_create()
 
 void Block_move()
 {
-	for (int i = 0; i < SCR_WIDTH; i++) {
+	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			block[i].y--;
 		}
@@ -876,7 +876,7 @@ void Block_move()
 
 void Block_delete()
 {
-	for (int i = 0; i < SCR_WIDTH; i++) {
+	for (int i = 0; i < block_width; i++) {
 		if (block[i].act && block[i].y < 0) {
 			block[i].act = FALSE;
 		}
@@ -885,7 +885,7 @@ void Block_delete()
 
 int Block_contain_player()
 {
-	for (int i = 0; i < SCR_WIDTH; i++) {
+	for (int i = 0; i < block_width; i++) {
 		if ((block[i].act) && (block[i].y == 0) && (block[i].x == player.x))
 			return TRUE;
 	}
@@ -904,7 +904,7 @@ void Block_move_player()
 void Block_print_map()
 {
 	system("cls");
-	for (int i = 0; i < SCR_WIDTH; i++) {
+	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
 			printf("бс");
