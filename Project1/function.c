@@ -726,6 +726,43 @@ void DicemainDraw()
 	}
 	Sleep(2500);
 }
+// DropBlok
+Object Player;
+Object* Block = NULL;
+void CreateBlock()
+{
+	if (BlockNum < BlockMaxNum)
+	{
+		Block = (Object*)malloc(sizeof(Object));
+
+		Block->X = rand() % 66 + 10;
+		Block->Y = rand() % 4 + 1;
+		Block->image = "бс";
+	}
+}
+
+void PrintBlock()
+{
+	gotoxy(Block->X, Block->Y);
+	printf("%s", Block->image);
+}
+
+void MoveBlock()
+{
+	if (Block->Y < 2)
+		Block = NULL;
+	else
+	{
+		gotoxy(Block->X, Block->Y - 1);
+		printf("%s", " ");
+		PrintBlock();
+	}
+}
+
+void AvoidBlock()
+{
+
+}
 
 int hocDraw()
 {
