@@ -6,8 +6,8 @@
 #include <string.h>
 #include <time.h>
 
-#define SCR_HEIGHT 30
-#define SCR_WIDTH 80
+#define SCR_HEIGHT 32
+#define SCR_WIDTH 96
 #define UP 0
 #define DOWN 1
 #define SUBMIT 4 // 선택 ( 스 페 이 스 바 )

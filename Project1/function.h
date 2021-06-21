@@ -21,7 +21,9 @@ int Dice();
 int minigameDraw();
 void gamemainDraw();
 void Coin(); // 동전 앞뒤	
-void RSP(); // 가위바위보 
+int RSP(); // 가위바위보 
+int RSPgameDraw();
+void RSPmainDraw();
 int DicegameDraw();
 void DicemainDraw();
 int hocDraw();

@@ -408,9 +408,12 @@ void gamemainDraw()
 	int menuCode = minigameDraw();
 	switch (menuCode) {
 	case 0:
+		hoctemp = hocDraw();
 		DicemainDraw();
 		break;
 	case 1:
+		hoctemp = hocDraw();
+		RSPmainDraw();
 		break;
 	case 2:
 		break;
@@ -537,7 +540,7 @@ void Coin()
 	Sleep(1000);
 }
 
-void RSP()
+int RSP()
 {
 	int rsp[3][16][13] = {
 		// 주먹
@@ -622,6 +625,70 @@ void RSP()
 	}
 	Sleep(2000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	
+	return rnd_rsp;
+}
+
+int RSPgameDraw()
+{
+	system("cls");
+	int x = 42, y = 22;
+	gotoxy(x - 2, y);
+	printf("> 주먹"); // 0
+	gotoxy(x, y + 1);
+	printf("가위"); // 1
+	gotoxy(x, y + 2);
+	printf("  보  "); // 2
+	while (1) {
+		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
+		switch (n) {
+		case UP: {
+			if (y > 22) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, --y);
+				printf(">");
+			}
+			break;
+		}
+		case DOWN: {
+			if (y < 24) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, ++y);
+				printf(">");
+			}
+			break;
+		}
+		case SUBMIT: {
+			return y - 22;
+		}
+		case ENTER: {
+			return y - 22;
+		}
+		}
+	}
+}
+
+void RSPmainDraw()
+{
+	system("cls");
+	int menuCode = RSPgameDraw();
+	int num;
+	switch (menuCode) {
+	case 0:
+		num = RSP();
+		if (menuCode == num) {
+			printf("비겼습니다.")
+		}
+		break;
+	case 1:
+		num = RSP();
+		break;
+	case 2:
+		num = RSP();
+		break;
+	}
 }
 
 int DicegameDraw()
