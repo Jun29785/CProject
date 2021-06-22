@@ -841,6 +841,8 @@ void hocmainDraw()
 {
 }
 
+block_width = SCR_WIDTH ;
+
 void Block_init()
 {
 	for (int i = 0; i < block_width; i++)
@@ -858,7 +860,7 @@ void Block_create()
 {
 	for (int i = 0; i < block_width; i++) {
 		if (!block[i].act) {
-			block[i].x = rand() % block_width;
+			block[i].x = rand() % block_width/2;
 			block[i].y = SCR_HEIGHT - 1;
 
 			block[i].act = TRUE;
@@ -888,7 +890,7 @@ void Block_delete()
 int Block_contain_player()
 {
 	for (int i = 0; i < block_width; i++) {
-		if ((block[i].act) && (block[i].y == 0) && (block[i].x == player.x))
+		if ((block[i].act) && (block[i].y <2) && (block[i].x == player.x))
 			return TRUE;
 	}
 	return FALSE;
@@ -914,7 +916,7 @@ void Block_print_map()
 	}
 
 	gotoxy(player.x, SCR_HEIGHT);
-	printf("¿ô");
+	printf("¢»");
 
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT; i++)
@@ -937,6 +939,6 @@ void Block_Avoid()
 
 		Block_print_map();
 
-		Sleep(7);
+		Sleep(100);
 	} while (!(Block_contain_player()));
 }
