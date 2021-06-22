@@ -858,7 +858,7 @@ int Block_iskeydown(int key)
 
 void Block_create()
 {
-	for (int i = 0; i < block_width; i++) {
+	for (int i = 0; i <= block_width+3; i++) {
 		if (!block[i].act) {
 			block[i].x = rand() % block_width;
 			block[i].y = SCR_HEIGHT - 1;
@@ -898,9 +898,9 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if (Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a'))
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a'))&&player.x>=0)
 		player.x--;
-	if (Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D'))
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D'))&&player.x<block_width-2)
 		player.x++;
 
 }
@@ -919,7 +919,7 @@ void Block_print_map()
 	printf("¢»");
 
 	gotoxy(0, SCR_HEIGHT + 1);
-	for (int i = 0; i < SCR_HEIGHT; i++)
+	for (int i = 0; i < SCR_HEIGHT-7; i++)
 		printf("¢Ç");
 }
 
