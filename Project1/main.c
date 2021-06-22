@@ -7,7 +7,7 @@ int main()
 	minigamecount1 = 10;
 	minigamecount2 = 10;
 	minigamecount3 = 10;
-
+	block_width = SCR_WIDTH / 2;
 	gotoxy(x, y);
 	HideCursor();
 	//while (1)

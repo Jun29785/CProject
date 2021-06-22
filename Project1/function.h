@@ -1,12 +1,6 @@
 #pragma once
 #include "GameDefine.h"
 
-struct SMALL_RECT {
-	SHORT Left;
-	SHORT Top;
-	SHORT Right;
-	SHORT Bottom;
-};
 
 // Avoid Block
 typedef struct {
@@ -19,7 +13,7 @@ typedef struct {
 	int x;
 }Player;
 
-int block_width = SCR_WIDTH/2;
+int block_width;
 
 Block block[SCR_WIDTH/2];
 Player player;

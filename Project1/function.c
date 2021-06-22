@@ -125,7 +125,7 @@ void EntryStory()
 
 void init()
 {
-	system("mode con:cols=96 lines=30");
+	system("mode con:cols=96 lines=40");
 }
 
 int menuDraw()
@@ -937,6 +937,6 @@ void Block_Avoid()
 
 		Block_print_map();
 
-		Sleep(100);
+		Sleep(7);
 	} while (!(Block_contain_player()));
 }
