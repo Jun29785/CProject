@@ -13,7 +13,7 @@ typedef struct {
 	int x;
 }Player;
 
-int block_width = SCR_WIDTH/2;
+int block_width;
 
 Block block[SCR_WIDTH/2];
 Player player;

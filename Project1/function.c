@@ -860,7 +860,7 @@ void Block_create()
 {
 	for (int i = 0; i < block_width; i++) {
 		if (!block[i].act) {
-			block[i].x = rand() % block_width/2;
+			block[i].x = rand() % block_width;
 			block[i].y = SCR_HEIGHT - 1;
 
 			block[i].act = TRUE;
@@ -939,6 +939,6 @@ void Block_Avoid()
 
 		Block_print_map();
 
-		Sleep(100);
+		Sleep(10);
 	} while (!(Block_contain_player()));
 }
