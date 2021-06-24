@@ -479,13 +479,16 @@ void gamemainDraw()
 		break;
 	case 1:
 		hoctemp = hocDraw();
-		RSPmainDraw();
+		Coin();
 		break;
 	case 2:
 		hoctemp = hocDraw();
-		Block_Avoid();
+		RSPmainDraw();
 		break;
 	case 3:
+		Block_Avoid();
+		break;
+	case 4:
 		break;
 	}
 }
@@ -1039,6 +1042,10 @@ void setColor(unsigned short text)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
 
+void setcolor(unsigned short text)
+{
+}
+
 void DayAlter(int day)
 {
 	int CountNum[10][5][4] = {
@@ -1144,4 +1151,47 @@ void DayAlter(int day)
 		printf("\n");
 		y++;
 	}
+}
+
+int coingameDraw()
+{
+	system("cls");
+	int x = 42, y = 26;
+	gotoxy(x - 2, y);
+	printf("> 앞"); // 0
+	gotoxy(x, y + 1);
+	printf("뒤"); // 1
+	while (1) {
+		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
+		switch (n) {
+		case UP: {
+			if (y > 26) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, --y);
+				printf(">");
+			}
+			break;
+		}
+		case DOWN: {
+			if (y < 27) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, ++y);
+				printf(">");
+			}
+			break;
+		}
+		case SUBMIT: {
+			return y - 26;
+		}
+		case ENTER: {
+			return y - 26;
+		}
+		}
+	}
+}
+void coinmainDraw()
+{
+	
 }
