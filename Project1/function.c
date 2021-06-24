@@ -188,9 +188,71 @@ int keyControl()
 	else return NONE;
 }
 
+void menuTitleDraw()
+{
+	printf("┌─────────────┐");
+	gotoxy(0, 1); printf("│    %d Day    │", day);
+	gotoxy(0, 2); printf("└─────────────┘");
+
+
+	// 인벤토리 
+	int x = 58, y = 0;
+	gotoxy(x, y); printf("┌");
+	for (int i = 0; i < 26; i++) {
+		if (i == 14) {
+			printf("인벤토리");
+		}
+		printf("─");
+	}
+	printf("┐");
+	y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    수소 : %d                      │", hydro); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    산소 : %d                      │", oxy); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    탄소 : %d                      │", carb); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("└");
+	for (int i = 0; i < 34; i++) printf("─");
+	printf("┘");
+	gotoxy(0, 22); printf("────────────────────────────────────────────────────────────────────────────────────────────────");
+	//int inventory[6][10][10] = {
+	//	// 1
+	//	{{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,0,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0},
+	//	{1,1,1,1,1,1,1,0,0,0}},
+	//};
+	//int x = 10, y = 10, sleep = 100;
+	//for (int i = 0; i < 1; i++)
+	//{
+	//	for (int k = 0; k < 10; k++)
+	//	{
+	//		gotoxy(x, y);
+	//		for (int j = 0; j < 10; j++)
+	//			printf("%s", inventory[i][k][j] == 1 ? "■" : "　");
+	//		printf("\n");
+	//		y++;
+	//		Sleep(sleep);
+	//	}
+
+	//	y = 10;
+	//}
+	//sleep += 200;
+}
+
 int mainDraw()
 {
-	int x = 42, y = 22;
+	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 미니게임");
 	gotoxy(x, y + 1);
@@ -201,7 +263,7 @@ int mainDraw()
 		int k = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (k) {
 		case UP: {
-			if (y > 22) {
+			if (y > 26) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, --y);
@@ -210,7 +272,7 @@ int mainDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 24) {
+			if (y < 28) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -219,10 +281,10 @@ int mainDraw()
 			break;
 		}
 		case SUBMIT: {
-			return y - 22;
+			return y - 26;
 		}
 		case ENTER: {
-			return y - 22;
+			return y - 26;
 		}
 		}
 	}
@@ -250,6 +312,7 @@ void startDraw()
 	system("cls");
 	//EntryStory();
 	while (1) {
+		menuTitleDraw();
 		int menuCode = mainDraw();
 		if (menuCode == 0) {
 			gamemainDraw();
@@ -361,7 +424,7 @@ int Dice()
 int minigameDraw()
 {
 	system("cls");
-	int x = 42, y = 22;
+	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 주사위"); // 0
 	gotoxy(x, y + 1);
@@ -374,7 +437,7 @@ int minigameDraw()
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
-			if (y > 22) {
+			if (y > 26) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, --y);
@@ -383,7 +446,7 @@ int minigameDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 25) {
+			if (y < 29) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -392,10 +455,10 @@ int minigameDraw()
 			break;
 		}
 		case SUBMIT: {
-			return y - 22;
+			return y - 26;
 		}
 		case ENTER: {
-			return y - 22;
+			return y - 26;
 		}
 		}
 	}
@@ -634,7 +697,7 @@ int RSP()
 int RSPgameDraw()
 {
 	system("cls");
-	int x = 42, y = 22;
+	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 주먹"); // 0
 	gotoxy(x, y + 1);
@@ -645,7 +708,7 @@ int RSPgameDraw()
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
-			if (y > 22) {
+			if (y > 26) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, --y);
@@ -654,7 +717,7 @@ int RSPgameDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 24) {
+			if (y < 28) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -663,10 +726,10 @@ int RSPgameDraw()
 			break;
 		}
 		case SUBMIT: {
-			return y - 22;
+			return y - 26;
 		}
 		case ENTER: {
-			return y - 22;
+			return y - 26;
 		}
 		}
 	}
@@ -696,7 +759,7 @@ void RSPmainDraw()
 int DicegameDraw()
 {
 	system("cls");
-	int x = 42, y = 22;
+	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 홀"); // 0
 	gotoxy(x, y + 1);
@@ -705,7 +768,7 @@ int DicegameDraw()
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
-			if (y > 22) {
+			if (y > 26) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, --y);
@@ -714,7 +777,7 @@ int DicegameDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 23) {
+			if (y < 27) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -723,10 +786,10 @@ int DicegameDraw()
 			break;
 		}
 		case SUBMIT: {
-			return y - 22;
+			return y - 26;
 		}
 		case ENTER: {
-			return y - 22;
+			return y - 26;
 		}
 		}
 	}
@@ -799,7 +862,7 @@ void DicemainDraw()
 int hocDraw()
 {
 	system("cls");
-	int x = 42, y = 22;
+	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 수소"); // 0
 	gotoxy(x, y + 1);
@@ -810,7 +873,7 @@ int hocDraw()
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
-			if (y > 22) {
+			if (y > 26) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, --y);
@@ -819,7 +882,7 @@ int hocDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 24) {
+			if (y < 28) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -828,10 +891,10 @@ int hocDraw()
 			break;
 		}
 		case SUBMIT: {
-			return y - 22;
+			return y - 26;
 		}
 		case ENTER: {
-			return y - 22;
+			return y - 26;
 		}
 		}
 	}
@@ -940,4 +1003,61 @@ void Block_Avoid()
 
 		Sleep(10);
 	} while (!(Block_contain_player()));
+}
+
+void spaceship()
+{
+	int rocket[21][19] = {
+	//   0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+		{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0}, // 0
+		{0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0}, // 1
+		{0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0}, // 2
+		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 3
+		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0},//  4 헤드
+		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 5
+		{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 6
+		{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 7
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},//  8
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}, // 9
+		{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 10
+		{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 11
+		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 12몸체
+		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 13
+		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 14
+		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 15
+		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 16
+		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 17
+		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 18
+		{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
+		{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 20
+	};
+	int x = 10, y = 0;
+	int color = 2;
+	for (int i = 0; i < 21; i++) {
+		gotoxy(x, y);
+		setColor(WHITE);
+		for (int j = 0; j < 19; j++) {
+			if (i == 20 && j ==3 ) setColor(RED);
+			if (i == 20 && j == 2) setColor(RED);
+			if (i <= 17 && j > 8) setColor(DARK_GRAY);
+			if (j == 12 && j >= 7 && j <= 10) setColor(DARK_GRAY);
+			if (i >= 18 && i < 19) {
+				setColor(SKYBLUE);
+				if (j == 2 || j == 4 || j >= 6 && j <= 8 || j == 10 || j == 12) {
+					setColor(DARK_SKYBLUE);
+				}
+
+			}
+
+
+			printf("%s", rocket[i][j] == 1 ? "■" : "　");
+		}
+		printf("\n");
+		y++;
+	}
+}
+// 콘솔 텍스트 색상 변경해주는 함수
+void setColor(unsigned short text)
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
