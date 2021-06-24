@@ -79,6 +79,7 @@ void Block_print_map();
 void Block_Avoid(); // 게임 실행 함수
 void spaceship();
 void setColor(unsigned short text);
+void DayAlter(int day);
 
 
 

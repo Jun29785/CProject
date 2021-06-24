@@ -387,7 +387,7 @@ int Dice()
 		{1,0,1,1,1,0,1},
 		{1,1,1,1,1,1,1}}
 	};
-	int x = 10, y = 10, sleep = 100;
+	int x = 10, y = 10, sleep = 70;
 	int rnd_dice = rand() % 6;
 	for (int g = 0; g < 3; g++)
 	{
@@ -690,7 +690,7 @@ int RSP()
 	}
 	Sleep(2000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-	
+
 	return rnd_rsp;
 }
 
@@ -810,47 +810,20 @@ void DicemainDraw()
 			switch (hoctemp)
 			{
 			case 0:
-				hydro++;
-				printf("\n¼ö¼Ò °¹¼ö %d", hydro);
+				hydro += num + 1;
+				printf("\n¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
 				break;
 			case 1:
-				oxy++;
-				printf("¼ö¼Ò °¹¼ö %d", oxy);
+				oxy += num + 1;
+				printf("\n»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
 				break;
 			case 2:
-				carb++;
-				printf("Åº¼Ò °¹¼ö %d", carb);
+				carb += num + 1;
+				printf("\nÅº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
 				break;
 			}
 		}
-		if (num % 2 != 0)
-		{
-			printf("Lose");
-		}
-		break;
-	case 1:
-		Dice();
-		num = Dice();
-		if (num % 2 != 0)
-		{
-			printf("Win");
-			switch (hoctemp)
-			{
-			case 0:
-				hydro++;
-				printf("\n¼ö¼Ò °¹¼ö %d", hydro);
-				break;
-			case 1:
-				oxy++;
-				printf("¼ö¼Ò °¹¼ö %d", oxy);
-				break;
-			case 2:
-				carb++;
-				printf("Åº¼Ò °¹¼ö %d", carb);
-				break;
-			}
-		}
-		else if (num % 2 == 0)
+		else
 		{
 			printf("Lose");
 		}
@@ -904,7 +877,7 @@ void hocmainDraw()
 {
 }
 
-block_width = SCR_WIDTH ;
+block_width = SCR_WIDTH;
 
 void Block_init()
 {
@@ -921,7 +894,7 @@ int Block_iskeydown(int key)
 
 void Block_create()
 {
-	for (int i = 0; i <= block_width+3; i++) {
+	for (int i = 0; i <= block_width + 3; i++) {
 		if (!block[i].act) {
 			block[i].x = rand() % block_width;
 			block[i].y = SCR_HEIGHT - 1;
@@ -953,7 +926,7 @@ void Block_delete()
 int Block_contain_player()
 {
 	for (int i = 0; i < block_width; i++) {
-		if ((block[i].act) && (block[i].y <2) && (block[i].x == player.x))
+		if ((block[i].act) && (block[i].y < 2) && (block[i].x == player.x))
 			return TRUE;
 	}
 	return FALSE;
@@ -961,9 +934,9 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a'))&&player.x>=0)
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 0)
 		player.x--;
-	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D'))&&player.x<block_width-2)
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2)
 		player.x++;
 }
 
@@ -981,7 +954,7 @@ void Block_print_map()
 	printf("¢»");
 
 	gotoxy(0, SCR_HEIGHT + 1);
-	for (int i = 0; i < SCR_HEIGHT-7; i++)
+	for (int i = 0; i < SCR_HEIGHT - 7; i++)
 		printf("¢Ç");
 }
 
@@ -1008,28 +981,28 @@ void Block_Avoid()
 void spaceship()
 {
 	int rocket[21][19] = {
-	//   0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
-		{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0}, // 0
-		{0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0}, // 1
-		{0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0}, // 2
-		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 3
-		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0},//  4 Çìµå
-		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 5
-		{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 6
-		{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 7
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},//  8
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}, // 9
-		{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 10
-		{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 11
-		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 12¸öÃ¼
-		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 13
-		{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 14
-		{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 15
-		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 16
-		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 17
-		{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 18
-		{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
-		{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 20
+		//   0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+			{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0}, // 0
+			{0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0}, // 1
+			{0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0}, // 2
+			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 3
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0},//  4 Çìµå
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 5
+			{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 6
+			{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 7
+			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},//  8
+			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}, // 9
+			{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 10
+			{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 11
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 12¸öÃ¼
+			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 13
+			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 14
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 15
+			{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 16
+			{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 17
+			{0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0}, // 18
+			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
+			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 20
 	};
 	int x = 10, y = 0;
 	int color = 2;
@@ -1037,7 +1010,7 @@ void spaceship()
 		gotoxy(x, y);
 		setColor(WHITE);
 		for (int j = 0; j < 19; j++) {
-			if (i == 20 && j ==3 ) setColor(RED);
+			if (i == 20 && j == 3) setColor(RED);
 			if (i == 20 && j == 2) setColor(RED);
 			if (i <= 17 && j > 8) setColor(DARK_GRAY);
 			if (j == 12 && j >= 7 && j <= 10) setColor(DARK_GRAY);
@@ -1055,9 +1028,117 @@ void spaceship()
 		printf("\n");
 		y++;
 	}
+	setColor(WHITE);
 }
 // ÄÜ¼Ö ÅØ½ºÆ® »ö»ó º¯°æÇØÁÖ´Â ÇÔ¼ö
 void setColor(unsigned short text)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+}
+
+void DayAlter(int day)
+{
+	int CountNum[10][5][4] = {
+		// NUM 0
+		{{1,1,1,1},
+		{1,0,0,1},
+		{1,0,0,1},
+		{1,0,0,1},
+		{1,1,1,1}},
+		// NUM 1
+		{{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0}},
+		// NUM 2
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{1,0,0,0},
+		{1,1,1,1}},
+		// NUM 3
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}},
+		// NUM 4
+		{{1,0,0,0},
+		{1,0,1,0},
+		{1,0,1,0},
+		{1,1,1,1},
+		{0,0,1,0}},
+		// NUM 5
+		{{1,1,1,1},
+		{1,0,0,0},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}},
+		// NUM 6
+		{{1,1,0,0},
+		{1,0,0,0},
+		{1,1,1,1},
+		{1,0,0,1},
+		{1,1,1,1}},
+		// NUM 7
+		{{1,1,1,1},
+		{1,0,0,1},
+		{0,0,0,1},
+		{0,0,0,1},
+		{0,0,0,1}},
+		// NUM 8
+		{{1,1,1,1},
+		{1,0,0,1},
+		{1,1,1,1},
+		{1,0,1,1},
+		{1,1,1,1}},
+		// NUM 9
+		{{1,1,1,1},
+		{1,0,0,1},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}}
+	};
+
+	int x=42, y = 7;
+	if (day > 19) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[2][j][k] == 1 ? "¡á" : "¡¡");
+			}
+			printf("\n");
+			y++;
+		}
+	}
+	else if (day > 9) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[1][j][k] == 1 ? "¡á" : "¡¡");
+			}
+			printf("\n");
+			y++;
+		}
+	}
+	else {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[0][j][k] == 1 ? "¡á" : "¡¡");
+			}
+			printf("\n");
+			y++;
+		}
+	}
+	x = 50, y = 7;
+	for (int j = 0; j < 5; j++) {
+		gotoxy(x, y);
+		for (int k = 0; k < 4; k++) {
+			printf("%s", CountNum[day%10][j][k] == 1 ? "¡á" : "¡¡");
+		}
+		printf("\n");
+		y++;
+	}
 }
