@@ -968,7 +968,6 @@ void Block_move_player()
 		player.x--;
 	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D'))&&player.x<block_width-2)
 		player.x++;
-
 }
 
 void Block_print_map()
