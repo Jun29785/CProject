@@ -10,6 +10,7 @@ int main()
 	block_width = SCR_WIDTH / 2;
 	gotoxy(x, y);
 	HideCursor();
+	minigamecount = 3;
 	//while (1)
 	//{
 	//	if (GetAsyncKeyState(VK_RIGHT))

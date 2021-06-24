@@ -193,6 +193,7 @@ void menuTitleDraw()
 	printf("┌─────────────┐");
 	gotoxy(0, 1); printf("│    %d Day    │", day);
 	gotoxy(0, 2); printf("└─────────────┘");
+	gotoxy(18, 1);  printf("미니게임 가능 횟수 : %d", minigamecount);
 
 
 	// 인벤토리 
@@ -426,13 +427,15 @@ int minigameDraw()
 	system("cls");
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> 주사위"); // 0
+	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
 	gotoxy(x, y + 1);
-	printf("가위바위보"); // 1
+	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 1
 	gotoxy(x, y + 2);
-	printf("  넌센스  "); // 2
+	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 8 )"); // 2
 	gotoxy(x, y + 3);
-	printf(" 돌아가기 ");
+	printf("블럭피하기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 3
+	gotoxy(x, y + 4);
+	printf(" 돌아가기 "); // 4
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
@@ -446,7 +449,7 @@ int minigameDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 29) {
+			if (y < 30) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);

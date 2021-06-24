@@ -18,6 +18,7 @@ int block_width;
 Block block[SCR_WIDTH/2];
 Player player;
 
+int minigamecount;
 int day;
 int hydro, oxy, carb;
 int OddEvencheck;
