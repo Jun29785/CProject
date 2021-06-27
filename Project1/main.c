@@ -4,9 +4,6 @@ int main()
 {
 	srand((unsigned int)time(NULL));
 	int x = 30, y = 10;
-	minigamecount1 = 10;
-	minigamecount2 = 10;
-	minigamecount3 = 10;
 	block_width = SCR_WIDTH / 2;
 	gotoxy(x, y);
 	HideCursor();

@@ -23,9 +23,7 @@ int day;
 int hydro, oxy, carb;
 int OddEvencheck;
 int hoctemp;
-int minigamecount1;
-int minigamecount2;
-int minigamecount3;
+int DAN;
 
 // »ö»ó
 enum {

@@ -126,6 +126,7 @@ void EntryStory()
 void init()
 {
 	system("mode con:cols=96 lines=40");
+	setColor(YELLOW);
 }
 
 int menuDraw()
@@ -193,6 +194,20 @@ void menuTitleDraw()
 	printf("┌─────────────┐");
 	gotoxy(0, 1); printf("│    %d Day    │", day);
 	gotoxy(0, 2); printf("└─────────────┘");
+	gotoxy(4, 4);
+	if (DAN == 0)
+	{
+		setColor(VIOLET);
+		printf("Morning");
+		setColor(YELLOW);
+	}
+	else if (DAN == 1)
+	{
+		gotoxy(5, 4);
+		setColor(VIOLET);
+		printf("Night");
+		setColor(YELLOW);
+	}
 	gotoxy(18, 1);  printf("미니게임 가능 횟수 : %d", minigamecount);
 
 
@@ -259,6 +274,8 @@ int mainDraw()
 	gotoxy(x, y + 1);
 	printf("  제작  ");
 	gotoxy(x, y + 2);
+	printf("  잠자기");
+	gotoxy(x, y + 3);
 	printf("  준비중  ");
 	while (1) {
 		int k = keyControl(); // 키보드 이벤트를 키값으로 받아오기
@@ -273,7 +290,7 @@ int mainDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 28) {
+			if (y < 29) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -284,9 +301,9 @@ int mainDraw()
 		case SUBMIT: {
 			return y - 26;
 		}
-		case ENTER: {
-			return y - 26;
-		}
+		//case ENTER: {
+		//	return y - 26;
+		//}
 		}
 	}
 	return 0;
@@ -315,7 +332,7 @@ void startDraw()
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
-		if (menuCode == 0) {
+		if (menuCode == 0 && minigamecount != 0) {
 			gamemainDraw();
 			//게임시작
 		}
@@ -417,7 +434,7 @@ int Dice()
 		printf("\n");
 		y++;
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	Sleep(1000);
 	return rnd_dice;
 }
@@ -425,6 +442,7 @@ int Dice()
 int minigameDraw()
 {
 	system("cls");
+	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
@@ -470,26 +488,22 @@ int minigameDraw()
 void gamemainDraw()
 {
 	system("cls");
-
 	int menuCode = minigameDraw();
-	switch (menuCode) {
-	case 0:
+	int test = menuCode;
+	if (menuCode == 0) {
 		hoctemp = hocDraw();
 		DicemainDraw();
-		break;
-	case 1:
+	}
+	else if (menuCode == 1) {
 		hoctemp = hocDraw();
 		Coin();
-		break;
-	case 2:
+	}
+	else if (menuCode == 2) {
 		hoctemp = hocDraw();
 		RSPmainDraw();
-		break;
-	case 3:
+	}
+	else if (menuCode == 3) {
 		Block_Avoid();
-		break;
-	case 4:
-		break;
 	}
 }
 
@@ -746,18 +760,32 @@ void RSPmainDraw()
 	system("cls");
 	int menuCode = RSPgameDraw();
 	int num;
-	switch (menuCode) {
+	switch (menuCode) { // 0 주먹 1 가위 2 보
 	case 0:
+		printf(" 하잉");
+		Sleep(1000);
+		minigamecount--;
 		num = RSP();
 		if (menuCode == num) {
 			printf("비겼습니다.");
+			Sleep(1000);
 		}
 		break;
 	case 1:
+		minigamecount--;
 		num = RSP();
+		if (menuCode == 0 && num == 1 || menuCode == 1 && num == 2 || menuCode == 2 && num == 0) {
+			printf("이겼습니다.");
+			Sleep(1000);
+		}
 		break;
 	case 2:
+		minigamecount--;
 		num = RSP();
+		if (menuCode == 0 && num == 2 || menuCode == 1 && num == 0 || menuCode == 2 && num == 1) {
+			printf("졌습니다.");
+			Sleep(1000);
+		}
 		break;
 	}
 }
@@ -810,7 +838,35 @@ void DicemainDraw()
 	switch (menuCode) {
 	case 0:
 		num = Dice();
+		minigamecount--;
 		if (num % 2 == 0)
+		{
+			printf("Win");
+			switch (hoctemp)
+			{
+			case 0:
+				hydro += num + 1;
+				printf("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
+				break;
+			case 1:
+				oxy += num + 1;
+				printf("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
+				break;
+			case 2:
+				carb += num + 1;
+				printf("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				break;
+			}
+		}
+		else
+		{
+			printf("Lose");
+		}
+		break;
+	case 1:
+		num = Dice();
+		minigamecount--;
+		if (num % 2 != 0)
 		{
 			printf("Win");
 			switch (hoctemp)
@@ -841,6 +897,7 @@ void DicemainDraw()
 int hocDraw()
 {
 	system("cls");
+	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 수소"); // 0
@@ -1010,7 +1067,7 @@ void spaceship()
 			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
 			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 20
 	};
-	int x = 10, y = 0;
+	int x = 29, y = 0;
 	int color = 2;
 	for (int i = 0; i < 21; i++) {
 		gotoxy(x, y);
@@ -1034,7 +1091,7 @@ void spaceship()
 		printf("\n");
 		y++;
 	}
-	setColor(WHITE);
+	setColor(YELLOW);
 }
 // 콘솔 텍스트 색상 변경해주는 함수
 void setColor(unsigned short text)
@@ -1132,7 +1189,7 @@ void DayAlter(int day)
 		{0,0,1,0,0}}
 	};
 
-	int x=32, y = 7;
+	int x=12, y = 7;
 	system("cls");
 	if (day > 19) {
 		for (int j = 0; j < 5; j++) {
@@ -1164,7 +1221,7 @@ void DayAlter(int day)
 			y++;
 		}
 	}
-	x = 42, y = 7;
+	x = 22, y = 7;
 	for (int j = 0; j < 5; j++) {
 		gotoxy(x, y);
 		for (int k = 0; k < 4; k++) {
@@ -1173,7 +1230,7 @@ void DayAlter(int day)
 		printf("\n");
 		y++;
 	}
-	x = 54, y = 7;
+	x = 34, y = 7;
 	for (int i = 0; i < 3; i++) {
 		for (int k = 0; k < 5; k++) {
 			gotoxy(x, y);
