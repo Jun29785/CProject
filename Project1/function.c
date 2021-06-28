@@ -682,8 +682,33 @@ int RSP()
 		 {0,0,0,0,1,1,1,1,1,0,0,0,0},
 		 {0,0,0,0,0,0,0,0,0,0,0,0,0}}
 	};
+	int player = RSPgameDraw();
 	int x = 10, y = 5;
 	int rnd_rsp = rand() % 3, sleep = 100;
+	for (int k = 0; k < 25; k++) {
+		gotoxy(44, k);
+		printf("¦­");
+	}
+	for (int k = 0; k < 90; k++) {
+		gotoxy(k, 25);
+		if (k != 44) {
+			printf("¦¬");
+		}
+		else {
+			printf("¦µ");
+		}
+	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0b);
+	for (int k = 0; k < 16; k++) {
+		gotoxy(x, y);
+		for (int j = 0; j < 13; j++) {
+			printf("%s", rsp[player][k][j] == 1 ? "¡á" : "¡¡");
+		}
+		printf("\n");
+		y++;
+	}
+	x = 54, y = 5;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0f);
 	for (int g = 0; g < 3; g++) {
 		for (int i = 0; i < 3; i++) {
 			for (int k = 0; k < 16; k++) {
@@ -699,7 +724,7 @@ int RSP()
 		}
 	}
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0a);
 	for (int k = 0; k < 16; k++) {
 		gotoxy(x, y);
 		for (int j = 0; j < 13; j++) {
@@ -982,7 +1007,7 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 0)
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 1)
 		player.x--;
 	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2)
 		player.x++;
@@ -994,12 +1019,12 @@ void Block_print_map()
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
-			printf("¡á");
+			printf("0");
 		}
 	}
 
 	gotoxy(player.x, SCR_HEIGHT);
-	printf("¢»");
+	printf("¿Ê");
 
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT - 7; i++)
@@ -1266,6 +1291,7 @@ int coingameDraw()
 		}
 	}
 }
+
 void coinmainDraw()
 {
 	
