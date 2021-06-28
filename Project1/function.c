@@ -1070,7 +1070,7 @@ void Block_print_map()
 
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT - 7; i++)
-		printf("0");
+		printf("¢Ë");
 }
 
 void Block_Avoid()
@@ -1196,11 +1196,11 @@ void DayAlter(int day)
 {
 	int CountNum[10][5][4] = {
 		// NUM 0
-		{{1,1,1,1},
-		{1,0,0,1},
-		{1,0,0,1},
-		{1,0,0,1},
-		{1,1,1,1}},
+		{{0,1,1,1},
+		{0,1,0,1},
+		{0,1,0,1},
+		{0,1,0,1},
+		{0,1,1,1}},
 		// NUM 1
 		{{0,0,1,0},
 		{0,0,1,0},
@@ -1319,7 +1319,7 @@ void DayAlter(int day)
 		printf("\n");
 		y++;
 	}
-	x = 34, y = 7;
+	x = 30, y = 7;
 	for (int i = 0; i < 3; i++) {
 		for (int k = 0; k < 5; k++) {
 			gotoxy(x, y);
@@ -1329,6 +1329,7 @@ void DayAlter(int day)
 			printf("\n");
 			y++;
 		}
+		x += 12, y = 7;
 	}
 }
 
