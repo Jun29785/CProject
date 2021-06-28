@@ -191,7 +191,8 @@ int keyControl()
 
 void menuTitleDraw()
 {
-	DayAlter(10);
+	gotoxy(25, 10);
+	DayAlter(4);
 
 
 	if (day < 10) {
@@ -536,7 +537,7 @@ void gamemainDraw()
 	}
 	else if (menuCode == 2) {
 		hoctemp = hocDraw();
-		RSPmainDraw();
+		RSP();
 	}
 	else if (menuCode == 3) {
 		hoctemp = hocDraw();
@@ -662,7 +663,7 @@ void Coin()
 	Sleep(1000);
 }
 
-int RSP()
+void RSP()
 {
 	int rsp[3][16][13] = {
 		// 주먹
@@ -722,6 +723,7 @@ int RSP()
 	int player = RSPgameDraw();
 	int x = 10, y = 5;
 	int rnd_rsp = rand() % 3, sleep = 100;
+
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("┃");
@@ -773,7 +775,15 @@ int RSP()
 	Sleep(2000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-	return rnd_rsp;
+	if (player - rnd_rsp == 0) {
+		puts("비겼습니다.");
+	}
+	else if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
+		puts("이겼습니다.");
+	}
+	else {
+		puts("졌습니다.");
+	}
 }
 
 int RSPgameDraw()
@@ -821,25 +831,7 @@ int RSPgameDraw()
 	}
 }
 
-void RSPmainDraw()
-{
-	system("cls");
-	int menuCode = RSPgameDraw();
-	int num = RSP();
-	
-	if (menuCode - num == 0) {
-		printf("비겼습니다.");
-		Sleep(1000);
-	}
-	else if (menuCode - num == -1 || menuCode - num == 2) {
-		printf("이겼습니다.");
-		Sleep(1000);
-	}
-	else {
-		printf("졌습니다.");
-		Sleep(1000);
-	}
-}
+
 
 int DicegameDraw()
 {
@@ -1276,9 +1268,25 @@ void DayAlter(int day)
 		{0,0,1,0,0},
 		{0,0,1,0,0}}
 	};
-
-	int x=12, y = 7;
+	
 	system("cls");
+
+	gotoxy(16, 12);
+	puts("┏");
+	gotoxy(80, 12);
+	puts("┓");
+	gotoxy(16, 20);
+	puts("┗");
+	gotoxy(80, 20);
+	puts("┛");
+	for (int k = 17; k < 80; k++) {
+		gotoxy(k, 12);
+		puts("━");
+		gotoxy(k, 20);
+		puts("━");
+	}
+	
+	int x=22, y = 14;
 	if (day > 19) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -1309,7 +1317,7 @@ void DayAlter(int day)
 			y++;
 		}
 	}
-	x = 22, y = 7;
+	x = 32, y = 14;
 	for (int j = 0; j < 5; j++) {
 		gotoxy(x, y);
 		for (int k = 0; k < 4; k++) {
@@ -1318,7 +1326,7 @@ void DayAlter(int day)
 		printf("\n");
 		y++;
 	}
-	x = 30, y = 7;
+	x = 42, y = 14;
 	for (int i = 0; i < 3; i++) {
 		for (int k = 0; k < 5; k++) {
 			gotoxy(x, y);
@@ -1328,8 +1336,10 @@ void DayAlter(int day)
 			printf("\n");
 			y++;
 		}
-		x += 12, y = 7;
+		x += 12, y = 14;
 	}
+	Sleep(1200);
+	system("cls");
 }
 
 int coingameDraw()
