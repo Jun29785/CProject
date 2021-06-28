@@ -191,17 +191,30 @@ int keyControl()
 
 void menuTitleDraw()
 {
-	printf("┌─────────────┐");
-	gotoxy(0, 1); printf("│    %d Day    │", day);
-	gotoxy(0, 2); printf("└─────────────┘");
+
+	gotoxy(25, 10);
+	DayAlter(4);
+
+	if (day < 10) {
+		printf("┌─────────────┐");
+		gotoxy(0, 1); printf("│    %d Day    │", day);
+		gotoxy(0, 2); printf("└─────────────┘");
+	}
+	else if (day >= 10) {
+		printf("┌─────────────┐");
+		gotoxy(0, 1); printf("│    %d Day   │", day);
+		gotoxy(0, 2); printf("└─────────────┘");
+	}
+
+
 	gotoxy(4, 4);
-	if (DAN == 0)
+	if (minigamecount != 0)
 	{
-		setColor(VIOLET);
+		setColor(RED);
 		printf("Morning");
 		setColor(YELLOW);
 	}
-	else if (DAN == 1)
+	else if (minigamecount == 0)
 	{
 		gotoxy(5, 4);
 		setColor(VIOLET);
@@ -209,6 +222,7 @@ void menuTitleDraw()
 		setColor(YELLOW);
 	}
 	gotoxy(18, 1);  printf("미니게임 가능 횟수 : %d", minigamecount);
+
 
 
 	// 인벤토리 
@@ -276,7 +290,13 @@ int mainDraw()
 	gotoxy(x, y + 2);
 	printf("  잠자기");
 	gotoxy(x, y + 3);
-	printf("  준비중  ");
+	if (day != 30) {
+		printf("  준비중  ");
+	}
+	else if (day == 30) {
+		printf(" 탈출");
+	}
+
 	while (1) {
 		int k = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (k) {
@@ -332,16 +352,35 @@ void startDraw()
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
+		if (menuCode == 0 && minigamecount == 0) {
+			gotoxy(54, 29);
+			setColor(RED);
+			printf("미니게임 횟수가 충분하지 않습니다.");
+			setColor(YELLOW);
+			Sleep(400);
+		}
 		if (menuCode == 0 && minigamecount != 0) {
 			gamemainDraw();
 			//게임시작
 		}
 		else if (menuCode == 1) {
-			// 게임정보
+			// 제작
 			infoDraw();
 		}
-		else if (menuCode == 2) {
-			return 0; // 종료
+		else if (menuCode == 2 && minigamecount == 0) {
+			// 잠자기
+			NextgameDraw();
+		}
+		else if (menuCode == 2 && minigamecount != 0) {
+			gotoxy(54, 29);
+			setColor(RED);
+			printf("잠을 잘수 있는 시간이 아닙니다.");
+			setColor(YELLOW);
+			Sleep(400);
+		}
+		else if (menuCode == 3 && day == 30) {
+			// 탈출
+			printf("탈출 게임");
 		}
 		system("cls");
 	}
@@ -503,6 +542,7 @@ void gamemainDraw()
 		RSPmainDraw();
 	}
 	else if (menuCode == 3) {
+		hoctemp = hocDraw();
 		Block_Avoid();
 	}
 }
@@ -1023,9 +1063,45 @@ void Block_print_map()
 
 void Block_Avoid()
 {
+	char CountNum[3][5][4] = {
+		// NUM 1
+		{{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0}},
+		// NUM 2
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{1,0,0,0},
+		{1,1,1,1}},
+		// NUM 3
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}},
+	};
 	char key;
 	Block_init();
+	int x = 25, y = 10;
 
+	for (int i = 2; i > -1; i--) {
+		Block_print_map();
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
+			}
+			printf("\n");
+			y++;
+		}
+		Sleep(1000);
+		system("cls");
+
+		y = 10;
+	}
 	do {
 		srand((int)malloc(NULL));
 
@@ -1037,7 +1113,7 @@ void Block_Avoid()
 
 		Block_print_map();
 
-		Sleep(10);
+		Sleep(5);
 	} while (!(Block_contain_player()));
 }
 
@@ -1281,7 +1357,70 @@ int coingameDraw()
 		}
 	}
 }
+
+int NextmainDraw()
+{
+	menuTitleDraw();
+	int x = 42, y = 26;
+	gotoxy(x - 2, y);
+	printf("> 네"); // 0
+	gotoxy(x, y + 1);
+	printf("아니요"); // 1
+	while (1) {
+		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
+		switch (n) {
+		case UP: {
+			if (y > 26) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, --y);
+				printf(">");
+			}
+			break;
+		}
+		case DOWN: {
+			if (y < 27) {
+				gotoxy(x - 2, y);
+				printf(" ");
+				gotoxy(x - 2, ++y);
+				printf(">");
+			}
+			break;
+		}
+		case SUBMIT: {
+			return y - 26;
+		}
+		case ENTER: {
+			return y - 26;
+		}
+		}
+	}
+}
+
+void NextgameDraw()
+{
+	int num;
+	int count = 0;
+	system("cls");
+	int menuCode = NextmainDraw();
+	switch (menuCode) {
+	case 0:
+		NextSleep();
+		break;
+	case 1:
+		break;
+	}
+}
+
 void coinmainDraw()
 {
 	
+}
+
+void NextSleep()
+{
+	day++;
+	minigamecount = 3;
+	startDraw();
+
 }
