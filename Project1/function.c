@@ -191,8 +191,7 @@ int keyControl()
 
 void menuTitleDraw()
 {
-	gotoxy(25, 10);
-	DayAlter(4);
+	DayAlter(10);
 
 
 	if (day < 10) {
