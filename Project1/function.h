@@ -81,6 +81,9 @@ void setColor(unsigned short text);
 void DayAlter(int day);
 int coingameDraw();
 void coinmainDraw();
+void NextSleep();
+int NextmainDraw();
+void NextgameDraw();
 
 
 
