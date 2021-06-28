@@ -192,7 +192,7 @@ int keyControl()
 void menuTitleDraw()
 {
 	gotoxy(25, 10);
-	DayAlter(4);
+	//DayAlter(4);
 
 
 	if (day < 10) {
@@ -777,6 +777,7 @@ void RSP()
 
 	if (player - rnd_rsp == 0) {
 		puts("ºñ°å½À´Ï´Ù.");
+		Sleep(1000);
 	}
 	else if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		puts("ÀÌ°å½À´Ï´Ù.");
