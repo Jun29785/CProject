@@ -8,7 +8,6 @@ int main()
 	gotoxy(x, y);
 	HideCursor();
 	minigamecount = 3;
-	day = 10;
 	//while (1)
 	//{
 	//	if (GetAsyncKeyState(VK_RIGHT))

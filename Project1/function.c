@@ -86,7 +86,7 @@ void EntryStory()
 	// entrystory
 	for (int i = 0; i < STORYNUM; i++) {
 		for (int j = 0; j < STORYMAX; j++) {
-			puts("%c", story[i][j]);
+			printf("%c", story[i][j]);
 			Sleep(50);
 		}
 		system("cls");
@@ -96,9 +96,9 @@ void EntryStory()
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				puts("%s", CountNum[i][j][k] == 1 ? "■" : "　");
+				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 		Sleep(1000);
@@ -112,9 +112,9 @@ void EntryStory()
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 5; k++) {
-				puts("%s", Start[i][j][k] == 1 ? "■" : "　");
+				printf("%s", Start[i][j][k] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 		Sleep(200);
@@ -133,29 +133,29 @@ int menuDraw()
 {
 	int x = 42, y = 22;
 	gotoxy(x - 2, y);
-	puts("> 게임시작");
+	printf("> 게임시작");
 	gotoxy(x, y + 1);
-	puts("게임정보");
+	printf("게임정보");
 	gotoxy(x, y + 2);
-	puts("  종료  ");
+	printf("  종료  ");
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
 			if (y > 22) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 24) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -194,48 +194,57 @@ void menuTitleDraw()
 	gotoxy(25, 10);
 	DayAlter(4);
 
+	if (day < 10) {
+		puts("┌─────────────┐");
+		gotoxy(0, 1); puts("│    %d Day    │", day);
+		gotoxy(0, 2); puts("└─────────────┘");
+	}
+	else if (day >= 10) {
+		puts("┌─────────────┐");
+		gotoxy(0, 1); puts("│    %d Day   │", day);
+		gotoxy(0, 2); puts("└─────────────┘");
+	}
 	gotoxy(4, 4);
-	if (minigamecount != 0)
+	if (DAN == 0)
 	{
 		setColor(VIOLET);
 		printf("Morning");
 		setColor(YELLOW);
 	}
-	else if (minigamecount == 0)
+	else if (DAN == 1)
 	{
 		gotoxy(5, 4);
 		setColor(VIOLET);
-		puts("Night");
+		printf("Night");
 		setColor(YELLOW);
 	}
-	gotoxy(18, 1);  puts("미니게임 가능 횟수 : %d", minigamecount);
-
+	gotoxy(18, 1);  printf("미니게임 가능 횟수 : %d", minigamecount);
 
 
 	// 인벤토리 
 	int x = 58, y = 0;
-	gotoxy(x, y); puts("┌");
+	gotoxy(x, y); printf("┌");
 	for (int i = 0; i < 26; i++) {
 		if (i == 14) {
-			puts("인벤토리");
+			printf("인벤토리");
 		}
-		puts("─");
+		printf("─");
 	}
-	puts("┐");
+	printf("┐");
 	y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("│    수소 : %d                      │", hydro); y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("│    산소 : %d                      │", oxy); y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("│    탄소 : %d                      │", carb); y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("│                                  │"); y++;
-	gotoxy(x, y); puts("└");
-	for (int i = 0; i < 34; i++) puts("─");
-	puts("┘");
-	gotoxy(0, 22); puts("────────────────────────────────────────────────────────────────────────────────────────────────");
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    수소 : %d                      │", hydro); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    산소 : %d                      │", oxy); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│    탄소 : %d                      │", carb); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("│                                  │"); y++;
+	gotoxy(x, y); printf("└");
+	for (int i = 0; i < 34; i++) printf("─");
+	printf("┘");
+	gotoxy(0, 22); printf("────────────────────────────────────────────────────────────────────────────────────────────────");
 	//int inventory[6][10][10] = {
 	//	// 1
 	//	{{1,1,1,1,1,1,1,0,0,0},
@@ -256,8 +265,8 @@ void menuTitleDraw()
 	//	{
 	//		gotoxy(x, y);
 	//		for (int j = 0; j < 10; j++)
-	//			puts("%s", inventory[i][k][j] == 1 ? "■" : "　");
-	//		puts("\n");
+	//			printf("%s", inventory[i][k][j] == 1 ? "■" : "　");
+	//		printf("\n");
 	//		y++;
 	//		Sleep(sleep);
 	//	}
@@ -271,11 +280,11 @@ int mainDraw()
 {
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts("> 미니게임");
+	printf("> 미니게임");
 	gotoxy(x, y + 1);
-	puts("  제작  ");
+	printf("  제작  ");
 	gotoxy(x, y + 2);
-	puts("  잠자기");
+	printf("  잠자기");
 	gotoxy(x, y + 3);
 	printf("  준비중  ");
 	while (1) {
@@ -284,18 +293,18 @@ int mainDraw()
 		case UP: {
 			if (y > 26) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 29) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -313,12 +322,12 @@ int mainDraw()
 void infoDraw()
 {
 	system("cls");
-	puts("\n\n");
-	puts("[조작법]\n\n");
-	puts("이동 : W, S\n");
-	puts("선택 : SPACE, ENTER\n");
-	puts("개발자 : 이준 , 전승원 \n");
-	puts("재밋게 즐겨주세요 .");
+	printf("\n\n");
+	printf("[조작법]\n\n");
+	printf("이동 : W, S\n");
+	printf("선택 : SPACE, ENTER\n");
+	printf("개발자 : 이준 , 전승원 \n");
+	printf("재밋게 즐겨주세요 .");
 	while (1) {
 		if (keyControl() == SUBMIT || keyControl() == ENTER) {
 			break;
@@ -333,35 +342,16 @@ void startDraw()
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
-		if (menuCode == 0 && minigamecount == 0) {
-			gotoxy(54, 29);
-			setColor(RED);
-			printf("미니게임 횟수가 충분하지 않습니다.");
-			setColor(YELLOW);
-			Sleep(400);
-		}
 		if (menuCode == 0 && minigamecount != 0) {
 			gamemainDraw();
 			//게임시작
 		}
 		else if (menuCode == 1) {
-			// 제작
+			// 게임정보
 			infoDraw();
 		}
-		else if (menuCode == 2 && minigamecount == 0) {
-			// 잠자기
-			NextgameDraw();
-		}
-		else if (menuCode == 2 && minigamecount != 0) {
-			gotoxy(54, 29);
-			setColor(RED);
-			printf("잠을 잘수 있는 시간이 아닙니다.");
-			setColor(YELLOW);
-			Sleep(400);
-		}
-		else if (menuCode == 3 && day == 30) {
-			// 탈출
-			printf("탈출 게임");
+		else if (menuCode == 2) {
+			return 0; // 종료
 		}
 		system("cls");
 	}
@@ -435,8 +425,8 @@ int Dice()
 			{
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++)
-					puts("%s", dice[i][k][j] == 1 ? "■" : "　");
-				puts("\n");
+					printf("%s", dice[i][k][j] == 1 ? "■" : "　");
+				printf("\n");
 				y++;
 			}
 			Sleep(sleep);
@@ -450,8 +440,8 @@ int Dice()
 	{
 		gotoxy(x, y);
 		for (int j = 0; j < 7; j++)
-			puts("%s", dice[rnd_dice][k][j] == 1 ? "■" : "　");
-		puts("\n");
+			printf("%s", dice[rnd_dice][k][j] == 1 ? "■" : "　");
+		printf("\n");
 		y++;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
@@ -465,33 +455,33 @@ int minigameDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
+	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
 	gotoxy(x, y + 1);
-	puts("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 1
+	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 1
 	gotoxy(x, y + 2);
-	puts("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 8 )"); // 2
+	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 8 )"); // 2
 	gotoxy(x, y + 3);
-	puts("블럭피하기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 3
+	printf("블럭피하기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 3
 	gotoxy(x, y + 4);
-	puts(" 돌아가기 "); // 4
+	printf(" 돌아가기 "); // 4
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
 			if (y > 26) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 30) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -523,7 +513,6 @@ void gamemainDraw()
 		RSPmainDraw();
 	}
 	else if (menuCode == 3) {
-		hoctemp = hocDraw();
 		Block_Avoid();
 	}
 }
@@ -612,9 +601,9 @@ void Coin()
 			for (int k = 0; k < 7; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++) {
-					puts("%s", coin[i][k][j] == 1 ? "▣" : "　");
+					printf("%s", coin[i][k][j] == 1 ? "▣" : "　");
 				}
-				puts("\n");
+				printf("\n");
 				y++;
 			}
 			Sleep(70);
@@ -627,18 +616,18 @@ void Coin()
 		for (int k = 0; k < 7; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 7; j++) {
-				puts("%s", coin[0][k][j] == 1 ? "▣" : "　");
+				printf("%s", coin[0][k][j] == 1 ? "▣" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	else
 		for (int k = 0; k < 7; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 7; j++) {
-				puts("%s", coin[4][k][j] == 1 ? "▣" : "　");
+				printf("%s", coin[4][k][j] == 1 ? "▣" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -708,24 +697,24 @@ int RSP()
 	int rnd_rsp = rand() % 3, sleep = 100;
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
-		puts("┃");
+		printf("┃");
 	}
 	for (int k = 0; k < 90; k++) {
 		gotoxy(k, 22);
 		if (k != 44) {
-			puts("━");
+			printf("━");
 		}
 		else {
-			puts("┻");
+			printf("┻");
 		}
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0b);
 	for (int k = 0; k < 16; k++) {
 		gotoxy(x, y);
 		for (int j = 0; j < 13; j++) {
-			puts("%s", rsp[player][k][j] == 1 ? "■" : "　");
+			printf("%s", rsp[player][k][j] == 1 ? "■" : "　");
 		}
-		puts("\n");
+		printf("\n");
 		y++;
 	}
 	x = 54, y = 5;
@@ -735,9 +724,9 @@ int RSP()
 			for (int k = 0; k < 16; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 13; j++) {
-					puts("%s", rsp[i][k][j] == 1 ? "■" : "　");
+					printf("%s", rsp[i][k][j] == 1 ? "■" : "　");
 				}
-				puts("\n");
+				printf("\n");
 				y++;
 			}
 			Sleep(sleep);
@@ -749,9 +738,9 @@ int RSP()
 	for (int k = 0; k < 16; k++) {
 		gotoxy(x, y);
 		for (int j = 0; j < 13; j++) {
-			puts("%s", rsp[rnd_rsp][k][j] == 1 ? "■" : "　");
+			printf("%s", rsp[rnd_rsp][k][j] == 1 ? "■" : "　");
 		}
-		puts("\n");
+		printf("\n");
 		y++;
 	}
 	Sleep(2000);
@@ -765,14 +754,14 @@ int RSPgameDraw()
 	system("cls");
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts("> 주먹"); // 0
+	printf("> 주먹"); // 0
 	gotoxy(x, y + 1);
-	puts("가위"); // 1
+	printf("가위"); // 1
 	gotoxy(x, y + 2);
-	puts("  보  "); // 2
+	printf("  보  "); // 2
 	for (int k = 0; k < 96; k++) {
 		gotoxy(k, 22);
-		puts("━");
+		printf("━");
 	}
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
@@ -780,18 +769,18 @@ int RSPgameDraw()
 		case UP: {
 			if (y > 26) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 28) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -812,15 +801,15 @@ void RSPmainDraw()
 	int num = RSP();
 	
 	if (menuCode - num == 0) {
-		puts("비겼습니다.");
+		printf("비겼습니다.");
 		Sleep(1000);
 	}
 	else if (menuCode - num == -1 || menuCode - num == 2) {
-		puts("이겼습니다.");
+		printf("이겼습니다.");
 		Sleep(1000);
 	}
 	else {
-		puts("졌습니다.");
+		printf("졌습니다.");
 		Sleep(1000);
 	}
 }
@@ -830,27 +819,27 @@ int DicegameDraw()
 	system("cls");
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts("> 홀"); // 0
+	printf("> 홀"); // 0
 	gotoxy(x, y + 1);
-	puts("짝"); // 1
+	printf("짝"); // 1
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
 			if (y > 26) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 27) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -876,26 +865,26 @@ void DicemainDraw()
 		minigamecount--;
 		if (num % 2 == 0)
 		{
-			puts("Win");
+			printf("Win");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
-				puts("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
 				break;
 			case 1:
 				oxy += num + 1;
-				puts("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
 				break;
 			case 2:
 				carb += num + 1;
-				puts("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
 				break;
 			}
 		}
 		else
 		{
-			puts("Lose");
+			printf("Lose");
 		}
 		break;
 	case 1:
@@ -903,26 +892,26 @@ void DicemainDraw()
 		minigamecount--;
 		if (num % 2 != 0)
 		{
-			puts("Win");
+			printf("Win");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
-				puts("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
 				break;
 			case 1:
 				oxy += num + 1;
-				puts("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
 				break;
 			case 2:
 				carb += num + 1;
-				puts("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
 				break;
 			}
 		}
 		else
 		{
-			puts("Lose");
+			printf("Lose");
 		}
 		break;
 	}
@@ -935,29 +924,29 @@ int hocDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts("> 수소"); // 0
+	printf("> 수소"); // 0
 	gotoxy(x, y + 1);
-	puts("산소");// 1
+	printf("산소");// 1
 	gotoxy(x, y + 2);
-	puts("탄소");
+	printf("탄소");
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
 		case UP: {
 			if (y > 26) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, --y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
 		case DOWN: {
 			if (y < 28) {
 				gotoxy(x - 2, y);
-				puts(" ");
+				printf(" ");
 				gotoxy(x - 2, ++y);
-				puts(">");
+				printf(">");
 			}
 			break;
 		}
@@ -1044,59 +1033,23 @@ void Block_print_map()
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
-			puts("0");
+			printf("0");
 		}
 	}
 
 	gotoxy(player.x, SCR_HEIGHT);
-	puts("옷");
+	printf("옷");
 
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT - 7; i++)
-		puts("▤");
+		printf("0");
 }
 
 void Block_Avoid()
 {
-	char CountNum[3][5][4] = {
-		// NUM 1
-		{{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0}},
-		// NUM 2
-		{{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1},
-		{1,0,0,0},
-		{1,1,1,1}},
-		// NUM 3
-		{{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1}},
-	};
 	char key;
 	Block_init();
-	int x = 25, y = 10;
 
-	for (int i = 2; i > -1; i--) {
-		Block_print_map();
-		for (int j = 0; j < 5; j++) {
-			gotoxy(x, y);
-			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
-			}
-			printf("\n");
-			y++;
-		}
-		Sleep(1000);
-		system("cls");
-
-		y = 10;
-	}
 	do {
 		srand((int)malloc(NULL));
 
@@ -1108,7 +1061,7 @@ void Block_Avoid()
 
 		Block_print_map();
 
-		Sleep(5);
+		Sleep(10);
 	} while (!(Block_contain_player()));
 }
 
@@ -1157,9 +1110,9 @@ void spaceship()
 			}
 
 
-			puts("%s", rocket[i][j] == 1 ? "■" : "　");
+			printf("%s", rocket[i][j] == 1 ? "■" : "　");
 		}
-		puts("\n");
+		printf("\n");
 		y++;
 	}
 	setColor(YELLOW);
@@ -1266,9 +1219,9 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				puts("%s", CountNum[2][j][k] == 1 ? "■" : "　");
+				printf("%s", CountNum[2][j][k] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	}
@@ -1276,9 +1229,9 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				puts("%s", CountNum[1][j][k] == 1 ? "■" : "　");
+				printf("%s", CountNum[1][j][k] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	}
@@ -1286,9 +1239,9 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				puts("%s", CountNum[0][j][k] == 1 ? "■" : "　");
+				printf("%s", CountNum[0][j][k] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	}
@@ -1296,9 +1249,9 @@ void DayAlter(int day)
 	for (int j = 0; j < 5; j++) {
 		gotoxy(x, y);
 		for (int k = 0; k < 4; k++) {
-			puts("%s", CountNum[day%10][j][k] == 1 ? "■" : "　");
+			printf("%s", CountNum[day%10][j][k] == 1 ? "■" : "　");
 		}
-		puts("\n");
+		printf("\n");
 		y++;
 	}
 	x = 34, y = 7;
@@ -1306,9 +1259,9 @@ void DayAlter(int day)
 		for (int k = 0; k < 5; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 5; j++) {
-				puts("%s", Day[i][k][j] == 1 ? "■" : "　");
+				printf("%s", Day[i][k][j] == 1 ? "■" : "　");
 			}
-			puts("\n");
+			printf("\n");
 			y++;
 		}
 	}
@@ -1319,48 +1272,9 @@ int coingameDraw()
 	system("cls");
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	puts("> 앞"); // 0
+	printf("> 앞"); // 0
 	gotoxy(x, y + 1);
-	puts("뒤"); // 1
-	while (1) {
-		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
-		switch (n) {
-		case UP: {
-			if (y > 26) {
-				gotoxy(x - 2, y);
-				puts(" ");
-				gotoxy(x - 2, --y);
-				puts(">");
-			}
-			break;
-		}
-		case DOWN: {
-			if (y < 27) {
-				gotoxy(x - 2, y);
-				puts(" ");
-				gotoxy(x - 2, ++y);
-				puts(">");
-			}
-			break;
-		}
-		case SUBMIT: {
-			return y - 26;
-		}
-		case ENTER: {
-			return y - 26;
-		}
-		}
-	}
-}
-
-int NextmainDraw()
-{
-	menuTitleDraw();
-	int x = 42, y = 26;
-	gotoxy(x - 2, y);
-	printf("> 네"); // 0
-	gotoxy(x, y + 1);
-	printf("아니요"); // 1
+	printf("뒤"); // 1
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
@@ -1389,33 +1303,10 @@ int NextmainDraw()
 			return y - 26;
 		}
 		}
-	}
-}
-
-void NextgameDraw()
-{
-	int num;
-	int count = 0;
-	system("cls");
-	int menuCode = NextmainDraw();
-	switch (menuCode) {
-	case 0:
-		NextSleep();
-		break;
-	case 1:
-		break;
 	}
 }
 
 void coinmainDraw()
 {
 	
-}
-
-void NextSleep()
-{
-	day++;
-	minigamecount = 3;
-	startDraw();
-
 }
