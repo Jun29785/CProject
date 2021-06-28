@@ -759,34 +759,19 @@ void RSPmainDraw()
 {
 	system("cls");
 	int menuCode = RSPgameDraw();
-	int num;
-	switch (menuCode) { // 0 주먹 1 가위 2 보
-	case 0:
-		printf(" 하잉");
+	int num = RSP();
+	
+	if (menuCode - num == 0) {
+		printf("비겼습니다.");
 		Sleep(1000);
-		minigamecount--;
-		num = RSP();
-		if (menuCode == num) {
-			printf("비겼습니다.");
-			Sleep(1000);
-		}
-		break;
-	case 1:
-		minigamecount--;
-		num = RSP();
-		if (menuCode == 0 && num == 1 || menuCode == 1 && num == 2 || menuCode == 2 && num == 0) {
-			printf("이겼습니다.");
-			Sleep(1000);
-		}
-		break;
-	case 2:
-		minigamecount--;
-		num = RSP();
-		if (menuCode == 0 && num == 2 || menuCode == 1 && num == 0 || menuCode == 2 && num == 1) {
-			printf("졌습니다.");
-			Sleep(1000);
-		}
-		break;
+	}
+	else if (menuCode - num == -1 || menuCode - num == 2) {
+		printf("이겼습니다.");
+		Sleep(1000);
+	}
+	else {
+		printf("졌습니다.");
+		Sleep(1000);
 	}
 }
 
