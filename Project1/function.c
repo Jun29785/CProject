@@ -194,16 +194,6 @@ void menuTitleDraw()
 	gotoxy(25, 10);
 	DayAlter(4);
 
-	if (day < 10) {
-		puts("忙式式式式式式式式式式式式式忖");
-		gotoxy(0, 1); puts("弛    %d Day    弛", day);
-		gotoxy(0, 2); puts("戌式式式式式式式式式式式式式戎");
-	}
-	else if (day >= 10) {
-		puts("忙式式式式式式式式式式式式式忖");
-		gotoxy(0, 1); puts("弛    %d Day   弛", day);
-		gotoxy(0, 2); puts("戌式式式式式式式式式式式式式戎");
-	}
 	gotoxy(4, 4);
 	if (minigamecount != 0)
 	{
