@@ -1,8 +1,7 @@
 #pragma once
 #include "GameDefine.h"
 
-
-// Avoid Block
+#pragma region Avoid Block
 typedef struct {
 	int x;
 	int y;
@@ -11,12 +10,37 @@ typedef struct {
 
 typedef struct {
 	int x;
-}Player;
+}Block_Player;
 
 int block_width;
 
 Block block[SCR_WIDTH/2];
-Player player;
+Block_Player player;
+#pragma endregion
+
+#pragma region EndGame
+typedef struct {
+    int x;
+    int y;
+    char* image;
+    int width;
+    int height;
+}EndGame_User;
+
+typedef struct {
+    int x;
+    int y;
+    char* image;
+    int width;
+    int height;
+}EndGame_Enemy;
+
+EndGame_User User;
+EndGame_Enemy Enemy[20];
+#pragma endregion
+
+
+
 
 int minigamecount;
 int day;
@@ -83,6 +107,20 @@ void coinmainDraw();
 void NextSleep();
 int NextmainDraw();
 void NextgameDraw();
+void EndGame_init();
+int EndGame_iskeydown(int key);
+void EndGame_Enemy_Create();
+void EndGame_Enemy_Move();
+void EndGame_Enemy_Delete();
+void EndGame_Enemy_Contain_Player();
+void EndGame_Print_Map();
+void EndGame_Player_Move();
+void EndGame_Player_Shot();
+void EndGame_Bullet_Create();
+void EndGame_Bullet_Move();
+void EndGame_Bullet_Delete();
+void EndGame_Enemy_Contain_Bullet();
+void EndGame_Main();
 
 
 
