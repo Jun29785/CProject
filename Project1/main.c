@@ -20,10 +20,12 @@ int main()
 	//	printf("TEST");	
 	//}
 	init();
-	spaceship();
+	//spaceship()w;
+	
 	while (1) {
 		int menuCode = menuDraw();
 		if (menuCode == 0) {
+			EntryStory();
 			startDraw();
 			//게임시작
 		}
