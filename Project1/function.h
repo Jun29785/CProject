@@ -46,6 +46,7 @@ typedef struct {
     int x;
     int y;
     char* image;
+    int act;
 }Enemy_Bullet;
 
 int enemy;
@@ -131,9 +132,9 @@ int EndGame_Enemy_Contain_Player();
 void EndGame_Print_Map();
 void EndGame_Player_Move();
 void EndGame_Player_Shot();
-void EndGame_Bullet_Create();
-void EndGame_Bullet_Move();
-void EndGame_Bullet_Delete();
+void EndGame_Player_Bullet_Create();
+void EndGame_Player_Bullet_Move();
+void EndGame_Player_Bullet_Delete();
 int EndGame_Enemy_Contain_Bullet();
 void EndGame_Main();
 

@@ -1456,6 +1456,12 @@ void EndGame_init()
 	for (int k = 0; k < Enemy; k++) {
 		Enemy[k].act = FALSE;
 	}
+	for (int k = 0; k < 10; k++) {
+		P_Bullet[k].act = FALSE;
+	}
+	for (int k = 0; k < 5; k++) {
+		E_Bullet[k].act = FALSE;
+	}
 	User.x = (e_width) / 2;
 	User.y = SCR_HEIGHT - SCR_HEIGHT / 4;
 }
@@ -1552,25 +1558,50 @@ void EndGame_Player_Shot()
 {
 	for (int k = 0; k < 10; k++) {
 		if ((EndGame_iskeydown(VK_SPACE)) && !P_Bullet[k].act) {
-			P_Bullet[k].act = TRUE;
+			EndGame_Player_Bullet_Create();
 		}
 	}
 }
 
-void EndGame_Bullet_Create()
+void EndGame_Player_Bullet_Create()
 {
+	for (int k = 0; k < 10; k++) {
+		if (!P_Bullet[k].act) {
+			P_Bullet[k].image = "!";
+			P_Bullet[k].x = User.x + 2;
+			P_Bullet[k].y = User.y - 1;
+
+			P_Bullet[k].act = TRUE;
+			return;
+		}
+	}
 }
 
-void EndGame_Bullet_Move()
+void EndGame_Player_Bullet_Move()
 {
+	for (int k = 0; k < 10; k++) {
+		if (P_Bullet[k].act) {
+			P_Bullet[k].y--;
+		}
+	}
 }
 
-void EndGame_Bullet_Delete()
+void EndGame_Plyaer_Bullet_Delete()
 {
+	for (int k = 0; k < 10; k++) {
+		if (P_Bullet[k].y < 0 && P_Bullet[k].act) {
+			P_Bullet[k].act = FALSE;
+		}
+	}
 }
 
-void EndGame_Enemy_Contain_Bullet()
+int EndGame_Enemy_Contain_Bullet()
 {
+	for (int k = 0; k < enemy; k++) {
+		for (int i = 0; i < 10; i++) {
+
+		}
+	}
 }
 
 void EndGame_Main()
