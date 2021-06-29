@@ -31,16 +31,31 @@ typedef struct {
     int x;
     int y;
     char* image;
+    int act;
     int width;
-    int height;
 }EndGame_Enemy;
+
+typedef struct {
+    int x;
+    int y;
+    char* image;
+    int act;
+}Player_Bullet;
+
+typedef struct {
+    int x;
+    int y;
+    char* image;
+}Enemy_Bullet;
+
+int enemy;
+int e_width;
 
 EndGame_User User;
 EndGame_Enemy Enemy[20];
+Player_Bullet P_Bullet[5];
+Enemy_Bullet E_Bullet[5];
 #pragma endregion
-
-
-
 
 int minigamecount;
 int day;
@@ -112,16 +127,16 @@ void NextgameDraw();
 void EndGame_init();
 int EndGame_iskeydown(int key);
 void EndGame_Enemy_Create();
-void EndGame_Enemy_Move();
+void EndGame_Enemy_Move(int n);
 void EndGame_Enemy_Delete();
-void EndGame_Enemy_Contain_Player();
+int EndGame_Enemy_Contain_Player();
 void EndGame_Print_Map();
 void EndGame_Player_Move();
 void EndGame_Player_Shot();
 void EndGame_Bullet_Create();
 void EndGame_Bullet_Move();
 void EndGame_Bullet_Delete();
-void EndGame_Enemy_Contain_Bullet();
+int EndGame_Enemy_Contain_Bullet();
 void EndGame_Main();
 void onetwothree();
 void create();
