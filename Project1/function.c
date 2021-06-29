@@ -55,6 +55,93 @@ void setColor(unsigned short text)
 
 #pragma endregion
 
+void onetwothree()
+{
+	char CountNum[3][5][4] = {
+		// NUM 1
+		{{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0}},
+		// NUM 2
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{1,0,0,0},
+		{1,1,1,1}},
+		// NUM 3
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}},
+	};
+	char Start[5][5][5] = { // START
+		// S
+		{{1,1,1,1,1},
+		{1,0,0,0,0},
+		{1,1,1,1,1},
+		{0,0,0,0,1},
+		{1,1,1,1,1}},
+		// T
+		{{1,1,1,1,1},
+		{0,0,1,0,0},
+		{0,0,1,0,0},
+		{0,0,1,0,0},
+		{0,0,1,0,0}},
+		// A
+		{{0,0,1,0,0},
+		{0,1,0,1,0},
+		{0,1,1,1,0},
+		{1,0,0,0,1},
+		{1,0,0,0,1}},
+		// R
+		{{1,1,1,1,0},
+		{1,0,0,1,0},
+		{1,1,1,1,0},
+		{1,0,1,0,0},
+		{1,0,0,1,0}},
+		// T
+		{{1,1,1,1,1},
+		{0,0,1,0,0},
+		{0,0,1,0,0},
+		{0,0,1,0,0},
+		{0,0,1,0,0}}
+	};
+	int x = 42, y = 7;
+	// count
+	for (int i = 2; i > -1; i--) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
+			}
+			printf("\n");
+			y++;
+		}
+		Sleep(1000);
+		system("cls");
+		y = 7;
+	}
+	// start
+	x = 18, y = 10;
+	for (int i = 0; i < 5; i++) {
+
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 5; k++) {
+				printf("%s", Start[i][j][k] == 1 ? "■" : "　");
+			}
+			printf("\n");
+			y++;
+		}
+		Sleep(200);
+		x += 12; y = 10;
+	}
+	system("cls");
+}
+
 void EntryStory()
 {
 	char story[][100] = {
@@ -118,45 +205,62 @@ void EntryStory()
 		{0,0,1,0,0},
 		{0,0,1,0,0}}
 	};
-	int x = 42, y = 7;
+	
+	int x = 42, y = 21;
+	Sleep(200);
 	// entrystory
 	for (int i = 0; i < STORYNUM; i++) {
+		system("cls");
+		gotoxy(22, 29);  printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		gotoxy(25, 31);  printf("spacebar를 누를시 기초 스토리를 스킵합니다.");
+		gotoxy(22, 33);  printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		spaceship();
+		gotoxy(0, 22);
 		for (int j = 0; j < STORYMAX; j++) {
 			printf("%c", story[i][j]);
-			Sleep(50);
-		}
-		system("cls");
-	}
-	// count
-	for (int i = 2; i > -1; i--) {
-		for (int j = 0; j < 5; j++) {
-			gotoxy(x, y);
-			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
+			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+				system("cls");
+				
+				day++;
+				DayAlter(day);
+				return;
 			}
-			printf("\n");
-			y++;
+			Sleep(20);
 		}
-		Sleep(1000);
-		system("cls");
-		y = 7;
 	}
-	// start
-	x = 18, y = 10;
-	for (int i = 0; i < 5; i++) {
+	day++;
+	DayAlter(day);
+	//// count
+	//for (int i = 2; i > -1; i--) {
+	//	for (int j = 0; j < 5; j++) {
+	//		gotoxy(x, y);
+	//		for (int k = 0; k < 4; k++) {
+	//			printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
+	//		}
+	//		printf("\n");
+	//		y++;
+	//	}
+	//	Sleep(1000);
+	//	system("cls");
+	//	y = 7;
+	//}
+	//// start
+	//x = 18, y = 10;
+	//for (int i = 0; i < 5; i++) {
 
-		for (int j = 0; j < 5; j++) {
-			gotoxy(x, y);
-			for (int k = 0; k < 5; k++) {
-				printf("%s", Start[i][j][k] == 1 ? "■" : "　");
-			}
-			printf("\n");
-			y++;
-		}
-		Sleep(200);
-		x += 12; y = 10;
-	}
-	system("cls");
+	//	for (int j = 0; j < 5; j++) {
+	//		gotoxy(x, y);
+	//		for (int k = 0; k < 5; k++) {
+	//			printf("%s", Start[i][j][k] == 1 ? "■" : "　");
+	//		}
+	//		printf("\n");
+	//		y++;
+	//	}
+	//	Sleep(200);
+	//	x += 12; y = 10;
+	//}
+	//system("cls");
+			/*onetwothree();*/
 }
 
 #pragma region Draw 
@@ -170,6 +274,7 @@ int menuDraw()
 	printf("게임정보");
 	gotoxy(x, y + 2);
 	printf("  종료  ");
+
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
@@ -205,7 +310,6 @@ void menuTitleDraw()
 {
 	gotoxy(25, 10);
 	//DayAlter(4);
-	day = 10;
 	if (day < 10) {
 		gotoxy(0, 0); printf("┏━━━━━━━━━━━━━━┓");
 		gotoxy(0, 1); printf("┃    %2d Day    ┃", day);
@@ -244,12 +348,12 @@ void menuTitleDraw()
 	gotoxy(x + 13, y);
 	printf("  인벤토리 ");
 	y++;
+	gotoxy(x, y); printf("┃          Lv1   Lv2   Lv3          ┃"); y++;
+	gotoxy(x, y); printf("┃    수소 : %d     %d     %d           ┃", hydro, hydro2, hydro3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    수소 : %d                       ┃", hydro); y++;
+	gotoxy(x, y); printf("┃    산소 : %d     %d     %d           ┃", oxy, oxy2, oxy3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    산소 : %d                       ┃", oxy); y++;
-	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    탄소 : %d                       ┃", carb); y++;
+	gotoxy(x, y); printf("┃    탄소 : %d     %d     %d           ┃", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
@@ -359,7 +463,7 @@ void infoDraw()
 void startDraw()
 {
 	system("cls");
-	//EntryStory();
+
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
@@ -460,7 +564,7 @@ void gamemainDraw()
 	}
 	else if (menuCode == 1) {
 		hoctemp = hocDraw();
-		Coin();
+		coinmainDraw();
 	}
 	else if (menuCode == 2) {
 		hoctemp = hocDraw();
@@ -520,11 +624,16 @@ int RSPgameDraw()
 int DicegameDraw()
 {
 	system("cls");
+	for (int k = 0; k < 96; k++) {
+		gotoxy(k, 22);
+		printf("━");
+	}
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
 	printf("> 홀"); // 0
 	gotoxy(x, y + 1);
 	printf("짝"); // 1
+
 	while (1) {
 		int n = keyControl(); // 키보드 이벤트를 키값으로 받아오기
 		switch (n) {
@@ -565,6 +674,14 @@ void DicemainDraw()
 	switch (menuCode) {
 	case 0:
 		num = Dice();
+		if (num % 2 == 0) {
+			OddEvendote();
+			Sleep(2000);
+		}
+		else if (num % 2 != 0) {
+			OddEvendote();
+			Sleep(2000);
+		}
 		minigamecount--;
 		if (num % 2 == 0)
 		{
@@ -775,7 +892,20 @@ int Dice()
 		{1,0,1,1,1,0,1},
 		{1,1,1,1,1,1,1}}
 	};
-	int x = 10, y = 10, sleep = 70;
+	for (int k = 0; k < 22; k++) {
+		gotoxy(44, k);
+		printf("┃");
+	}
+	for (int k = 0; k < 90; k++) {
+		gotoxy(k, 22);
+		if (k != 44) {
+			printf("━");
+		}
+		else {
+			printf("┻");
+		}
+	}
+	int x = 16, y = 7, sleep = 70;
 	int rnd_dice = rand() % 6;
 	for (int g = 0; g < 3; g++)
 	{
@@ -790,11 +920,11 @@ int Dice()
 				y++;
 			}
 			Sleep(sleep);
-			y = 10;
+			y = 7;
 		}
 		sleep += 150;
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	Sleep(500);
 	for (int k = 0; k < 7; k++)
 	{
@@ -809,7 +939,7 @@ int Dice()
 	return rnd_dice;
 }
 
-void Coin()
+int Coin()
 {
 	int coin[][7][7] = {
 		// front
@@ -886,7 +1016,19 @@ void Coin()
 
 	};
 	int x = 10, y = 10;
-
+	for (int k = 0; k < 22; k++) {
+		gotoxy(44, k);
+		printf("┃");
+	}
+	for (int k = 0; k < 90; k++) {
+		gotoxy(k, 22);
+		if (k != 44) {
+			printf("━");
+		}
+		else {
+			printf("┻");
+		}
+	}
 	int rnd_coin = rand() % 2;
 	for (int g = 0; g < 3; g++) {
 		for (int i = 0; i < 8; i++) {
@@ -925,6 +1067,8 @@ void Coin()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	Sleep(1000);
+	setColor(YELLOW);
+	return rnd_coin;
 }
 
 void RSP()
@@ -1358,6 +1502,10 @@ int coingameDraw()
 {
 	system("cls");
 	int x = 42, y = 26;
+	for (int k = 0; k < 96; k++) {
+		gotoxy(k, 22);
+		printf("━");
+	}
 	gotoxy(x - 2, y);
 	printf("> 앞"); // 0
 	gotoxy(x, y + 1);
@@ -1615,10 +1763,104 @@ void NextSleep()
 {
 	day++;
 	minigamecount = 3;
+	DayAlter(day);
 	startDraw();
 
 }
 void coinmainDraw()
 {
+	system("cls");
+	int menuCode = coingameDraw();
+	int n;
+	switch (menuCode) {
+	case 0:
+		n = Coin();
+		minigamecount--;
+		if (menuCode == n) {
+			printf("이겼습니다.");
+			Sleep(2000);
+		}
+		else {
+			printf("졌습니다.");
+			Sleep(2000);
+		}
+		break;
+	case 1:
+		n = Coin();
+		minigamecount--;
+		if (menuCode == n) {
+			printf("이겼습니다.");
+			Sleep(2000);
+		}
+		else {
+			printf("졌습니다.");
+			Sleep(2000);
+		}
+		break;
+	}
+}
+
+void create() {
 	
 }
+
+
+void OddEvendote() {
+	int rsp[2][18][13] = {
+		// 홀
+	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,1,1,1,0,0,0,0,0,0},
+		{0,0,0,1,0,0,0,1,0,0,0,0,0},
+		{0,0,0,1,0,0,0,1,0,0,0,0,0},
+		{0,0,0,1,0,0,0,1,0,0,0,0,0},
+		{0,0,0,0,1,1,1,0,0,0,0,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,0},
+		{1,1,1,1,1,1,1,1,1,1,1,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,0,0,0,0}},
+
+
+		// 짝
+	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0}},
+	};
+	int x = 60, y = 2;
+	int sleep = 100;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+		for (int i = 0; i < 1; i++) {
+			for (int k = 0; k < 18; k++) {
+				gotoxy(x, y);
+				for (int j = 0; j < 13; j++) {
+					printf("%s", rsp[i][k][j] == 1 ? "■" : "　");
+				}
+				printf("\n");
+				y++;
+			}
+			Sleep(sleep);
+			y = 2, sleep += 50;
+		}
+		
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	}
