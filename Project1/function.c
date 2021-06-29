@@ -1041,6 +1041,7 @@ void RSP()
 
 	if (player - rnd_rsp == 0) {
 		puts("∫Ò∞ÂΩ¿¥œ¥Ÿ.");
+		Sleep(1000);
 	}
 	else if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		puts("¿Ã∞ÂΩ¿¥œ¥Ÿ.");
