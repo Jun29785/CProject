@@ -45,6 +45,8 @@ EndGame_Enemy Enemy[20];
 int minigamecount;
 int day;
 int hydro, oxy, carb;
+int hydro2, oxy2, carb2;
+int hydro3, oxy3, carb3;
 int OddEvencheck;
 int hoctemp;
 int DAN;
@@ -83,7 +85,7 @@ void startDraw();
 int Dice();
 int minigameDraw();
 void gamemainDraw();
-void Coin(); // 동전 앞뒤	
+int Coin(); // 동전 앞뒤	
 void RSP(); // 가위바위보 
 int RSPgameDraw();
 int DicegameDraw();
@@ -121,7 +123,9 @@ void EndGame_Bullet_Move();
 void EndGame_Bullet_Delete();
 void EndGame_Enemy_Contain_Bullet();
 void EndGame_Main();
-
+void onetwothree();
+void create();
+void OddEvendote();
 
 
 
