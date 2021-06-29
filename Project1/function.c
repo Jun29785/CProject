@@ -1052,14 +1052,14 @@ void RSP()
 
 #pragma region Avoid_Block
 
-block_width = SCR_WIDTH;
+block_width = SCR_WIDTH/2;
 
 void Block_init()
 {
 	for (int i = 0; i < block_width; i++)
 		block[i].act = FALSE;
 
-	player.x = block_width / 2;
+	player.x = block_width;
 }
 
 int Block_iskeydown(int key)
@@ -1445,6 +1445,140 @@ void NextgameDraw()
 		break;
 	}
 }
+#pragma region EndGame
+
+enemy = 20;
+e_width = SCR_WIDTH - 20;
+
+void EndGame_init()
+{
+	for (int k = 0; k < Enemy; k++) {
+		Enemy[k].act = FALSE;
+	}
+	User.x = (e_width) / 2;
+	User.y = SCR_HEIGHT - SCR_HEIGHT / 4;
+}
+
+int EndGame_iskeydown(int key)
+{
+	return ((GetAsyncKeyState(key) & 0x8000) != 0);
+}
+
+void EndGame_Enemy_Create()
+{
+	for (int k = 0; k < enemy; k++) {
+		if (!Enemy[k].act) {
+			Enemy[k].x = rand() % (e_width);
+			Enemy[k].y = SCR_HEIGHT - 1;
+			Enemy[k].width = 3;
+			Enemy[k].image = "<0>";
+
+			Enemy[k].act = TRUE;
+			return;
+		}
+	}
+}
+
+void EndGame_Enemy_Move(int n)
+{
+	Sleep(300);
+	switch (rand()%3)
+	{
+	case 0:
+		if (Enemy[n].y < SCR_HEIGHT-10) {
+			Enemy[n].y++; break;
+		}
+		else {
+			break;
+		}
+	case 1:
+		if (Enemy[n].x < e_width) {
+			Enemy[n].x++; break;
+		}
+		else {
+			break;
+		}
+	case 2:
+		if (Enemy[n].x > 0) {
+			Enemy[n].x--; break;
+		}
+
+	default:
+		break;
+	}
+}
+
+void EndGame_Enemy_Delete()
+{
+	for (int k = 0; k < enemy; k++) {
+		if (Enemy[k].act && Enemy[k].y < 0) {
+			Enemy[k].act = FALSE;
+		}
+	}
+}
+
+int EndGame_Enemy_Contain_Player()
+{
+	for (int k = 0; k < enemy; k++) {
+		if (User.x - Enemy[k].x > -5 || User.x - Enemy[k].x < 3) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+void EndGame_Print_Map()
+{
+	for (int k = 0; k < SCR_HEIGHT; k++) {
+		gotoxy(e_width + 2, k);
+		puts("жн");
+	}
+}
+
+void EndGame_Player_Move()
+{
+	if ((EndGame_iskeydown(VK_LEFT) || EndGame_iskeydown('a') || EndGame_iskeydown('a')) && User.x >= 1)
+		User.x--;
+	if ((EndGame_iskeydown(VK_RIGHT) || EndGame_iskeydown('d') || EndGame_iskeydown('D')) && User.x < e_width - 2)
+		User.x++;
+	if ((EndGame_iskeydown(VK_UP) || EndGame_iskeydown('w') || EndGame_iskeydown('W')) && User.y > SCR_HEIGHT/2)
+		User.y++;
+	if ((EndGame_iskeydown(VK_DOWN) || EndGame_iskeydown('s') || EndGame_iskeydown('S')) && User.y < SCR_HEIGHT-1)
+		User.y--;
+}
+
+void EndGame_Player_Shot()
+{
+	for (int k = 0; k < 10; k++) {
+		if ((EndGame_iskeydown(VK_SPACE)) && !P_Bullet[k].act) {
+			P_Bullet[k].act = TRUE;
+		}
+	}
+}
+
+void EndGame_Bullet_Create()
+{
+}
+
+void EndGame_Bullet_Move()
+{
+}
+
+void EndGame_Bullet_Delete()
+{
+}
+
+void EndGame_Enemy_Contain_Bullet()
+{
+}
+
+void EndGame_Main()
+{
+}
+
+#pragma endregion
+
+
 void NextSleep()
 {
 	day++;
