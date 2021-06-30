@@ -673,65 +673,90 @@ void DicemainDraw()
 	int menuCode = DicegameDraw();
 	switch (menuCode) {
 	case 0:
+		OddEvendote(menuCode);
 		num = Dice();
-		if (num % 2 == 0) {
-			OddEvendote();
-			Sleep(2000);
-		}
-		else if (num % 2 != 0) {
-			OddEvendote();
-			Sleep(2000);
-		}
 		minigamecount--;
+		Sleep(500);
 		if (num % 2 == 0)
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Win");
+			setColor(YELLOW);
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
+				setColor(YELLOW);
 				break;
 			case 1:
 				oxy += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
+				setColor(YELLOW);
 				break;
 			case 2:
 				carb += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				setColor(YELLOW);
 				break;
 			}
 		}
 		else
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Lose");
+			setColor(YELLOW);
 		}
 		break;
 	case 1:
+		OddEvendote(menuCode);
 		num = Dice();
 		minigamecount--;
 		if (num % 2 != 0)
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Win");
+			setColor(YELLOW);
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
+				gotoxy(20, 30);
+				setColor(RED);
 				printf("\n수소 +%d / 현재 수소 %d", num + 1, hydro);
+				setColor(YELLOW);
 				break;
 			case 1:
 				oxy += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n산소 +%d / 현재 산소 %d", num + 1, oxy);
+				setColor(YELLOW);
 				break;
 			case 2:
 				carb += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				setColor(YELLOW);
 				break;
 			}
 		}
 		else
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Lose");
+			setColor(YELLOW);
 		}
 		break;
 	}
@@ -782,6 +807,7 @@ int hocDraw()
 
 void hocmainDraw()
 {
+
 }
 
 void spaceship()
@@ -905,8 +931,9 @@ int Dice()
 			printf("┻");
 		}
 	}
-	int x = 16, y = 7, sleep = 70;
-	int rnd_dice = rand() % 6;
+
+	int x = 64, y = 7, sleep = 70;
+	rnd_dice = rand() % 6;
 	for (int g = 0; g < 3; g++)
 	{
 		for (int i = 0; i < 6; i++)
@@ -935,7 +962,7 @@ int Dice()
 		y++;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	Sleep(1000);
+	Sleep(300);
 	return rnd_dice;
 }
 
@@ -1015,7 +1042,7 @@ int Coin()
 		   {0,0,0,0,0,0,0}},
 
 	};
-	int x = 10, y = 10;
+	int x = 50, y = 10;
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("┃");
@@ -1029,7 +1056,7 @@ int Coin()
 			printf("┻");
 		}
 	}
-	int rnd_coin = rand() % 2;
+	rnd_coin = rand() % 2;
 	for (int g = 0; g < 3; g++) {
 		for (int i = 0; i < 8; i++) {
 			for (int k = 0; k < 7; k++) {
@@ -1833,9 +1860,10 @@ void coinmainDraw()
 	int n;
 	switch (menuCode) {
 	case 0:
+		frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
-		if (menuCode == n) {
+		if (menuCode != n) {
 			printf("이겼습니다.");
 			Sleep(2000);
 		}
@@ -1845,9 +1873,10 @@ void coinmainDraw()
 		}
 		break;
 	case 1:
+		frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
-		if (menuCode == n) {
+		if (menuCode != n) {
 			printf("이겼습니다.");
 			Sleep(2000);
 		}
@@ -1864,7 +1893,7 @@ void create() {
 }
 
 
-void OddEvendote() {
+void OddEvendote(int num) {
 	int rsp[2][18][13] = {
 		// 홀
 	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -1888,38 +1917,39 @@ void OddEvendote() {
 
 
 		// 짝
-	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+	   {{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{1,1,1,1,1,1,1,1,1,0,1,0,0},
+		{0,0,0,1,0,1,0,0,0,0,1,0,0},
+		{0,0,1,0,1,0,1,0,0,0,1,0,0},
+		{0,1,0,1,0,1,0,1,0,0,1,1,1},
+		{1,0,1,0,1,0,1,0,1,0,1,0,0},
+		{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{0,1,1,1,1,1,1,1,1,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0}},
 	};
-	int x = 60, y = 2;
+	/*int x = 60, y = 2;*/
+	int x = 10, y = 2;
 	int sleep = 100;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	for (int i = 0; i < 1; i++) {
-		for (int k = 0; k < 18; k++) {
-			gotoxy(x, y);	
-			for (int j = 0; j < 13; j++) {
-				printf("%s", rsp[i][k][j] == 1 ? "■" : "　");
+		for (int i = 0; i < 1; i++) {
+			for (int k = 0; k < 18; k++) {
+				gotoxy(x, y);
+				for (int j = 0; j < 13; j++) {
+					printf("%s", rsp[i][k][j] == 1 ? "■" : "　");
+				}
+				printf("\n");
+				y++;
 			}
-			printf("\n");
-			y++;
+			Sleep(sleep);
+			y = 2, sleep += 50;
 		}
-		Sleep(sleep);
-		y = 2, sleep += 50;
-	}
-
+		
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-}
+	}
