@@ -132,13 +132,13 @@ void EndGame_Player_Shot();
 void EndGame_Bullet_Create();
 void EndGame_Bullet_Move();
 void EndGame_Bullet_Delete();
-int EndGame_Enemy_Contain_Bullet();
-void EndGame_Player_Bullet_Create();
+void EndGame_Enemy_Contain_Bullet();
 void EndGame_Main();
 void onetwothree();
 void create();
 void OddEvendote(int num);
 void frontbackdote(int num);
+
 
 
 

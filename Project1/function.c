@@ -1042,7 +1042,7 @@ int Coin()
 		   {0,0,0,0,0,0,0}},
 
 	};
-	int x = 63, y = 7;
+	int x = 50, y = 10;
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("жн");
@@ -1068,7 +1068,7 @@ int Coin()
 				y++;
 			}
 			Sleep(70);
-			y = 7;
+			y = 10;
 		}
 	}
 
