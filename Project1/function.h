@@ -46,6 +46,7 @@ typedef struct {
     int x;
     int y;
     char* image;
+    int act;
 }Enemy_Bullet;
 
 int enemy;
