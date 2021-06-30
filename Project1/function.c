@@ -1607,9 +1607,7 @@ void EndGame_init()
 	for (int k = 0; k < 10; k++) {
 		P_Bullet[k].act = FALSE;
 	}
-	for (int k = 0; k < 5; k++) {
-		E_Bullet[k].act = FALSE;
-	}
+
 	User.x = (e_width) / 2;
 	User.y = SCR_HEIGHT - SCR_HEIGHT / 4;
 }
@@ -1912,7 +1910,7 @@ void OddEvendote() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	for (int i = 0; i < 1; i++) {
 		for (int k = 0; k < 18; k++) {
-			gotoxy(x, y);
+			gotoxy(x, y);	
 			for (int j = 0; j < 13; j++) {
 				printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
 			}
