@@ -205,7 +205,7 @@ void EntryStory()
 		{0,0,1,0,0},
 		{0,0,1,0,0}}
 	};
-	
+
 	int x = 42, y = 21;
 	Sleep(200);
 	// entrystory
@@ -220,7 +220,7 @@ void EntryStory()
 			printf("%c", story[i][j]);
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
 				system("cls");
-				
+
 				day++;
 				DayAlter(day);
 				return;
@@ -436,9 +436,9 @@ int mainDraw()
 		case SUBMIT: {
 			return y - 26;
 		}
-		//case ENTER: {
-		//	return y - 26;
-		//}
+				   //case ENTER: {
+				   //	return y - 26;
+				   //}
 		}
 	}
 	return 0;
@@ -673,65 +673,90 @@ void DicemainDraw()
 	int menuCode = DicegameDraw();
 	switch (menuCode) {
 	case 0:
+		OddEvendote(menuCode);
 		num = Dice();
-		if (num % 2 == 0) {
-			OddEvendote();
-			Sleep(2000);
-		}
-		else if (num % 2 != 0) {
-			OddEvendote();
-			Sleep(2000);
-		}
 		minigamecount--;
+		Sleep(500);
 		if (num % 2 == 0)
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Win");
+			setColor(YELLOW);
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
+				setColor(YELLOW);
 				break;
 			case 1:
 				oxy += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
+				setColor(YELLOW);
 				break;
 			case 2:
 				carb += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\nÅº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
+				setColor(YELLOW);
 				break;
 			}
 		}
 		else
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Lose");
+			setColor(YELLOW);
 		}
 		break;
 	case 1:
+		OddEvendote(menuCode);
 		num = Dice();
 		minigamecount--;
 		if (num % 2 != 0)
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Win");
+			setColor(YELLOW);
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
+				gotoxy(20, 30);
+				setColor(RED);
 				printf("\n¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
+				setColor(YELLOW);
 				break;
 			case 1:
 				oxy += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\n»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
+				setColor(YELLOW);
 				break;
 			case 2:
 				carb += num + 1;
+				gotoxy(54, 30);
+				setColor(RED);
 				printf("\nÅº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
+				setColor(YELLOW);
 				break;
 			}
 		}
 		else
 		{
+			gotoxy(54, 29);
+			setColor(RED);
 			printf("Lose");
+			setColor(YELLOW);
 		}
 		break;
 	}
@@ -782,6 +807,7 @@ int hocDraw()
 
 void hocmainDraw()
 {
+
 }
 
 void spaceship()
@@ -905,8 +931,9 @@ int Dice()
 			printf("¦µ");
 		}
 	}
-	int x = 16, y = 7, sleep = 70;
-	int rnd_dice = rand() % 6;
+
+	int x = 64, y = 7, sleep = 70;
+	rnd_dice = rand() % 6;
 	for (int g = 0; g < 3; g++)
 	{
 		for (int i = 0; i < 6; i++)
@@ -935,7 +962,7 @@ int Dice()
 		y++;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	Sleep(1000);
+	Sleep(300);
 	return rnd_dice;
 }
 
@@ -1015,7 +1042,7 @@ int Coin()
 		   {0,0,0,0,0,0,0}},
 
 	};
-	int x = 10, y = 10;
+	int x = 50, y = 10;
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("¦­");
@@ -1029,7 +1056,7 @@ int Coin()
 			printf("¦µ");
 		}
 	}
-	int rnd_coin = rand() % 2;
+	rnd_coin = rand() % 2;
 	for (int g = 0; g < 3; g++) {
 		for (int i = 0; i < 8; i++) {
 			for (int k = 0; k < 7; k++) {
@@ -1197,7 +1224,7 @@ void RSP()
 
 #pragma region Avoid_Block
 
-block_width = SCR_WIDTH/2;
+block_width = SCR_WIDTH / 2;
 
 void Block_init()
 {
@@ -1404,13 +1431,13 @@ void DayAlter(int day)
 		{1,1,1,1}}
 	};
 
-	int Day[3][5][5] = {	
+	int Day[3][5][5] = {
 		// D
-		{{0,1,1,1,0},	
-		{0,1,0,0,1},	
-		{0,1,0,0,1},	
-		{0,1,0,0,1},	
-		{0,1,1,1,0}},	
+		{{0,1,1,1,0},
+		{0,1,0,0,1},
+		{0,1,0,0,1},
+		{0,1,0,0,1},
+		{0,1,1,1,0}},
 		// A
 		{{0,0,1,0,0},
 		{0,1,0,1,0},
@@ -1424,7 +1451,7 @@ void DayAlter(int day)
 		{0,0,1,0,0},
 		{0,0,1,0,0}}
 	};
-	
+
 	system("cls");
 
 	gotoxy(16, 12);
@@ -1441,8 +1468,8 @@ void DayAlter(int day)
 		gotoxy(k, 20);
 		puts("¦¬");
 	}
-	
-	int x=22, y = 14;
+
+	int x = 22, y = 14;
 	if (day > 19) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -1477,7 +1504,7 @@ void DayAlter(int day)
 	for (int j = 0; j < 5; j++) {
 		gotoxy(x, y);
 		for (int k = 0; k < 4; k++) {
-			printf("%s", CountNum[day%10][j][k] == 1 ? "¡á" : "¡¡");
+			printf("%s", CountNum[day % 10][j][k] == 1 ? "¡á" : "¡¡");
 		}
 		printf("\n");
 		y++;
@@ -1631,10 +1658,10 @@ void EndGame_Enemy_Create()
 void EndGame_Enemy_Move(int n)
 {
 	Sleep(300);
-	switch (rand()%3)
+	switch (rand() % 3)
 	{
 	case 0:
-		if (Enemy[n].y < SCR_HEIGHT-10) {
+		if (Enemy[n].y < SCR_HEIGHT - 10) {
 			Enemy[n].y++; break;
 		}
 		else {
@@ -1690,9 +1717,9 @@ void EndGame_Player_Move()
 		User.x--;
 	if ((EndGame_iskeydown(VK_RIGHT) || EndGame_iskeydown('d') || EndGame_iskeydown('D')) && User.x < e_width - 2)
 		User.x++;
-	if ((EndGame_iskeydown(VK_UP) || EndGame_iskeydown('w') || EndGame_iskeydown('W')) && User.y > SCR_HEIGHT/2)
+	if ((EndGame_iskeydown(VK_UP) || EndGame_iskeydown('w') || EndGame_iskeydown('W')) && User.y > SCR_HEIGHT / 2)
 		User.y++;
-	if ((EndGame_iskeydown(VK_DOWN) || EndGame_iskeydown('s') || EndGame_iskeydown('S')) && User.y < SCR_HEIGHT-1)
+	if ((EndGame_iskeydown(VK_DOWN) || EndGame_iskeydown('s') || EndGame_iskeydown('S')) && User.y < SCR_HEIGHT - 1)
 		User.y--;
 }
 
@@ -1743,9 +1770,10 @@ void coinmainDraw()
 	int n;
 	switch (menuCode) {
 	case 0:
+		frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
-		if (menuCode == n) {
+		if (menuCode != n) {
 			printf("ÀÌ°å½À´Ï´Ù.");
 			Sleep(2000);
 		}
@@ -1755,9 +1783,10 @@ void coinmainDraw()
 		}
 		break;
 	case 1:
+		frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
-		if (menuCode == n) {
+		if (menuCode != n) {
 			printf("ÀÌ°å½À´Ï´Ù.");
 			Sleep(2000);
 		}
@@ -1770,11 +1799,11 @@ void coinmainDraw()
 }
 
 void create() {
-	
+
 }
 
 
-void OddEvendote() {
+void OddEvendote(int num) {
 	int rsp[2][18][13] = {
 		// È¦
 	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -1798,26 +1827,28 @@ void OddEvendote() {
 
 
 		// Â¦
-	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0},
+	   {{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{1,1,1,1,1,1,1,1,1,0,1,0,0},
+		{0,0,0,1,0,1,0,0,0,0,1,0,0},
+		{0,0,1,0,1,0,1,0,0,0,1,0,0},
+		{0,1,0,1,0,1,0,1,0,0,1,1,1},
+		{1,0,1,0,1,0,1,0,1,0,1,0,0},
+		{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{0,0,0,0,0,0,0,0,0,0,1,0,0},
+		{0,1,1,1,1,1,1,1,1,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
+		{0,0,0,0,0,0,0,0,0,1,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0}},
 	};
-	int x = 60, y = 2;
+	/*int x = 60, y = 2;*/
+	int x = 10, y = 2;
 	int sleep = 100;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	if (num == 0) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 		for (int i = 0; i < 1; i++) {
 			for (int k = 0; k < 18; k++) {
 				gotoxy(x, y);
@@ -1828,8 +1859,110 @@ void OddEvendote() {
 				y++;
 			}
 			Sleep(sleep);
+			y = 7, sleep += 50;
+		}
+	}
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	if (num == 1) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+		for (int i = 1; i < 2; i++) {
+			for (int k = 0; k < 18; k++) {
+				gotoxy(x, y);
+				for (int j = 0; j < 13; j++) {
+					printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
+				}
+				printf("\n");
+				y++;
+			}
+			Sleep(sleep);
+			y = 7, sleep += 50;
+		}
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	}
+
+}
+
+void frontbackdote(int num)
+{
+	int fb[2][18][18] = {
+		// È¦
+	   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
+		{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
+		{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
+		{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
+		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
+
+
+		// Â¦
+	   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+		{0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
+		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0}}
+	};
+	int x = 7, y = 2;
+	int sleep = 100;
+	if (num == 0) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+		for (int i = 0; i < 1; i++) {
+			for (int k = 0; k < 18; k++) {
+				gotoxy(x, y);
+				for (int j = 0; j < 18; j++) {
+					printf("%s", fb[i][k][j] == 1 ? "¡á" : "¡¡");
+				}
+				printf("\n");
+				y++;
+			}
+			Sleep(sleep);
 			y = 2, sleep += 50;
 		}
-		
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	}
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	if (num == 1) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+		for (int i = 1; i < 2; i++) {
+			for (int k = 0; k < 18; k++) {
+				gotoxy(x, y);
+				for (int j = 0; j < 18; j++) {
+					printf("%s", fb[i][k][j] == 1 ? "¡á" : "¡¡");
+				}
+				printf("\n");
+				y++;
+			}
+			Sleep(sleep);
+			y = 2, sleep += 50;
+		}
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	}
+
+}

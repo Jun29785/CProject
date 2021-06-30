@@ -56,6 +56,9 @@ EndGame_Enemy Enemy[20];
 Player_Bullet P_Bullet[5];
 Enemy_Bullet E_Bullet[5];
 #pragma endregion
+//랜덤 코인 전역변수
+int rnd_dice;
+int rnd_coin;
 
 int minigamecount;
 int day;
@@ -136,11 +139,12 @@ void EndGame_Player_Shot();
 void EndGame_Bullet_Create();
 void EndGame_Bullet_Move();
 void EndGame_Bullet_Delete();
-int EndGame_Enemy_Contain_Bullet();
+void EndGame_Enemy_Contain_Bullet();
 void EndGame_Main();
 void onetwothree();
 void create();
-void OddEvendote();
+void OddEvendote(int num);
+void frontbackdote(int num);
 
 
 
