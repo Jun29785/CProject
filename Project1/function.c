@@ -1634,9 +1634,7 @@ void EndGame_init()
 	for (int k = 0; k < 10; k++) {
 		P_Bullet[k].act = FALSE;
 	}
-	for (int k = 0; k < 5; k++) {
-		E_Bullet[k].act = FALSE;
-	}
+
 	User.x = (e_width) / 2;
 	User.y = SCR_HEIGHT - SCR_HEIGHT / 4;
 }
@@ -1661,33 +1659,38 @@ void EndGame_Enemy_Create()
 	}
 }
 
-void EndGame_Enemy_Move(int n)
+void EndGame_Enemy_Move()
 {
 	Sleep(300);
-	switch (rand() % 3)
-	{
-	case 0:
-		if (Enemy[n].y < SCR_HEIGHT - 10) {
-			Enemy[n].y++; break;
-		}
-		else {
-			break;
-		}
-	case 1:
-		if (Enemy[n].x < e_width) {
-			Enemy[n].x++; break;
-		}
-		else {
-			break;
-		}
-	case 2:
-		if (Enemy[n].x > 0) {
-			Enemy[n].x--; break;
-		}
+	for (int n = 0; n < enemy; n++) {
+		if (Enemy[n].act) {
+			switch (rand() % 3)
+			{
+			case 0:
+				if (Enemy[n].y < SCR_HEIGHT - 10) {
+					Enemy[n].y++; break;
+				}
+				else {
+					break;
+				}
+			case 1:
+				if (Enemy[n].x < e_width) {
+					Enemy[n].x++; break;
+				}
+				else {
+					break;
+				}
+			case 2:
+				if (Enemy[n].x > 0) {
+					Enemy[n].x--; break;
+				}
 
-	default:
-		break;
+			default:
+				break;
+			}
+		}
 	}
+
 }
 
 void EndGame_Enemy_Delete()
@@ -1774,13 +1777,69 @@ int EndGame_Enemy_Contain_Bullet()
 {
 	for (int k = 0; k < enemy; k++) {
 		for (int i = 0; i < 10; i++) {
-
+			if (Enemy[k].x - P_Bullet[i].x > -3 && Enemy[k].x - P_Bullet[i].x < 1 && Enemy[k].act && P_Bullet[i].act) {
+				Enemy[k].act = FALSE;
+				P_Bullet[k].act = FALSE;
+			}
 		}
 	}
 }
 
 void EndGame_Main()
 {
+	char CountNum[3][5][4] = {
+		// NUM 1
+		{{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0},
+		{0,0,1,0}},
+		// NUM 2
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{1,0,0,0},
+		{1,1,1,1}},
+		// NUM 3
+		{{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1},
+		{0,0,0,1},
+		{1,1,1,1}},
+	};
+	char key;
+	EndGame_init();
+	int x = 25, y = 10;
+
+	for (int i = 2; i > -1; i--) {
+		EndGame_Print_Map();
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[i][j][k] == 1 ? "¡á" : "¡¡");
+			}
+			printf("\n");
+			y++;
+		}
+		Sleep(1000);
+		system("cls");
+
+		y = 10;
+	}
+	do {
+		srand((int)malloc(NULL));
+
+		EndGame_Enemy_Create();
+		EndGame_Enemy_Move();
+		EndGame_Enemy_Delete();
+
+		EndGame_Player_Move();
+		EndGame_Player_Shot();
+
+		EndGame_Print_Map();
+
+		Sleep(10);
+	} while (!(EndGame_Enemy_Contain_Player()));
 }
 
 #pragma endregion
@@ -1878,8 +1937,7 @@ void OddEvendote(int num) {
 	/*int x = 60, y = 2;*/
 	int x = 10, y = 2;
 	int sleep = 100;
-	if (num == 0) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 		for (int i = 0; i < 1; i++) {
 			for (int k = 0; k < 18; k++) {
 				gotoxy(x, y);
@@ -1890,110 +1948,8 @@ void OddEvendote(int num) {
 				y++;
 			}
 			Sleep(sleep);
-			y = 7, sleep += 50;
-		}
-	}
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	if (num == 1) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-		for (int i = 1; i < 2; i++) {
-			for (int k = 0; k < 18; k++) {
-				gotoxy(x, y);
-				for (int j = 0; j < 13; j++) {
-					printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
-				}
-				printf("\n");
-				y++;
-			}
-			Sleep(sleep);
-			y = 7, sleep += 50;
-		}
-
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	}
-
-}
-
-void frontbackdote(int num)
-{
-	int fb[2][18][18] = {
-		// È¦
-	   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
-		{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-		{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
-		{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-		{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-		{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
-
-
-		// Â¦
-	   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-		{0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
-		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0}}
-	};
-	int x = 7, y = 2;
-	int sleep = 100;
-	if (num == 0) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-		for (int i = 0; i < 1; i++) {
-			for (int k = 0; k < 18; k++) {
-				gotoxy(x, y);
-				for (int j = 0; j < 18; j++) {
-					printf("%s", fb[i][k][j] == 1 ? "¡á" : "¡¡");
-				}
-				printf("\n");
-				y++;
-			}
-			Sleep(sleep);
 			y = 2, sleep += 50;
 		}
-	}
-
+		
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	if (num == 1) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-		for (int i = 1; i < 2; i++) {
-			for (int k = 0; k < 18; k++) {
-				gotoxy(x, y);
-				for (int j = 0; j < 18; j++) {
-					printf("%s", fb[i][k][j] == 1 ? "¡á" : "¡¡");
-				}
-				printf("\n");
-				y++;
-			}
-			Sleep(sleep);
-			y = 2, sleep += 50;
-		}
-
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	}
-
-}
