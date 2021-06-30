@@ -42,20 +42,12 @@ typedef struct {
     int act;
 }Player_Bullet;
 
-typedef struct {
-    int x;
-    int y;
-    char* image;
-    int act;
-}Enemy_Bullet;
-
 int enemy;
 int e_width;
 
 EndGame_User User;
 EndGame_Enemy Enemy[20];
 Player_Bullet P_Bullet[5];
-Enemy_Bullet E_Bullet[5];
 #pragma endregion
 
 int minigamecount;
