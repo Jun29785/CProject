@@ -358,7 +358,7 @@ void menuTitleDraw()
 	gotoxy(x, y); printf("早                                   早"); y++;
 	gotoxy(x, y); printf("早    驕模 : %d     %d     %d           早", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("早                                   早"); y++;
-	gotoxy(x, y); printf("早                                   早"); y++;
+	gotoxy(x, y); printf("早   辦輿摹 : %d   辦輿犒 : %d           早", rocket, spacesuit); y++;
 	gotoxy(x, y); printf("早                                   早"); y++;
 	gotoxy(x, y); printf("曲");
 	for (int i = 0; i < 35; i++) printf("收");
@@ -413,7 +413,7 @@ int mainDraw()
 	if (day != 30) {
 		printf("  遽綠醞  ");
 	}
-	else if (day == 30) {
+	else if (rocket == 1 && spacesuit == 1) {
 		printf(" 驍轎");
 	}
 
@@ -2502,6 +2502,7 @@ void create() {
 				return 0;
 			}
 			anvilhammer();
+			rocket++;
 			hydro3 -= 2;
 			oxy3 -= 2;
 			carb3 -= 2;
@@ -2521,6 +2522,7 @@ void create() {
 				return 0;
 			}
 			anvilhammer();
+			spacesuit++;
 			hydro3 -= 1;
 			oxy3 -= 1;
 			carb3 -= 1;

@@ -64,6 +64,8 @@ int day;
 int hydro, oxy, carb;
 int hydro2, oxy2, carb2;
 int hydro3, oxy3, carb3;
+int rocket;
+int spacesuit;
 int OddEvencheck;
 int hoctemp;
 int DAN;
