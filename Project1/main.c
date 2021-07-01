@@ -20,8 +20,21 @@ int main()
 	//	printf("TEST");	
 	//}
 	init();
-	//spaceship()w;
+
+	//// 원소 1레벨
+	//hydro = 5;
+	//oxy = 5;
+	//carb = 5;
+	//// 원소 2레벨
+	//hydro2 = 5;
+	//oxy2 = 5;
+	//carb2 = 5;
+	//// 원소 3레벨
+	//hydro3 = 3;
+	//oxy3 = 2;
+	//carb3 = 3;
 	
+	//spaceship()w;
 	while (1) {
 		int menuCode = menuDraw();
 		if (menuCode == 0) {

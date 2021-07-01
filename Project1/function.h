@@ -53,6 +53,12 @@ Player_Bullet P_Bullet[5];
 int rnd_dice;
 int rnd_coin;
 
+//제작 전역변수
+int lv_2;
+int lv_3;
+int createany;
+int news;
+
 int minigamecount;
 int day;
 int hydro, oxy, carb;
@@ -88,7 +94,7 @@ void HideCursor();
 void EntryStory();
 void init(); // 초기화 함수
 int menuDraw(); // 메인메뉴 그리기 함수
-void menuTitleDraw();
+void menuTitwleDraw();
 int keyControl();
 int mainDraw();
 void infoDraw();
@@ -132,13 +138,20 @@ void EndGame_Player_Shot();
 void EndGame_Bullet_Create();
 void EndGame_Bullet_Move();
 void EndGame_Bullet_Delete();
-void EndGame_Enemy_Contain_Bullet();
+int EndGame_Enemy_Contain_Bullet();
+void EndGame_Player_Bullet_Create();
 void EndGame_Main();
 void onetwothree();
 void create();
+int lv3();
+int lv2();
+int creategameDraw();
+int createnextDraw();
 void OddEvendote(int num);
 void frontbackdote(int num);
-
+void anvil();
+void hammer();
+void anvilhammer();
 
 
 
