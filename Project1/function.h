@@ -25,29 +25,14 @@ typedef struct {
     char* image;
     int width;
     int height;
-}EndGame_User;
+}Object,*p_Object;
 
-typedef struct {
-    int x;
-    int y;
-    char* image;
-    int act;
-    int width;
-}EndGame_Enemy;
+bool Player_Bullet_Reload;
 
-typedef struct {
-    int x;
-    int y;
-    char* image;
-    int act;
-}Player_Bullet;
+Object User;
+p_Object Enemy[EndGame_Max_Enemy];
 
-int enemy;
-int e_width;
-
-EndGame_User User;
-EndGame_Enemy Enemy[20];
-Player_Bullet P_Bullet[5];
+p_Object P_Bullet_Array[MAX_BULLETS];
 #pragma endregion
 //랜덤 코인 전역변수
 int rnd_dice;
@@ -120,20 +105,20 @@ void coinmainDraw();
 void NextSleep();
 int NextmainDraw();
 void NextgameDraw();
-void EndGame_init();
-int EndGame_iskeydown(int key);
+void EndGame_Main();
+void EndGame_Init();
+void EndGame_Draw();
+void EndGame_Enemy();
 void EndGame_Enemy_Create();
 void EndGame_Enemy_Move(int n);
-void EndGame_Enemy_Delete();
-int EndGame_Enemy_Contain_Player();
-void EndGame_Print_Map();
-void EndGame_Player_Move();
-void EndGame_Player_Shot();
+void EndGame_Enemy_Delete(int n);
+void EndGame_Player();
+void EndGame_Player_Controll();
+void EndGame_Player_Bullet();
 void EndGame_Bullet_Create();
-void EndGame_Bullet_Move();
-void EndGame_Bullet_Delete();
-void EndGame_Enemy_Contain_Bullet();
-void EndGame_Main();
+void EndGame_Bullet_Move(int n);
+void EndGame_Bullet_Delete(int n);
+void EndGame_Collision_Enemy_Bullet();
 void onetwothree();
 void create();
 void OddEvendote(int num);

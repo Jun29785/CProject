@@ -19,3 +19,7 @@
 #define STORYNUM 6 // 스토리 개수
 #define STORYMAX 85 // 글자수 최대
 #define BlockMaxNum 30
+#define MAX_BULLETS 3
+#define EndGame_WIDTH 70
+#define EndGame_HEIGHT 50
+#define EndGame_Max_Enemy 10

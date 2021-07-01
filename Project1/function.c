@@ -480,7 +480,7 @@ void startDraw()
 		}
 		else if (menuCode == 1) {
 			// 제작
-			infoDraw();
+			EndGame_Main();
 		}
 		else if (menuCode == 2 && minigamecount == 0) {
 			// 잠자기
@@ -1621,229 +1621,223 @@ void NextgameDraw()
 		break;
 	}
 }
-#pragma region EndGame
 
-enemy = 20;
-e_width = SCR_WIDTH - 20;
-
-void EndGame_init()
+void EndGame_Main()
 {
-	for (int k = 0; k < Enemy; k++) {
-		Enemy[k].act = FALSE;
-	}
-	for (int k = 0; k < 10; k++) {
-		P_Bullet[k].act = FALSE;
+	EndGame_Init();
+
+	while (1) {
+		system("cls");
+		EndGame_Draw();
+		EndGame_Enemy();
+		EndGame_Player();
+		EndGame_Player_Bullet();
+		Sleep(10);
 	}
 
-	User.x = (e_width) / 2;
-	User.y = SCR_HEIGHT - SCR_HEIGHT / 4;
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			free(P_Bullet_Array[k]);
+			P_Bullet_Array[k] = NULL;
+		}
+	}
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			free(Enemy[k]);
+			Enemy[k] = NULL;
+		}
+	}
 }
 
-int EndGame_iskeydown(int key)
+void EndGame_Init()
 {
-	return ((GetAsyncKeyState(key) & 0x8000) != 0);
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		P_Bullet_Array[k] = NULL;
+	}
+	User.image = "<=0=>";
+	User.x = EndGame_WIDTH / 2;
+	User.y = 30;
+	User.width = 5;
+	User.height = 1;
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		Enemy[k] = NULL;
+	}
+	Player_Bullet_Reload = true;
+}
+
+void EndGame_Draw()
+{
+	gotoxy(User.x, User.y);
+	printf("%s", User.image);
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			gotoxy(Enemy[k]->x, Enemy[k]->y);
+			printf("%s", Enemy[k]->image);
+		}
+	}
+
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			gotoxy(P_Bullet_Array[k]->x, P_Bullet_Array[k]->y);
+			printf("%s", P_Bullet_Array[k]->image);
+		}
+	}
+}
+
+void EndGame_Enemy()
+{
+	EndGame_Enemy_Create();
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			EndGame_Enemy_Move(k);
+			if (Enemy[k]->y > 36) {
+				EndGame_Enemy_Delete(k);
+			}
+		}
+	}
 }
 
 void EndGame_Enemy_Create()
 {
-	for (int k = 0; k < enemy; k++) {
-		if (!Enemy[k].act) {
-			Enemy[k].x = rand() % (e_width);
-			Enemy[k].y = SCR_HEIGHT - 1;
-			Enemy[k].width = 3;
-			Enemy[k].image = "<0>";
-
-			Enemy[k].act = TRUE;
-			return;
+	int b_ix = -1;
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] == NULL) {
+			b_ix = k;
+			break;
 		}
 	}
+	if (b_ix == -1) return;
+
+	Enemy[b_ix] = (p_Object)malloc(sizeof(Object));
+	Enemy[b_ix]->x = rand() % (EndGame_WIDTH - 1) + 1;
+	Enemy[b_ix]->y = 1;
+	Enemy[b_ix]->image = "<0>";
+	Enemy[b_ix]->width = 3;
+	Enemy[b_ix]->height = 1;
 }
 
-void EndGame_Enemy_Move()
+void EndGame_Enemy_Move(int n)
 {
-	Sleep(300);
-	for (int n = 0; n < enemy; n++) {
-		if (Enemy[n].act) {
-			switch (rand() % 3)
-			{
-			case 0:
-				if (Enemy[n].y < SCR_HEIGHT - 10) {
-					Enemy[n].y++; break;
-				}
-				else {
-					break;
-				}
-			case 1:
-				if (Enemy[n].x < e_width) {
-					Enemy[n].x++; break;
-				}
-				else {
-					break;
-				}
-			case 2:
-				if (Enemy[n].x > 0) {
-					Enemy[n].x--; break;
-				}
-
-			default:
-				break;
-			}
-		}
-	}
-
-}
-
-void EndGame_Enemy_Delete()
-{
-	for (int k = 0; k < enemy; k++) {
-		if (Enemy[k].act && Enemy[k].y < 0) {
-			Enemy[k].act = FALSE;
-		}
+	int move = rand() % 4;
+	switch (move)
+	{
+	case 0: // stay
+		break;
+	case 1: // left
+		if (Enemy[n]->x>0)
+			Enemy[n]->x--;
+		break;
+	case 2: // right
+		if (Enemy[n]->x<EndGame_WIDTH-1)
+		Enemy[n]->x++;
+		break;
+	case 3: // front
+		Enemy[n]->y++;
+		break;
+	default:
+		break;
 	}
 }
 
-int EndGame_Enemy_Contain_Player()
+void EndGame_Player()
 {
-	for (int k = 0; k < enemy; k++) {
-		if (User.x - Enemy[k].x > -5 || User.x - Enemy[k].x < 3) {
-			return TRUE;
-		}
-	}
-	return FALSE;
+	EndGame_Player_Controll();
 }
 
-void EndGame_Print_Map()
+void EndGame_Enemy_Delete(int n)
 {
-	for (int k = 0; k < SCR_HEIGHT; k++) {
-		gotoxy(e_width + 2, k);
-		puts("┃");
-	}
+	free(Enemy[n]);
+	Enemy[n] = NULL;
 }
 
-void EndGame_Player_Move()
+void EndGame_Player_Controll()
 {
-	if ((EndGame_iskeydown(VK_LEFT) || EndGame_iskeydown('a') || EndGame_iskeydown('a')) && User.x >= 1)
-		User.x--;
-	if ((EndGame_iskeydown(VK_RIGHT) || EndGame_iskeydown('d') || EndGame_iskeydown('D')) && User.x < e_width - 2)
-		User.x++;
-	if ((EndGame_iskeydown(VK_UP) || EndGame_iskeydown('w') || EndGame_iskeydown('W')) && User.y > SCR_HEIGHT / 2)
-		User.y++;
-	if ((EndGame_iskeydown(VK_DOWN) || EndGame_iskeydown('s') || EndGame_iskeydown('S')) && User.y < SCR_HEIGHT - 1)
+	if (GetAsyncKeyState(VK_UP) & 0x8000) {
+		if (User.y>0)
 		User.y--;
-}
-
-void EndGame_Player_Shot()
-{
-	for (int k = 0; k < 10; k++) {
-		if ((EndGame_iskeydown(VK_SPACE)) && !P_Bullet[k].act) {
-			EndGame_Player_Bullet_Create();
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+		if (User.y < SCR_HEIGHT + 20) {
+			User.y++;
 		}
+	}
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+		if (User.x > 0) {
+			User.x--;
+		}
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+		if (User.x < 70) {
+			User.x++;
+		}
+	}
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		if (Player_Bullet_Reload) {
+			EndGame_Bullet_Create();
+			Player_Bullet_Reload = false;
+		}
+	}
+	else {
+		Player_Bullet_Reload = true;
 	}
 }
 
-void EndGame_Player_Bullet_Create()
+void EndGame_Player_Bullet()
 {
-	for (int k = 0; k < 10; k++) {
-		if (!P_Bullet[k].act) {
-			P_Bullet[k].image = "!";
-			P_Bullet[k].x = User.x + 2;
-			P_Bullet[k].y = User.y - 1;
-
-			P_Bullet[k].act = TRUE;
-			return;
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			EndGame_Bullet_Move(k);
+			if (P_Bullet_Array[k]->y < 1) {
+				EndGame_Bullet_Delete(k);
+			}
 		}
+		
 	}
 }
 
-void EndGame_Player_Bullet_Move()
+void EndGame_Bullet_Create()
 {
-	for (int k = 0; k < 10; k++) {
-		if (P_Bullet[k].act) {
-			P_Bullet[k].y--;
+	int b_ix = -1;
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] == NULL) {
+			b_ix = k;
+			break;
 		}
 	}
+	if (b_ix == -1) return;
+
+	P_Bullet_Array[b_ix] = (p_Object)malloc(sizeof(Object));
+	P_Bullet_Array[b_ix]->x = User.x + 2;
+	P_Bullet_Array[b_ix]->y = User.y - 1;
+	P_Bullet_Array[b_ix]->image = "!";
 }
 
-void EndGame_Plyaer_Bullet_Delete()
+void EndGame_Bullet_Move(int n)
 {
-	for (int k = 0; k < 10; k++) {
-		if (P_Bullet[k].y < 0 && P_Bullet[k].act) {
-			P_Bullet[k].act = FALSE;
-		}
-	}
+	P_Bullet_Array[n]->y--;
 }
 
-int EndGame_Enemy_Contain_Bullet()
+void EndGame_Bullet_Delete(int n)
 {
-	for (int k = 0; k < enemy; k++) {
-		for (int i = 0; i < 10; i++) {
-			if (Enemy[k].x - P_Bullet[i].x > -3 && Enemy[k].x - P_Bullet[i].x < 1 && Enemy[k].act && P_Bullet[i].act) {
-				Enemy[k].act = FALSE;
-				P_Bullet[k].act = FALSE;
+	free(P_Bullet_Array[n]);
+	P_Bullet_Array[n] = NULL;
+}
+
+void EndGame_Collision_Enemy_Bullet()
+{
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		for (int i = 0; i < MAX_BULLETS; i++) {
+			if (Enemy[k]->x - P_Bullet_Array[i]->x <3 && Enemy[k]->x - P_Bullet_Array[i]->x > -1 && Enemy[k]->y == P_Bullet_Array[i]->y) {
+				EndGame_Enemy_Delete(k);
+				EndGame_Bullet_Delete(i);
 			}
 		}
 	}
 }
-
-void EndGame_Main()
-{
-	char CountNum[3][5][4] = {
-		// NUM 1
-		{{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0},
-		{0,0,1,0}},
-		// NUM 2
-		{{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1},
-		{1,0,0,0},
-		{1,1,1,1}},
-		// NUM 3
-		{{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1},
-		{0,0,0,1},
-		{1,1,1,1}},
-	};
-	char key;
-	EndGame_init();
-	int x = 25, y = 10;
-
-	for (int i = 2; i > -1; i--) {
-		EndGame_Print_Map();
-		for (int j = 0; j < 5; j++) {
-			gotoxy(x, y);
-			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
-			}
-			printf("\n");
-			y++;
-		}
-		Sleep(1000);
-		system("cls");
-
-		y = 10;
-	}
-	do {
-		srand((int)malloc(NULL));
-
-		EndGame_Enemy_Create();
-		EndGame_Enemy_Move();
-		EndGame_Enemy_Delete();
-
-		EndGame_Player_Move();
-		EndGame_Player_Shot();
-
-		EndGame_Print_Map();
-
-		Sleep(10);
-	} while (!(EndGame_Enemy_Contain_Player()));
-}
-
-#pragma endregion
-
 
 void NextSleep()
 {
@@ -1853,6 +1847,7 @@ void NextSleep()
 	startDraw();
 
 }
+
 void coinmainDraw()
 {
 	system("cls");
@@ -1860,7 +1855,7 @@ void coinmainDraw()
 	int n;
 	switch (menuCode) {
 	case 0:
-		frontbackdote(menuCode);
+		//frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
 		if (menuCode != n) {
@@ -1873,7 +1868,7 @@ void coinmainDraw()
 		}
 		break;
 	case 1:
-		frontbackdote(menuCode);
+		//frontbackdote(menuCode);
 		n = Coin();
 		minigamecount--;
 		if (menuCode != n) {
@@ -1953,3 +1948,9 @@ void OddEvendote(int num) {
 		
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	}
+
+void frontbackdote(int num)
+{
+}
+
+
