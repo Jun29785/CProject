@@ -281,54 +281,57 @@ void endsuccedsin()
 			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
 			{0,0,0,3,0,3,0,3,3,3,0,3,0,3,0,0,0,0,0}}, // 20
 	};
-	int x = 29, y = 0, sleep = 200;
-	for (int i = 0; i < 1; i++)
-	{
-		for (int k = 0; k < 21; k++)
+	int x = 29, y = 0, sleep = 200,K=21;
+	for (int g = 0; g < 21; g++) {
+		for (int i = 0; i < 1; i++)
 		{
-			gotoxy(x, y);
-			for (int j = 0; j < 19; j++) {
-				switch (rocket[i][k][j]) {
-				case 0:
-					printf("¡¡");
-					break;
-				case 1:
-					setColor(WHITE);
-					printf("¡á");
-					setColor(YELLOW);
-					break;
-				case 2:
-					setColor(DARK_GRAY);
-					printf("¡á");
-					setColor(YELLOW);
-					break;
-				case 3:
-					setColor(RED);
-					printf("¡á");
-					setColor(YELLOW);
-					break;
-				case 4:
-					setColor(SKYBLUE);
-					printf("¡á");
-					setColor(YELLOW);
-					break;
-				case 5:
-					setColor(DARK_SKYBLUE);
-					printf("¡á");
-					setColor(YELLOW);
+			for (int k = 0; k < K; k++)
+			{
+				gotoxy(x, y);
+				for (int j = 0; j < 19; j++) {
+					switch (rocket[i][k][j]) {
+					case 0:
+						printf("¡¡");
+						break;
+					case 1:
+						setColor(WHITE);
+						printf("¡á");
+						setColor(YELLOW);
+						break;
+					case 2:
+						setColor(DARK_GRAY);
+						printf("¡á");
+						setColor(YELLOW);
+						break;
+					case 3:
+						setColor(RED);
+						printf("¡á");
+						setColor(YELLOW);
+						break;
+					case 4:
+						setColor(SKYBLUE);
+						printf("¡á");
+						setColor(YELLOW);
+						break;
+					case 5:
+						setColor(DARK_SKYBLUE);
+						printf("¡á");
+						setColor(YELLOW);
+					}
+
+					/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
 				}
-
-				/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+				printf("\n");
+				y++;
 			}
-			printf("\n");
-			y++;
+			Sleep(sleep);
+			system("cls");
+			K--;
+			y = 0;
 		}
-		system("cls");
-		Sleep(sleep);
-		y = 0;
+		gotoxy(x, y);
+		y += 2;
 	}
-	y += 2;
-
 	sleep += 50;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
