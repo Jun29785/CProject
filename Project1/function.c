@@ -491,7 +491,7 @@ void startDraw()
 		}
 		else if (menuCode == 1/* && minigamecount == 0*/) {
 			// 제작
-			EndGame_Main();
+			create();
 		}
 		else if (menuCode == 1 && minigamecount != 0) {
 			// 제작
