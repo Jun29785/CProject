@@ -16,7 +16,7 @@
 #define NUM2 102
 #define NUM3 103
 #define NONE 1000
-#define STORYNUM 6 // 스토리 개수
+#define STORYNUM 9 // 스토리 개수
 #define STORYMAX 85 // 글자수 최대
 #define BlockMaxNum 30
 #define MAX_BULLETS 3
