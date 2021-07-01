@@ -406,16 +406,18 @@ int mainDraw()
 	gotoxy(x - 2, y);
 	printf("> 미니게임");
 	gotoxy(x, y + 1);
-	printf("  제작  ");
+	printf("제작  ");
 	gotoxy(x, y + 2);
-	printf("  잠자기");
+	printf("잠자기");
 	gotoxy(x, y + 3);
-	if (day != 30) {
-		printf("  준비중  ");
+
+	if (rsswap == 0) {
+		printf("준비중  ");
 	}
-	else if (rocket == 1 && spacesuit == 1) {
-		printf(" 탈출");
+	if (rsswap == 1) {
+		printf("탈출");
 	}
+
 
 	while (1) {
 		int k = keyControl(); // 키보드 이벤트를 키값으로 받아오기
@@ -472,6 +474,10 @@ void startDraw()
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
+		if (rocket == 1 && spacesuit == 1) {
+			rsswap++;
+		}
+
 		if (menuCode == 0 && minigamecount == 0) {
 			gotoxy(54, 29);
 			setColor(RED);
@@ -506,10 +512,21 @@ void startDraw()
 			setColor(YELLOW);
 			Sleep(400);
 		}
-		else if (menuCode == 3 && day == 30) {
+		else if (menuCode == 3 && rsswap == 1) {
 			// 탈출
-			printf("탈출 게임");
+			EndGame_Main();
+			Sleep(1000);
 		}
+		else if (menuCode == 3 && rsswap == 0) {
+			gotoxy(54, 29);
+			setColor(RED);
+			printf("아직 개방되지 않았습니다.");
+			setColor(YELLOW);
+			Sleep(400);
+		}
+		//else if (menuCode == 3 && rsswap == 0) {
+		//	Sleep(1000);
+		//}
 		system("cls");
 	}
 	//while (1) {
@@ -2095,6 +2112,10 @@ void NextSleep()
 	minigamecount = 3;
 	news = rand() % 100;
 	DayAlter(day);
+	if (day == 31) {
+		_31day();
+		exit(0);
+	}
 	startDraw();
 
 }
@@ -2104,7 +2125,7 @@ void coinmainDraw()
 	int menuCode = coingameDraw();
 	int n;
 	int num = rand() % 6 + 1;
-	
+
 	switch (menuCode) {
 	case 0:
 		frontbackdote(menuCode);
@@ -2112,28 +2133,28 @@ void coinmainDraw()
 		setColor(GREEN);
 		minigamecount--;
 		if (menuCode != n) {
-				gotoxy(50, 27);
-				printf("맞추셨습니다");
-				switch (hoctemp)
-				{
-				case 0:
-					hydro += num + 1;
-					gotoxy(50, 28);
-					printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
-					break;
-				case 1:
-					oxy += num + 1;
-					gotoxy(50, 28);
-					printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
-					break;
-				case 2:
-					carb += num + 1;
-					gotoxy(50, 28);
-					printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
-					break;
-				}
-				Sleep(2000);
+			gotoxy(50, 27);
+			printf("맞추셨습니다");
+			switch (hoctemp)
+			{
+			case 0:
+				hydro += num + 1;
+				gotoxy(50, 28);
+				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				break;
+			case 1:
+				oxy += num + 1;
+				gotoxy(50, 28);
+				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				break;
+			case 2:
+				carb += num + 1;
+				gotoxy(50, 28);
+				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				break;
 			}
+			Sleep(2000);
+		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
@@ -2177,7 +2198,7 @@ void coinmainDraw()
 		setColor(YELLOW);
 		break;
 	}
-	
+
 }
 
 void create() {
