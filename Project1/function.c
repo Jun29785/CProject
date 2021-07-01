@@ -244,12 +244,95 @@ void EndGame_Bullet_Move(int n)
 	P_Bullet_Array[n]->y--;
 }
 
+void _31day()
+{
+}
+
 void EndGame_Bullet_Delete(int n)
 {
 	free(P_Bullet_Array[n]);
 	P_Bullet_Array[n] = NULL;
 }
 
+void endsuccedsin()
+{
+	system("cls");
+	int rocket[2][21][19] = {
+		//   0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+		   {{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0}, // 0
+			{0,0,0,0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0}, // 1
+			{0,0,0,0,0,0,1,1,1,2,2,0,0,0,0,0,0,0,0}, // 2
+			{0,0,0,0,0,1,1,1,1,2,2,2,0,0,0,0,0,0,0}, // 3
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0},//  4 헤드
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 5
+			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 6
+			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 7
+			{1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,0,0},//  8
+			{1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,0,0}, // 9
+			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 10
+			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 11
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 12몸체
+			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 13
+			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 14
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 15
+			{0,0,0,1,1,1,1,1,1,2,2,2,2,2,0,0,0,0,0}, // 16
+			{0,0,0,1,1,1,1,1,1,2,2,2,2,2,0,0,0,0,0}, // 17
+			{0,0,0,4,5,4,5,4,4,4,5,4,5,4,0,0,0,0,0}, // 18
+			{0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0}, // 19
+			{0,0,0,3,0,3,0,3,3,3,0,3,0,3,0,0,0,0,0}}, // 20
+	};
+	int x = 29, y = 0, sleep = 200;
+	for (int i = 0; i < 1; i++)
+	{
+		for (int k = 0; k < 21; k++)
+		{
+			gotoxy(x, y);
+			for (int j = 0; j < 19; j++) {
+				switch (rocket[i][k][j]) {
+				case 0:
+					printf("　");
+					break;
+				case 1:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 2:
+					setColor(DARK_GRAY);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 3:
+					setColor(RED);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 4:
+					setColor(SKYBLUE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 5:
+					setColor(DARK_SKYBLUE);
+					printf("■");
+					setColor(YELLOW);
+				}
+
+				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+			}
+			printf("\n");
+			y++;
+		}
+		system("cls");
+		Sleep(sleep);
+		y = 0;
+	}
+	y += 2;
+
+	sleep += 50;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+}
 void EndGame_Collision_Enemy_Bullet()
 {
 	for (int k = 0; k < EndGame_Max_Enemy; k++) {
@@ -566,7 +649,7 @@ void menuTitleDraw()
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃    탄소 : %d     %d     %d           ┃", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃   우주선 : %d   우주복 : %d           ┃", rocket, spacesuit); y++;
+	gotoxy(x, y); printf("┃   우주선 : %d   우주복 : %d         ┃", rocket, spacesuit); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┗");
 	for (int i = 0; i < 35; i++) printf("━");
@@ -614,16 +697,18 @@ int mainDraw()
 	gotoxy(x - 2, y);
 	printf("> 미니게임");
 	gotoxy(x, y + 1);
-	printf("  제작  ");
+	printf("제작  ");
 	gotoxy(x, y + 2);
-	printf("  잠자기");
+	printf("잠자기");
 	gotoxy(x, y + 3);
-	if (day != 30) {
-		printf("  준비중  ");
+
+	if (rsswap == 0) {
+		printf("준비중  ");
 	}
-	else if (rocket == 1 && spacesuit == 1) {
-		printf(" 탈출");
+	if (rsswap == 1) {
+		printf("탈출");
 	}
+
 
 	while (1) {
 		int k = keyControl(); // 키보드 이벤트를 키값으로 받아오기
@@ -680,6 +765,10 @@ void startDraw()
 	while (1) {
 		menuTitleDraw();
 		int menuCode = mainDraw();
+		if (rocket == 1 && spacesuit == 1) {
+			rsswap++;
+		}
+
 		if (menuCode == 0 && minigamecount == 0) {
 			gotoxy(54, 29);
 			setColor(RED);
@@ -714,10 +803,21 @@ void startDraw()
 			setColor(YELLOW);
 			Sleep(400);
 		}
-		else if (menuCode == 3 && day == 30) {
+		else if (menuCode == 3 && rsswap == 1) {
 			// 탈출
-			printf("탈출 게임");
+			EndGame_Main();
+			Sleep(1000);
 		}
+		else if (menuCode == 3 && rsswap == 0) {
+			gotoxy(54, 29);
+			setColor(RED);
+			printf("아직 개방되지 않았습니다.");
+			setColor(YELLOW);
+			Sleep(400);
+		}
+		//else if (menuCode == 3 && rsswap == 0) {
+		//	Sleep(1000);
+		//}
 		system("cls");
 	}
 	//while (1) {
@@ -2292,6 +2392,10 @@ void NextSleep()
 	minigamecount = 3;
 	news = rand() % 2;
 	DayAlter(day);
+	if (day == 31) {
+		_31day();
+		exit(0);
+	}
 	startDraw();
 
 }
@@ -2301,7 +2405,7 @@ void coinmainDraw()
 	int menuCode = coingameDraw();
 	int n;
 	int num = rand() % 6 + 1;
-	
+
 	switch (menuCode) {
 	case 0:
 		frontbackdote(menuCode);
@@ -2309,28 +2413,28 @@ void coinmainDraw()
 		setColor(GREEN);
 		minigamecount--;
 		if (menuCode != n) {
-				gotoxy(50, 27);
-				printf("맞추셨습니다");
-				switch (hoctemp)
-				{
-				case 0:
-					hydro += num + 1;
-					gotoxy(50, 28);
-					printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
-					break;
-				case 1:
-					oxy += num + 1;
-					gotoxy(50, 28);
-					printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
-					break;
-				case 2:
-					carb += num + 1;
-					gotoxy(50, 28);
-					printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
-					break;
-				}
-				Sleep(2000);
+			gotoxy(50, 27);
+			printf("맞추셨습니다");
+			switch (hoctemp)
+			{
+			case 0:
+				hydro += num + 1;
+				gotoxy(50, 28);
+				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				break;
+			case 1:
+				oxy += num + 1;
+				gotoxy(50, 28);
+				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				break;
+			case 2:
+				carb += num + 1;
+				gotoxy(50, 28);
+				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				break;
 			}
+			Sleep(2000);
+		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
@@ -2374,7 +2478,7 @@ void coinmainDraw()
 		setColor(YELLOW);
 		break;
 	}
-	
+
 }
 
 void create() {

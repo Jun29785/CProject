@@ -54,6 +54,7 @@ int spacesuit;
 int OddEvencheck;
 int hoctemp;
 int DAN;
+int rsswap;
 
 // »ö»ó
 enum {
@@ -138,6 +139,8 @@ void frontbackdote(int num);
 void anvil();
 void hammer();
 void anvilhammer();
+void _31day();
+void endsuccedsin();
 
 
 
