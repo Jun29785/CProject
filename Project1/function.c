@@ -485,7 +485,6 @@ void startDraw()
 		}
 		else if (menuCode == 1 && minigamecount == 0) {
 			// ¡¶¿€
-			EndGame_Main();
 			create();
 		}
 		else if (menuCode == 1 && minigamecount != 0) {
@@ -1811,15 +1810,6 @@ void EndGame_Player_Controll()
 	}
 }
 
-void EndGame_Player_Bullet_Move()
-{
-	for (int k = 0; k < 10; k++) {
-		if (P_Bullet[k].act) {
-			P_Bullet[k].y--;
-		}
-	}
-}
-
 void EndGame_Player_Bullet()
 {
 	for (int k = 0; k < MAX_BULLETS; k++) {
@@ -1877,7 +1867,7 @@ void NextSleep()
 {
 	day++;
 	minigamecount = 3;
-	news = rand() % 2;
+	//news = rand() % 2;
 	DayAlter(day);
 	startDraw();
 
