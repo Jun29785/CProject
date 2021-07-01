@@ -2794,7 +2794,7 @@ void EndGame_Enemy()
 	for (int k = 0; k < EndGame_Max_Enemy; k++) {
 		if (Enemy[k] != NULL) {
 			EndGame_Enemy_Move(k);
-			if (Enemy[k]->y > 36) {
+			if (Enemy[k]->y > SCR_HEIGHT) {
 				EndGame_Enemy_Delete(k);
 			}
 		}
@@ -2857,21 +2857,21 @@ void EndGame_Enemy_Delete(int n)
 
 void EndGame_Player_Controll()
 {
-	if (GetAsyncKeyState(VK_UP) & 0x8000) {
+	if (GetAsyncKeyState('W') & 0x8000) {
 		if (User.y > 0)
 			User.y--;
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-		if (User.y < SCR_HEIGHT + 6) {
+	if (GetAsyncKeyState('S') & 0x8000) {
+		if (User.y < SCR_HEIGHT-1) {
 			User.y++;
 		}
 	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+	if (GetAsyncKeyState('A') & 0x8000) {
 		if (User.x > 0) {
 			User.x--;
 		}
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+	if (GetAsyncKeyState('D') & 0x8000) {
 		if (User.x < 70) {
 			User.x++;
 		}
