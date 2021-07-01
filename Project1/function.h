@@ -27,6 +27,8 @@ typedef struct {
     int height;
 }Object, * p_Object;
 
+int EndGameScore;
+bool IsGame;
 bool Player_Bullet_Reload;
 
 Object User;
@@ -104,7 +106,7 @@ void Block_move();
 void Block_delete();
 int Block_contain_player();
 void Block_move_player();
-void Block_print_map();
+void Block_print_map(int score);
 void Block_Avoid(); // 게임 실행 함수
 void spaceship();
 void setColor(unsigned short text);
@@ -128,6 +130,7 @@ void EndGame_Bullet_Create();
 void EndGame_Bullet_Move(int n);
 void EndGame_Bullet_Delete(int n);
 void EndGame_Collision_Enemy_Bullet();
+void EndGame_Collision_Enemy_Player();
 void onetwothree();
 void create();
 int lv3();
@@ -141,6 +144,22 @@ void hammer();
 void anvilhammer();
 void _31day();
 void endsuccedsin();
+
+
+
+
+
+
+
+
+
+int creategameDraw();
+int createnextDraw();
+void OddEvendote(int num);
+void frontbackdote(int num);
+void anvil();
+void hammer();
+void anvilhammer();
 
 
 
