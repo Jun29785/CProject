@@ -19,7 +19,6 @@ int main()
 	//	printf("■");
 	//	printf("TEST");	
 	//}
-	no_money();
 	init();
 
 	//// 원소 1레벨
@@ -40,9 +39,11 @@ int main()
 	while (1) {
 		int menuCode = menuDraw();
 		if (menuCode == 0) {
+			//게임시작 
 			EntryStory();
 			startDraw();
-			//게임시작
+			// 엔딩
+			Ending_TItle();
 		}
 		else if (menuCode == 1) {
 			// 게임정보

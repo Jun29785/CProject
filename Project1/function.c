@@ -3041,6 +3041,22 @@ void hiddenEnding(int n)
 	}
 }
 
+void ChckHiddenEnd()
+{
+	if (hydro > 150) {
+		hiddenEnding(0);
+	}
+	else if (oxy > 150) {
+		hiddenEnding(1);
+	}
+	else if (oxy > 70 && carb > 70) {
+		hiddenEnding(2);
+	}
+	else if (day > 31) {
+		hiddenEnding(3);
+	}
+}
+
 void hydroBomb() // 수소 폭발
 {
 	char ending[][70] = { "수소가 너무 많이 모여서 터져버렸다.", "수소 폭발의 규모는 외계인도 없어질만큼 상당히 컸다." };
@@ -3139,4 +3155,20 @@ void Ending_TItle()
 		 {1,0,0,1,0},
 		 {1,1,1,0,0}}
 	};
+
+	int x =8, y=12;
+
+	for (int i = 0; i < 7; i++) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 5; k++) {
+				printf("%s", title[i][j][k] == 1 ? "■" : "　");
+			}
+			y++;
+		}
+		Sleep(10);
+		y = 12;
+		x += 12;
+	}
+	Sleep(2500);
 }

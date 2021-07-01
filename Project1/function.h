@@ -163,6 +163,7 @@ void anvil();
 void hammer();
 void anvilhammer();
 void hiddenEnding(int n);
+void ChckHiddenEnd();
 
 void hydroBomb();
 void oxid();
