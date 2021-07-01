@@ -19,6 +19,7 @@ int main()
 	//	printf("■");
 	//	printf("TEST");	
 	//}
+	no_money();
 	init();
 
 	//// 원소 1레벨
@@ -35,7 +36,7 @@ int main()
 	//carb3 = 3;
 	//rocket = 1;
 	//spacesuit = 1;
-	
+	news = 100;
 	while (1) {
 		int menuCode = menuDraw();
 		if (menuCode == 0) {

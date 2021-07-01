@@ -145,6 +145,7 @@ void anvilhammer();
 void endlosesin();
 void endsuccedsin();
 void AilenBeam();
+void Delivery();
 
 
 
@@ -161,6 +162,13 @@ void frontbackdote(int num);
 void anvil();
 void hammer();
 void anvilhammer();
+void hiddenEnding(int n);
+
+void hydroBomb();
+void oxid();
+void earth_death();
+void no_money();
+void Ending_TItle();
 
 
 

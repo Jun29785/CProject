@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 
-#define SCR_HEIGHT 40
+#define SCR_HEIGHT 36
 #define SCR_WIDTH 96
 #define UP 0
 #define DOWN 1
@@ -21,5 +21,5 @@
 #define BlockMaxNum 30
 #define MAX_BULLETS 7
 #define EndGame_WIDTH 70
-#define EndGame_HEIGHT 50
+#define EndGame_HEIGHT 40
 #define EndGame_Max_Enemy 50

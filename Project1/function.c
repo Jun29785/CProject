@@ -372,8 +372,8 @@ void menuTitleDraw()
 		printf("━");
 	}
 	printf("┓");
-	gotoxy(x + 13, y);
-	printf(" 오늘의 소식 ");
+	gotoxy(x + 11, y);
+	printf("  오늘의 소식 ");
 	y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
@@ -387,16 +387,19 @@ void menuTitleDraw()
 	gotoxy(x, y); printf("┗");
 	for (int i = 0; i < 35; i++) printf("━");
 	printf("┛");
-	x = 62, y = 16;
+	x = 68, y = 17;
 
-
-	if (news == 1) {
-		gotoxy(x + 5, y);
-		printf("하잉");
+	if (news <10) {
+		AilenBeam();
+		news = 100;
+	}
+	else if (news >= 10 && news < 20) {
+		Delivery();
+		news = 100;
 	}
 	else {
-		gotoxy(x + 10, y);
-		printf("없습니다");
+		gotoxy(x, y);
+		printf("%2d일 남았습니다.", 31 - day);
 	}
 }
 
@@ -1273,7 +1276,7 @@ void RSP()
 
 #pragma region Avoid_Block
 
-block_width = SCR_WIDTH / 3;
+block_width = SCR_WIDTH / 2+30;
 
 void Block_init()
 {
@@ -1332,12 +1335,12 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 1) {
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('A')) && player.x >= 1) {
 		gotoxy(player.x, SCR_HEIGHT);
 		printf(" ");
 		player.x--;
 	}
-	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2) {
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('D')) && player.x < block_width-2) {
 		gotoxy(player.x, SCR_HEIGHT);
 		printf(" ");
 		player.x++;
@@ -1346,7 +1349,10 @@ void Block_move_player()
 
 void Block_print_map(int score)
 {
-	
+	for (int k = 0; k < 35; k++) {
+		gotoxy(50, k);
+		puts("┃");
+	}
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
@@ -1358,15 +1364,14 @@ void Block_print_map(int score)
 	printf("옷");
 
 	gotoxy(0, SCR_HEIGHT + 1);
-	for (int i = 0; i < SCR_HEIGHT - 7; i++)
+	for (int i = 0; i < SCR_HEIGHT - 12; i++)
 		printf("▦");
-	gotoxy(60, 1);
+	gotoxy(60, 28);
 	printf("score : %6d", score);
 }
 
 void Block_Avoid()
 {
-
 	char CountNum[3][5][4] = {
 		// NUM 1
 		{{0,0,1,0},
@@ -1420,6 +1425,26 @@ void Block_Avoid()
 
 		Sleep(20);
 	} while (!(Block_contain_player()));
+	int item = score / 35;
+	switch (hoctemp)
+	{
+	case 0:
+		hydro += item;
+		gotoxy(60, 29);
+		printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
+		break;
+	case 1:
+		oxy += item + 1;
+		gotoxy(60, 29);
+		printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
+		break;
+	case 2:
+		carb += item + 1;
+		gotoxy(60, 28);
+		printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
+		break;
+	}
+	Sleep(2000);
 	minigamecount--;
 }
 
@@ -1682,7 +1707,7 @@ void NextgameDraw()
 		break;
 	}
 }
-#pragma region EndGame
+#pragma region CREATE
 
 int creategameDraw()
 {
@@ -1868,7 +1893,50 @@ void anvilhammer()
 
 void AilenBeam()
 {
+	char event[][50] = { "밤 사이에 외계인이 쏜 수상한 빔에 맞았다.","아이템 전체가 절반 감소되었다.           " };
+	
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	hydro /= 2; hydro2 /= 2; hydro3 /= 2;
+	oxy /= 2; oxy2 /= 2; oxy3 /= 2;
+	carb /= 2; carb2 /= 2; carb3 /= 2;
+}
 
+void Delivery()
+{
+	char event[][50] = { "밤 사이에 문 앞에 수상한 상자가 배송되었다.", "상자 안에는 누군가 보낸 자원이 있었다.     " };
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	int deliv;
+	for (int k = 0; k < 3; k++) {
+		deliv = rand() % 9;
+		switch (deliv)
+		{
+		case 0: hydro += 3;	 break;
+		case 1: hydro2 += 2; break;
+		case 2: hydro3 += 1; break;
+		case 3: oxy += 3;	 break;
+		case 4: oxy2 += 2;	 break;
+		case 5: oxy3 += 1;	 break;
+		case 6: carb += 3;	 break;
+		case 7: carb2 += 2;	 break;
+		case 8: carb3 += 1;	 break;
+		default:
+			break;
+		}
+	}
 }
 
 void anvil()
@@ -2629,7 +2697,6 @@ void frontbackdote(int num)
 	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
 	//	{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
 
-
 	//	// 짝
 	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
@@ -2794,7 +2861,7 @@ void EndGame_Enemy()
 	for (int k = 0; k < EndGame_Max_Enemy; k++) {
 		if (Enemy[k] != NULL) {
 			EndGame_Enemy_Move(k);
-			if (Enemy[k]->y > SCR_HEIGHT) {
+			if (Enemy[k]->y > EndGame_HEIGHT) {
 				EndGame_Enemy_Delete(k);
 			}
 		}
@@ -2862,7 +2929,7 @@ void EndGame_Player_Controll()
 			User.y--;
 	}
 	if (GetAsyncKeyState('S') & 0x8000) {
-		if (User.y < SCR_HEIGHT-1) {
+		if (User.y < EndGame_HEIGHT-1) {
 			User.y++;
 		}
 	}
@@ -2952,3 +3019,124 @@ void EndGame_Collision_Enemy_Player()
 }
 
 #pragma endregion
+
+void hiddenEnding(int n)
+{
+	switch (n)
+	{
+	case 0: // 수소 폭발 (수소 150개 초과)
+		hydroBomb();
+		break;
+	case 1: // 산화 작용 (산소 150개 초과)
+		oxid();
+		break;
+	case 2: // 온난화 (산소 70개, 탄소 70개 초과)
+		earth_death();
+		break;
+	case 3: // 파산 (Day 30 초과)
+		no_money();
+		break;
+	default:
+		break;
+	}
+}
+
+void hydroBomb() // 수소 폭발
+{
+	char ending[][70] = { "수소가 너무 많이 모여서 터져버렸다.", "수소 폭발의 규모는 외계인도 없어질만큼 상당히 컸다." };
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void oxid() // 산화
+{
+	char ending[][70] = { "산소가 너무 많이 모였다.", "외계인들이 타고 온 UFO에 캡슐을 던졌다.","UFO에서 산화 작용이 일어났다.             ", "외계인들과 함께 지구에서 살게 되었다." };
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void earth_death() // 온난화
+{
+	char ending[][70] = { "산소와 탄소가 너무 많이 모였다.", "이산화탄소가 생성되었다.            ","지구가 점점 뜨거워진다..","결국 사람과 외계인은 모두 지구에서 살수 없게 됬다." };
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void no_money() // 파산
+{
+	char ending[][70] = { "30일이 지났다.","하지만 충분한 자원을 모으지 못하였다.", "외계인이 이상한 빛을 발사한다.         ","지구에 있는 모든 사람은 죽게되었다."};
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void Ending_TItle()
+{
+	int title[7][5][5] = {
+		// T
+		{{1,1,1,1,1},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0}},
+		 // H
+		 {{1,0,0,0,1},
+		 {1,0,0,0,1},
+		 {1,1,1,1,1},
+		 {1,0,0,0,1},
+		 {1,0,0,0,1}},
+		 // E
+		 {{1,1,1,1,1},
+		 {1,0,0,0,0},
+		 {1,1,1,1,0},
+		 {1,0,0,0,0},
+		 {1,1,1,1,1}},
+		 // 
+		 {{0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0}},
+		 // E
+		 {{1,1,1,1,1},
+		 {1,0,0,0,0},
+		 {1,1,1,1,0},
+		 {1,0,0,0,0},
+		 {1,1,1,1,1}},
+		 // N
+		 {{1,0,0,0,1},
+		 {1,1,0,0,1},
+		 {1,0,1,0,1},
+		 {1,0,0,1,1},
+		 {1,0,0,0,1}},
+		 // D
+		 {{1,1,1,0,0},
+		 {1,0,0,1,0},
+		 {1,0,0,1,0},
+		 {1,0,0,1,0},
+		 {1,1,1,0,0}}
+	};
+}
