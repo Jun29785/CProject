@@ -142,7 +142,7 @@ void frontbackdote(int num);
 void anvil();
 void hammer();
 void anvilhammer();
-void _31day();
+void endlosesin();
 void endsuccedsin();
 
 
