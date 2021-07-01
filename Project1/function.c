@@ -52,215 +52,6 @@ void setColor(unsigned short text)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
-
-
-void EndGame_Main()
-{
-	EndGame_Init();
-
-	while (1) {
-		system("cls");
-		EndGame_Draw();
-		EndGame_Enemy();
-		EndGame_Player();
-		EndGame_Player_Bullet();
-		Sleep(10);
-	}
-
-	for (int k = 0; k < MAX_BULLETS; k++) {
-		if (P_Bullet_Array[k] != NULL) {
-			free(P_Bullet_Array[k]);
-			P_Bullet_Array[k] = NULL;
-		}
-	}
-
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		if (Enemy[k] != NULL) {
-			free(Enemy[k]);
-			Enemy[k] = NULL;
-		}
-	}
-}
-
-void EndGame_Init()
-{
-	for (int k = 0; k < MAX_BULLETS; k++) {
-		P_Bullet_Array[k] = NULL;
-	}
-	User.image = "<=0=>";
-	User.x = EndGame_WIDTH / 2;
-	User.y = 30;
-	User.width = 5;
-	User.height = 1;
-
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		Enemy[k] = NULL;
-	}
-	Player_Bullet_Reload = true;
-}
-
-void EndGame_Draw()
-{
-	gotoxy(User.x, User.y);
-	printf("%s", User.image);
-
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		if (Enemy[k] != NULL) {
-			gotoxy(Enemy[k]->x, Enemy[k]->y);
-			printf("%s", Enemy[k]->image);
-		}
-	}
-
-	for (int k = 0; k < MAX_BULLETS; k++) {
-		if (P_Bullet_Array[k] != NULL) {
-			gotoxy(P_Bullet_Array[k]->x, P_Bullet_Array[k]->y);
-			printf("%s", P_Bullet_Array[k]->image);
-		}
-	}
-}
-
-void EndGame_Enemy()
-{
-	EndGame_Enemy_Create();
-
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		if (Enemy[k] != NULL) {
-			EndGame_Enemy_Move(k);
-			if (Enemy[k]->y > 36) {
-				EndGame_Enemy_Delete(k);
-			}
-		}
-	}
-}
-
-void EndGame_Enemy_Create()
-{
-	int b_ix = -1;
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		if (Enemy[k] == NULL) {
-			b_ix = k;
-			break;
-		}
-	}
-	if (b_ix == -1) return;
-
-	Enemy[b_ix] = (p_Object)malloc(sizeof(Object));
-	Enemy[b_ix]->x = rand() % (EndGame_WIDTH - 1) + 1;
-	Enemy[b_ix]->y = 1;
-	Enemy[b_ix]->image = "<0>";
-	Enemy[b_ix]->width = 3;
-	Enemy[b_ix]->height = 1;
-}
-
-void EndGame_Enemy_Move(int n)
-{
-	int move = rand() % 4;
-	switch (move)
-	{
-	case 0: // stay
-		break;
-	case 1: // left
-		if (Enemy[n]->x > 0)
-			Enemy[n]->x--;
-		break;
-	case 2: // right
-		if (Enemy[n]->x < EndGame_WIDTH - 1)
-			Enemy[n]->x++;
-		break;
-	case 3: // front
-		Enemy[n]->y++;
-		break;
-	default:
-		break;
-	}
-}
-
-void EndGame_Player()
-{
-	EndGame_Player_Controll();
-}
-
-void EndGame_Enemy_Delete(int n)
-{
-	free(Enemy[n]);
-	Enemy[n] = NULL;
-}
-
-void EndGame_Player_Controll()
-{
-	if (GetAsyncKeyState(VK_UP) & 0x8000) {
-		if (User.y > 0)
-			User.y--;
-	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-		if (User.y < SCR_HEIGHT + 20) {
-			User.y++;
-		}
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-		if (User.x > 0) {
-			User.x--;
-		}
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-		if (User.x < 70) {
-			User.x++;
-		}
-	}
-}
-
-void EndGame_Player_Bullet()
-{
-	for (int k = 0; k < MAX_BULLETS; k++) {
-		if (P_Bullet_Array[k] != NULL) {
-			EndGame_Bullet_Move(k);
-			if (P_Bullet_Array[k]->y < 1) {
-				EndGame_Bullet_Delete(k);
-			}
-		}
-
-	}
-}
-
-void EndGame_Bullet_Create()
-{
-	int b_ix = -1;
-	for (int k = 0; k < MAX_BULLETS; k++) {
-		if (P_Bullet_Array[k] == NULL) {
-			b_ix = k;
-			break;
-		}
-	}
-	if (b_ix == -1) return;
-
-	P_Bullet_Array[b_ix] = (p_Object)malloc(sizeof(Object));
-	P_Bullet_Array[b_ix]->x = User.x + 2;
-	P_Bullet_Array[b_ix]->y = User.y - 1;
-	P_Bullet_Array[b_ix]->image = "!";
-}
-
-void EndGame_Bullet_Move(int n)
-{
-	P_Bullet_Array[n]->y--;
-}
-
-void EndGame_Bullet_Delete(int n)
-{
-	free(P_Bullet_Array[n]);
-	P_Bullet_Array[n] = NULL;
-}
-
-void EndGame_Collision_Enemy_Bullet()
-{
-	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		for (int i = 0; i < MAX_BULLETS; i++) {
-			if (Enemy[k]->x - P_Bullet_Array[i]->x <3 && Enemy[k]->x - P_Bullet_Array[i]->x > -1 && Enemy[k]->y == P_Bullet_Array[i]->y) {
-				EndGame_Enemy_Delete(k);
-				EndGame_Bullet_Delete(i);
-			}
-		}
-	}
-}
 #pragma endregion
 
 void onetwothree()
@@ -566,7 +357,7 @@ void menuTitleDraw()
 	gotoxy(x, y); printf("Ν                                   Ν"); y++;
 	gotoxy(x, y); printf("Ν    藕家 : %d     %d     %d           Ν", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("Ν                                   Ν"); y++;
-	gotoxy(x, y); printf("Ν   快林急 : %d   快林汗 : %d           Ν", rocket, spacesuit); y++;
+	gotoxy(x, y); printf("Ν   快林急 : %d   快林汗 : %d         Ν", rocket, spacesuit); y++;
 	gotoxy(x, y); printf("Ν                                   Ν"); y++;
 	gotoxy(x, y); printf("Ρ");
 	for (int i = 0; i < 35; i++) printf("Μ");
@@ -597,6 +388,7 @@ void menuTitleDraw()
 	for (int i = 0; i < 35; i++) printf("Μ");
 	printf("Π");
 	x = 62, y = 16;
+
 
 	if (news == 1) {
 		gotoxy(x + 5, y);
@@ -691,9 +483,9 @@ void startDraw()
 			gamemainDraw();
 			//霸烙矫累
 		}
-		else if (menuCode == 1 && minigamecount == 0) {
+		else if (menuCode == 1/* && minigamecount == 0*/) {
 			// 力累
-			create();
+			EndGame_Main();
 		}
 		else if (menuCode == 1 && minigamecount != 0) {
 			// 力累
@@ -1496,6 +1288,8 @@ void Block_move()
 {
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
+			gotoxy(block[i].x, block[i].y);
+			printf(" ");
 			block[i].y--;
 		}
 	}
@@ -1521,15 +1315,21 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 1)
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 1) {
+		gotoxy(player.x, SCR_HEIGHT);
+		printf(" ");
 		player.x--;
-	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2)
+	}
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2) {
+		gotoxy(player.x, SCR_HEIGHT);
+		printf(" ");
 		player.x++;
+	}
 }
 
-void Block_print_map()
+void Block_print_map(int score)
 {
-	system("cls");
+	
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
@@ -1543,6 +1343,8 @@ void Block_print_map()
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT - 7; i++)
 		printf("⑺");
+	gotoxy(60, 1);
+	printf("score : %6d", score);
 }
 
 void Block_Avoid()
@@ -1570,10 +1372,11 @@ void Block_Avoid()
 	};
 	char key;
 	Block_init();
+	system("cls");
 	int x = 25, y = 10;
-
+	int score = 0;
 	for (int i = 2; i > -1; i--) {
-		Block_print_map();
+		Block_print_map(score);
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
@@ -1583,22 +1386,22 @@ void Block_Avoid()
 			y++;
 		}
 		Sleep(1000);
-		system("cls");
-
+	
 		y = 10;
 	}
 	do {
+		system("cls");
 		srand((int)malloc(NULL));
-
+		score++;
 		Block_create();
 		Block_move();
 		Block_delete();
 
 		Block_move_player();
 
-		Block_print_map();
+		Block_print_map(score);
 
-		Sleep(10);
+		Sleep(20);
 	} while (!(Block_contain_player()));
 	minigamecount--;
 }
@@ -2290,7 +2093,7 @@ void NextSleep()
 {
 	day++;
 	minigamecount = 3;
-	news = rand() % 2;
+	news = rand() % 100;
 	DayAlter(day);
 	startDraw();
 
@@ -2677,7 +2480,6 @@ void frontbackdote(int num)
 
 	};
 
-
 	int x = 16, y = 8;
 	int sleep = 100;
 	if (num == 0) {
@@ -2715,3 +2517,246 @@ void frontbackdote(int num)
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	}
 }
+
+#pragma region EndGame
+void EndGame_Main()
+{
+	EndGame_Init();
+
+	while (IsGame) {
+		system("cls");
+		EndGame_Draw();
+		EndGame_Enemy();
+		EndGame_Player();
+		EndGame_Player_Bullet();
+		EndGame_Collision_Enemy_Bullet();
+		EndGame_Collision_Enemy_Player();
+		Sleep(50);
+	}
+
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			free(P_Bullet_Array[k]);
+			P_Bullet_Array[k] = NULL;
+		}
+	}
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			free(Enemy[k]);
+			Enemy[k] = NULL;
+		}
+	}
+}
+
+void EndGame_Init()
+{
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		P_Bullet_Array[k] = NULL;
+	}
+	User.image = "<=0=>";
+	User.x = EndGame_WIDTH / 2;
+	User.y = 30;
+	User.width = 5;
+	User.height = 1;
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		Enemy[k] = NULL;
+	}
+	Player_Bullet_Reload = true;
+	IsGame = true;
+	EndGameScore = 0;
+}
+
+void EndGame_Draw()
+{
+	for (int k = 0; k < 40; k++) {
+		gotoxy(76, k);
+		printf("Ν");
+	}
+
+	gotoxy(78, 1);
+	printf("Remain Kills : %3d", 150 - EndGameScore);
+	gotoxy(User.x, User.y);
+	printf("%s", User.image);
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			gotoxy(Enemy[k]->x, Enemy[k]->y);
+			printf("%s", Enemy[k]->image);
+		}
+	}
+
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			gotoxy(P_Bullet_Array[k]->x, P_Bullet_Array[k]->y);
+			printf("%s", P_Bullet_Array[k]->image);
+		}
+	}
+}
+
+void EndGame_Enemy()
+{
+	EndGame_Enemy_Create();
+
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL) {
+			EndGame_Enemy_Move(k);
+			if (Enemy[k]->y > 36) {
+				EndGame_Enemy_Delete(k);
+			}
+		}
+	}
+}
+
+void EndGame_Enemy_Create()
+{
+	int b_ix = -1;
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] == NULL) {
+			b_ix = k;
+			break;
+		}
+	}
+	if (b_ix == -1) return;
+
+	Enemy[b_ix] = (p_Object)malloc(sizeof(Object));
+	Enemy[b_ix]->x = rand() % (EndGame_WIDTH - 1) + 1;
+	Enemy[b_ix]->y = 1;
+	Enemy[b_ix]->image = "<0>";
+	Enemy[b_ix]->width = 3;
+	Enemy[b_ix]->height = 1;
+}
+
+void EndGame_Enemy_Move(int n)
+{
+	int move = rand() % 4;
+	switch (move)
+	{
+	case 0: // stay
+		break;
+	case 1: // left
+		if (Enemy[n]->x > 0)
+			Enemy[n]->x--;
+		break;
+	case 2: // right
+		if (Enemy[n]->x < EndGame_WIDTH - 1)
+			Enemy[n]->x++;
+		break;
+	case 3: // front
+		if (Enemy[n]->y < 26);
+			Enemy[n]->y++;
+		break;
+	default:
+		break;
+	}
+}
+
+void EndGame_Player()
+{
+	EndGame_Player_Controll();
+}
+
+void EndGame_Enemy_Delete(int n)
+{
+	free(Enemy[n]);
+	Enemy[n] = NULL;
+}
+
+void EndGame_Player_Controll()
+{
+	if (GetAsyncKeyState(VK_UP) & 0x8000) {
+		if (User.y > 0)
+			User.y--;
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+		if (User.y < SCR_HEIGHT + 6) {
+			User.y++;
+		}
+	}
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+		if (User.x > 0) {
+			User.x--;
+		}
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+		if (User.x < 70) {
+			User.x++;
+		}
+	}
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		if (Player_Bullet_Reload) {
+			EndGame_Bullet_Create();
+			Player_Bullet_Reload = false;
+		}
+	}
+	else {
+		Player_Bullet_Reload = true;
+	}
+}
+
+void EndGame_Player_Bullet()
+{
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] != NULL) {
+			EndGame_Bullet_Move(k);
+			if (P_Bullet_Array[k]->y < 1) {
+				EndGame_Bullet_Delete(k);
+			}
+		}
+
+	}
+}
+
+void EndGame_Bullet_Create()
+{
+	int b_ix = -1;
+	for (int k = 0; k < MAX_BULLETS; k++) {
+		if (P_Bullet_Array[k] == NULL) {
+			b_ix = k;
+			break;
+		}
+	}
+	if (b_ix == -1) return;
+
+	P_Bullet_Array[b_ix] = (p_Object)malloc(sizeof(Object));
+	P_Bullet_Array[b_ix]->x = User.x + 2;
+	P_Bullet_Array[b_ix]->y = User.y - 1;
+	P_Bullet_Array[b_ix]->image = "!";
+}
+
+void EndGame_Bullet_Move(int n)
+{
+	P_Bullet_Array[n]->y--;
+}
+
+void EndGame_Bullet_Delete(int n)
+{
+	free(P_Bullet_Array[n]);
+	P_Bullet_Array[n] = NULL;
+}
+
+void EndGame_Collision_Enemy_Bullet()
+{
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		for (int i = 0; i < MAX_BULLETS; i++) {
+			if (P_Bullet_Array[i] != NULL && Enemy[k] != NULL && (Enemy[k]->x - P_Bullet_Array[i]->x <3 && Enemy[k]->x - P_Bullet_Array[i]->x > -1 && Enemy[k]->y == P_Bullet_Array[i]->y)) {
+				EndGame_Enemy_Delete(k);
+				EndGame_Bullet_Delete(i);
+				EndGameScore++;
+			}
+		}
+	}
+}
+
+void EndGame_Collision_Enemy_Player()
+{
+	for (int k = 0; k < EndGame_Max_Enemy; k++) {
+		if (Enemy[k] != NULL ){
+			if (User.y == Enemy[k]->y && User.x - Enemy[k]->x >= -4 && User.x - Enemy[k]->x <= 2)
+				IsGame = false;
+		}
+	}
+}
+
+#pragma endregion
