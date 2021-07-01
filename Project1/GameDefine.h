@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 
-#define SCR_HEIGHT 32
+#define SCR_HEIGHT 40
 #define SCR_WIDTH 96
 #define UP 0
 #define DOWN 1

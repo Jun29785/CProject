@@ -1783,6 +1783,11 @@ void anvilhammer()
 	system("cls");
 }
 
+void AilenBeam()
+{
+
+}
+
 void anvil()
 {
 	int anvil[6][14][18] = {
@@ -2113,12 +2118,12 @@ void NextSleep()
 	news = rand() % 100;
 	DayAlter(day);
 	if (day == 31) {
-		_31day();
 		exit(0);
 	}
 	startDraw();
 
 }
+
 void coinmainDraw()
 {
 	system("cls");
