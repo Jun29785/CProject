@@ -35,7 +35,6 @@ int main()
 	//carb3 = 3;
 	//rocket = 1;
 	//spacesuit = 1;
-	Ending_Title();
 	news = 100;
 	while (1) {
 		int menuCode = menuDraw();

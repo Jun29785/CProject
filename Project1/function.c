@@ -408,9 +408,40 @@ void menuTitleDraw()
 		Water();
 		news = 100;
 	}
+	else if (news >= 40 && news < 50) {
+		Mouse();
+		news = 100;
+	}
 	else {
 		gotoxy(x, y);
 		printf("%2d일 남았습니다.", 31 - day);
+	}
+
+	// 인벤토리
+	x = 58, y = 0;
+	gotoxy(x, y); printf("┏");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	printf("┓");
+	gotoxy(x + 13, y);
+	printf("  인벤토리 ");
+	y++;
+	gotoxy(x, y); printf("┃            Lv1    Lv2    Lv3      ┃"); y++;
+	gotoxy(x, y); printf("┃    수소 : %3d     %2d     %2d       ┃", hydro, hydro2, hydro3); y++;
+	gotoxy(x, y); printf("┃                                   ┃"); y++;
+	gotoxy(x, y); printf("┃    산소 : %3d     %2d     %2d       ┃", oxy, oxy2, oxy3); y++;
+	gotoxy(x, y); printf("┃                                   ┃"); y++;
+	gotoxy(x, y); printf("┃    탄소 : %3d     %2d     %2d       ┃", carb, carb2, carb3); y++;
+	gotoxy(x, y); printf("┃                                   ┃"); y++;
+	gotoxy(x, y); printf("┃   우주선 : %d   우주복 : %d         ┃", rocket, spacesuit); y++;
+	gotoxy(x, y); printf("┃                                   ┃"); y++;
+	gotoxy(x, y); printf("┗");
+	for (int i = 0; i < 35; i++) printf("━");
+	printf("┛");
+	for (int k = 0; k < 96; k++) {
+		gotoxy(k, 22);
+		printf("━");
 	}
 }
 
@@ -1543,7 +1574,7 @@ void DayAlter(int day)
 		{{1,1,1,1},
 		{1,0,0,1},
 		{1,1,1,1},
-		{1,0,1,1},
+		{1,0,0,1},
 		{1,1,1,1}},
 		// NUM 9
 		{{1,1,1,1},
