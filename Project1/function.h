@@ -164,6 +164,10 @@ void frontbackdote(int num);
 void anvil();
 void hammer();
 void anvilhammer();
+void boom(int num);
+void Hboom();
+void Oboom();
+void Cboom();
 void hiddenEnding(int n);
 void ChckHiddenEnd();
 

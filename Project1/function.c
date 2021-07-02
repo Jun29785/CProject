@@ -1,10 +1,10 @@
-#include "Function.h"
+ï»¿#include "Function.h"
 
 #pragma region Settings
 
 void gotoxy(int x, int y)
 {
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE); // ÄÜ¼Ö ÇÚµé °¡Á®¿À±â
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE); // ì½˜ì†” í•¸ë“¤ ê°€ì ¸ì˜¤ê¸°
 	COORD pos;
 	pos.X = x;
 	pos.Y = y;
@@ -48,7 +48,7 @@ int keyControl()
 	else return NONE;
 }
 
-// ÄÜ¼Ö ÅØ½ºÆ® »ö»ó º¯°æÇØÁÖ´Â ÇÔ¼ö
+// ì½˜ì†” í…ìŠ¤íŠ¸ ìƒ‰ìƒ ë³€ê²½í•´ì£¼ëŠ” í•¨ìˆ˜
 void setColor(unsigned short text)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
@@ -115,7 +115,7 @@ void onetwothree()
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[i][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[i][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -131,7 +131,7 @@ void onetwothree()
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 5; k++) {
-				printf("%s", Start[i][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", Start[i][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -145,15 +145,15 @@ void onetwothree()
 void EntryStory()
 {
 	char story[][100] = {
-	{"3021³âÀÇ Áö±¸´Â ¸¹Àº ÀÎ°£µéÀÌ »ó»ó¸¸ÇÏ´ø ¿Ü°èÀÎÀÇ Ä§°øÀÌ ´« ¾Õ¿¡ ´Ù°¡¿Ô´Ù."},
-	{"¿Ü°èÀÎµéÀº ÀÎ°£µé¿¡°Ô Áö±¸¸¦ Ä§·«ÇÒ °ÍÀÌ¶ó°í ¼±ÀüÆ÷°í¸¦ ÇÏ¿´´Ù."},
-	{"ÇÏÁö¸¸ ¿Ü°èÀÎµéÀº »ì ¼ö ÀÖ´Â ÇÑ°¡Áö Á¦¾ÈÀ» ÇÑ´Ù."},
-	{"Á¦¾ÈÀº °£´ÜÇß´Ù. 30ÀÏ¾È¿¡ Áö±¸¸¦ Å»ÃâÇÏ´Â °ÍÀÌ¾ú´Ù."},
-	{"Áö±¸¸¦ Å»ÃâÇÏ±â À§ÇÑ ¹æ¹ıÀº °£´ÜÇß´Ù."},
-	{"1. ¸ÅÀÏ ¹Ì´Ï°ÔÀÓÀ» ÅëÇØ Àç·á¸¦ ¾ò´Â´Ù."},
-	{"2. ¾òÀº Àç·á¸¦ ÅëÇØ ¿ìÁÖ¼±°ú ¿ìÁÖº¹À» Á¦ÀÛÇÑ´Ù."},
-	{"3. Á¦ÀÛÀº Àú³á¿¡¸¸ °¡´ÉÇÏ´Ù."},
-	{"ºÎµğ Å»ÃâÇÏ±æ ºô°Ú½À´Ï´Ù. GOOD LUCK"},
+	{"3021ë…„ì˜ ì§€êµ¬ëŠ” ë§ì€ ì¸ê°„ë“¤ì´ ìƒìƒë§Œí•˜ë˜ ì™¸ê³„ì¸ì˜ ì¹¨ê³µì´ ëˆˆ ì•ì— ë‹¤ê°€ì™”ë‹¤."},
+	{"ì™¸ê³„ì¸ë“¤ì€ ì¸ê°„ë“¤ì—ê²Œ ì§€êµ¬ë¥¼ ì¹¨ëµí•  ê²ƒì´ë¼ê³  ì„ ì „í¬ê³ ë¥¼ í•˜ì˜€ë‹¤."},
+	{"í•˜ì§€ë§Œ ì™¸ê³„ì¸ë“¤ì€ ì‚´ ìˆ˜ ìˆëŠ” í•œê°€ì§€ ì œì•ˆì„ í•œë‹¤."},
+	{"ì œì•ˆì€ ê°„ë‹¨í–ˆë‹¤. 30ì¼ì•ˆì— ì§€êµ¬ë¥¼ íƒˆì¶œí•˜ëŠ” ê²ƒì´ì—ˆë‹¤."},
+	{"ì§€êµ¬ë¥¼ íƒˆì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•ì€ ê°„ë‹¨í–ˆë‹¤."},
+	{"1. ë§¤ì¼ ë¯¸ë‹ˆê²Œì„ì„ í†µí•´ ì¬ë£Œë¥¼ ì–»ëŠ”ë‹¤."},
+	{"2. ì–»ì€ ì¬ë£Œë¥¼ í†µí•´ ìš°ì£¼ì„ ê³¼ ìš°ì£¼ë³µì„ ì œì‘í•œë‹¤."},
+	{"3. ì œì‘ì€ ì €ë…ì—ë§Œ ê°€ëŠ¥í•˜ë‹¤."},
+	{"ë¶€ë”” íƒˆì¶œí•˜ê¸¸ ë¹Œê² ìŠµë‹ˆë‹¤. GOOD LUCK"},
 	};
 	char CountNum[3][5][4] = {
 		// NUM 1
@@ -213,9 +213,9 @@ void EntryStory()
 	// entrystory
 	for (int i = 0; i < STORYNUM; i++) {
 		system("cls");
-		gotoxy(22, 29);  printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-		gotoxy(25, 31);  printf("spacebar¸¦ ´©¸¦½Ã ±âÃÊ ½ºÅä¸®¸¦ ½ºÅµÇÕ´Ï´Ù.");
-		gotoxy(22, 33);  printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+		gotoxy(22, 29);  printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+		gotoxy(25, 31);  printf("spacebarë¥¼ ëˆ„ë¥¼ì‹œ ê¸°ì´ˆ ìŠ¤í† ë¦¬ë¥¼ ìŠ¤í‚µí•©ë‹ˆë‹¤.");
+		gotoxy(22, 33);  printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 		spaceship();
 		gotoxy(0, 22);
 		for (int j = 0; j < STORYMAX; j++) {
@@ -237,7 +237,7 @@ void EntryStory()
 	//	for (int j = 0; j < 5; j++) {
 	//		gotoxy(x, y);
 	//		for (int k = 0; k < 4; k++) {
-	//			printf("%s", CountNum[i][j][k] == 1 ? "¡á" : "¡¡");
+	//			printf("%s", CountNum[i][j][k] == 1 ? "â– " : "ã€€");
 	//		}
 	//		printf("\n");
 	//		y++;
@@ -253,7 +253,7 @@ void EntryStory()
 	//	for (int j = 0; j < 5; j++) {
 	//		gotoxy(x, y);
 	//		for (int k = 0; k < 5; k++) {
-	//			printf("%s", Start[i][j][k] == 1 ? "¡á" : "¡¡");
+	//			printf("%s", Start[i][j][k] == 1 ? "â– " : "ã€€");
 	//		}
 	//		printf("\n");
 	//		y++;
@@ -271,14 +271,14 @@ int menuDraw()
 {
 	int x = 42, y = 22;
 	gotoxy(x - 2, y);
-	printf("> °ÔÀÓ½ÃÀÛ");
+	printf("> ê²Œì„ì‹œì‘");
 	gotoxy(x, y + 1);
-	printf("°ÔÀÓÁ¤º¸");
+	printf("ê²Œì„ì •ë³´");
 	gotoxy(x, y + 2);
-	printf("  Á¾·á  ");
+	printf("  ì¢…ë£Œ  ");
 
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 22) {
@@ -310,6 +310,9 @@ int menuDraw()
 
 void menuTitleDraw()
 {
+	if (rocket == 1 && spacesuit == 1) {
+		rsswap++;
+	}
 	gotoxy(25, 10);
 	ChckHiddenEnd();
 	if (GAMEEND == true) {
@@ -317,14 +320,14 @@ void menuTitleDraw()
 	}
 	setColor(YELLOW);
 	if (day < 10) {
-		gotoxy(0, 0); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-		gotoxy(0, 1); printf("¦­    %2d Day    ¦­", day);
-		gotoxy(0, 2); printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+		gotoxy(0, 0); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+		gotoxy(0, 1); printf("â”ƒ    %2d Day    â”ƒ", day);
+		gotoxy(0, 2); printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 	}
 	else if (day >= 10) {
-		gotoxy(0, 0); printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-		gotoxy(0, 1); printf("¦­    %2d Day    ¦­", day);
-		gotoxy(0, 2); printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+		gotoxy(0, 0); printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+		gotoxy(0, 1); printf("â”ƒ    %2d Day    â”ƒ", day);
+		gotoxy(0, 2); printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 	}
 	gotoxy(4, 4);
 	if (minigamecount != 0)
@@ -340,57 +343,57 @@ void menuTitleDraw()
 		printf("Night");
 		setColor(YELLOW);
 	}
-	gotoxy(18, 1);  printf("¹Ì´Ï°ÔÀÓ °¡´É È½¼ö : %d", minigamecount);
+	gotoxy(18, 1);  printf("ë¯¸ë‹ˆê²Œì„ ê°€ëŠ¥ íšŸìˆ˜ : %d", minigamecount);
 
 
 
-	// ÀÎº¥Åä¸® 
+	// ì¸ë²¤í† ë¦¬ 
 	int x = 58, y = 0;
-	gotoxy(x, y); printf("¦®");
+	gotoxy(x, y); printf("â”");
 	for (int i = 0; i < 35; i++) {
-		printf("¦¬");
+		printf("â”");
 	}
-	printf("¦¯");
+	printf("â”“");
 	gotoxy(x + 13, y);
-	printf("  ÀÎº¥Åä¸® ");
+	printf("  ì¸ë²¤í† ë¦¬ ");
 	y++;
-	gotoxy(x, y); printf("¦­            Lv1    Lv2    Lv3      ¦­"); y++;
-	gotoxy(x, y); printf("¦­    ¼ö¼Ò : %3d     %2d     %2d       ¦­", hydro, hydro2, hydro3); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­    »ê¼Ò : %3d     %2d     %2d       ¦­", oxy, oxy2, oxy3); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­    Åº¼Ò : %3d     %2d     %2d       ¦­", carb, carb2, carb3); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­   ¿ìÁÖ¼± : %d   ¿ìÁÖº¹ : %d         ¦­", rocket, spacesuit); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦±");
-	for (int i = 0; i < 35; i++) printf("¦¬");
-	printf("¦°");
+	gotoxy(x, y); printf("â”ƒ            Lv1    Lv2    Lv3      â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ    ìˆ˜ì†Œ : %3d     %2d     %2d       â”ƒ", hydro, hydro2, hydro3); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ    ì‚°ì†Œ : %3d     %2d     %2d       â”ƒ", oxy, oxy2, oxy3); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ    íƒ„ì†Œ : %3d     %2d     %2d       â”ƒ", carb, carb2, carb3); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ   ìš°ì£¼ì„  : %d   ìš°ì£¼ë³µ : %d         â”ƒ", rocket, spacesuit); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”—");
+	for (int i = 0; i < 35; i++) printf("â”");
+	printf("â”›");
 	for (int k = 0; k < 96; k++) {
 		gotoxy(k, 22);
-		printf("¦¬");
+		printf("â”");
 	}
 	y += 2;
-	gotoxy(x, y); printf("¦®");
+	gotoxy(x, y); printf("â”");
 	for (int i = 0; i < 35; i++) {
-		printf("¦¬");
+		printf("â”");
 	}
-	printf("¦¯");
+	printf("â”“");
 	gotoxy(x + 11, y);
-	printf("  ¿À´ÃÀÇ ¼Ò½Ä ");
+	printf("  ì˜¤ëŠ˜ì˜ ì†Œì‹ ");
 	y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦­                                   ¦­"); y++;
-	gotoxy(x, y); printf("¦±");
-	for (int i = 0; i < 35; i++) printf("¦¬");
-	printf("¦°");
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”ƒ                                   â”ƒ"); y++;
+	gotoxy(x, y); printf("â”—");
+	for (int i = 0; i < 35; i++) printf("â”");
+	printf("â”›");
 	x = 68, y = 17;
 
 	if (news < 10) {
@@ -407,7 +410,7 @@ void menuTitleDraw()
 	}
 	else {
 		gotoxy(x, y);
-		printf("%2dÀÏ ³²¾Ò½À´Ï´Ù.", 31 - day);
+		printf("%2dì¼ ë‚¨ì•˜ìŠµë‹ˆë‹¤.", 31 - day);
 	}
 }
 
@@ -415,23 +418,23 @@ int mainDraw()
 {
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> ¹Ì´Ï°ÔÀÓ");
+	printf("> ë¯¸ë‹ˆê²Œì„");
 	gotoxy(x, y + 1);
-	printf("Á¦ÀÛ  ");
+	printf("ì œì‘  ");
 	gotoxy(x, y + 2);
-	printf("ÀáÀÚ±â");
+	printf("ì ìê¸°");
 	gotoxy(x, y + 3);
 
 	if (rsswap == 0) {
-		printf("ÁØºñÁß  ");
+		printf("ì¤€ë¹„ì¤‘  ");
 	}
 	if (rsswap == 1) {
-		printf("Å»Ãâ");
+		printf("íƒˆì¶œ");
 	}
 
 
 	while (1) {
-		int k = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int k = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (k) {
 		case UP: {
 			if (y > 26) {
@@ -466,11 +469,11 @@ void infoDraw()
 {
 	system("cls");
 	printf("\n\n");
-	printf("[Á¶ÀÛ¹ı]\n\n");
-	printf("ÀÌµ¿ : W, S\n");
-	printf("¼±ÅÃ : SPACE, ENTER\n");
-	printf("°³¹ßÀÚ : ÀÌÁØ , Àü½Â¿ø \n");
-	printf("Àç¹Ô°Ô Áñ°ÜÁÖ¼¼¿ä .");
+	printf("[ì¡°ì‘ë²•]\n\n");
+	printf("ì´ë™ : W, S\n");
+	printf("ì„ íƒ : SPACE, ENTER\n");
+	printf("ê°œë°œì : ì´ì¤€ , ì „ìŠ¹ì› \n");
+	printf("ì¬ë°‹ê²Œ ì¦ê²¨ì£¼ì„¸ìš” .");
 	while (1) {
 		if (keyControl() == SUBMIT || keyControl() == ENTER) {
 			break;
@@ -488,53 +491,50 @@ void startDraw()
 			break;
 		}
 		int menuCode = mainDraw();
-		if (rocket == 1 && spacesuit == 1) {
-			rsswap++;
-		}
 
 		if (menuCode == 0 && minigamecount == 0) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("¹Ì´Ï°ÔÀÓ È½¼ö°¡ ÃæºĞÇÏÁö ¾Ê½À´Ï´Ù.");
+			printf("ë¯¸ë‹ˆê²Œì„ íšŸìˆ˜ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
 		if (menuCode == 0 && minigamecount != 0) {
 			gamemainDraw();
-			//°ÔÀÓ½ÃÀÛ
+			//ê²Œì„ì‹œì‘
 		}
 		else if (menuCode == 1 && minigamecount == 0) {
-			// Á¦ÀÛ
+			// ì œì‘
 			create();
 		}
 		else if (menuCode == 1 && minigamecount != 0) {
-			// Á¦ÀÛ
+			// ì œì‘
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛ ÇÒ ¼ö ÀÖ´Â ½Ã°£ÀÌ ¾Æ´Õ´Ï´Ù.");
+			printf("ì œì‘ í•  ìˆ˜ ìˆëŠ” ì‹œê°„ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
 		else if (menuCode == 2 && minigamecount == 0) {
-			// ÀáÀÚ±â
+			// ì ìê¸°
 			NextgameDraw();
 		}
 		else if (menuCode == 2 && minigamecount != 0) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("ÀáÀ» Àß¼ö ÀÖ´Â ½Ã°£ÀÌ ¾Æ´Õ´Ï´Ù.");
+			printf("ì ì„ ì˜ìˆ˜ ìˆëŠ” ì‹œê°„ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
 		else if (menuCode == 3 && rsswap == 1) {
-			// Å»Ãâ
+			// íƒˆì¶œ
 			EndGame_Main();
 			Sleep(1000);
 		}
 		else if (menuCode == 3 && rsswap == 0) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("¾ÆÁ÷ °³¹æµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			printf("ì•„ì§ ê°œë°©ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -557,17 +557,17 @@ int minigameDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf(">   ÁÖ»çÀ§   ( Ä¸½¶ È¹µæ °¡´É ¼ö( 1 ~ 12 )"); // 0
+	printf(">   ì£¼ì‚¬ìœ„   ( ìº¡ìŠ íšë“ ê°€ëŠ¥ ìˆ˜( 1 ~ 12 )"); // 0
 	gotoxy(x, y + 1);
-	printf("µ¿Àü´øÁö±â ( Ä¸½¶ È¹µæ °¡´É ¼ö( 1 ~ 12 )"); // 1
+	printf("ë™ì „ë˜ì§€ê¸° ( ìº¡ìŠ íšë“ ê°€ëŠ¥ ìˆ˜( 1 ~ 12 )"); // 1
 	gotoxy(x, y + 2);
-	printf("°¡À§¹ÙÀ§º¸ ( Ä¸½¶ È¹µæ °¡´É ¼ö( 3 ~ 15 )"); // 2
+	printf("ê°€ìœ„ë°”ìœ„ë³´ ( ìº¡ìŠ íšë“ ê°€ëŠ¥ ìˆ˜( 3 ~ 15 )"); // 2
 	gotoxy(x, y + 3);
-	printf("ºí·°ÇÇÇÏ±â ( Ä¸½¶ È¹µæ °¡´É ¼ö( 0 ~ ? )"); // 3
+	printf("ë¸”ëŸ­í”¼í•˜ê¸° ( ìº¡ìŠ íšë“ ê°€ëŠ¥ ìˆ˜( 0 ~ ? )"); // 3
 	gotoxy(x, y + 4);
-	printf(" µ¹¾Æ°¡±â "); // 4
+	printf(" ëŒì•„ê°€ê¸° "); // 4
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -625,17 +625,17 @@ int RSPgameDraw()
 	system("cls");
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> ÁÖ¸Ô"); // 0
+	printf("> ì£¼ë¨¹"); // 0
 	gotoxy(x, y + 1);
-	printf("°¡À§"); // 1
+	printf("ê°€ìœ„"); // 1
 	gotoxy(x, y + 2);
-	printf("  º¸  "); // 2
+	printf("  ë³´  "); // 2
 	for (int k = 0; k < 96; k++) {
 		gotoxy(k, 22);
-		printf("¦¬");
+		printf("â”");
 	}
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -670,16 +670,16 @@ int DicegameDraw()
 	system("cls");
 	for (int k = 0; k < 96; k++) {
 		gotoxy(k, 22);
-		printf("¦¬");
+		printf("â”");
 	}
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> È¦"); // 0
+	printf("> í™€"); // 0
 	gotoxy(x, y + 1);
-	printf("Â¦"); // 1
+	printf("ì§"); // 1
 
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -726,30 +726,30 @@ void DicemainDraw()
 		if (num % 2 == 0)
 		{
 			gotoxy(50, 27);
-			printf("¸ÂÃß¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì…¨ìŠµë‹ˆë‹¤");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", item + 1, hydro);
+				printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", item + 1, hydro);
 				break;
 			case 1:
 				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", item + 1, oxy);
+				printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", item + 1, oxy);
 				break;
 			case 2:
 				carb += item + 1;
 				gotoxy(50, 28);
-				printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", item + 1, carb);
+				printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", item + 1, carb);
 				break;
 			}
 		}
 		else
 		{
 			gotoxy(50, 27);
-			printf("¸ÂÃßÁö ¸øÇÏ¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì§€ ëª»í•˜ì…¨ìŠµë‹ˆë‹¤");
 		}
 		break;
 	case 1:
@@ -760,30 +760,30 @@ void DicemainDraw()
 		if (num % 2 != 0)
 		{
 			gotoxy(50, 27);
-			printf("¸ÂÃß¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì…¨ìŠµë‹ˆë‹¤");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", item + 1, hydro);
+				printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", item + 1, hydro);
 				break;
 			case 1:
 				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", item + 1, oxy);
+				printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", item + 1, oxy);
 				break;
 			case 2:
 				carb += item + 1;
 				gotoxy(50, 28);
-				printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", item + 1, carb);
+				printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", item + 1, carb);
 				break;
 			}
 		}
 		else
 		{
 			gotoxy(50, 27);
-			printf("¸ÂÃßÁö ¸øÇÏ¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì§€ ëª»í•˜ì…¨ìŠµë‹ˆë‹¤");
 		}
 		break;
 	}
@@ -797,13 +797,13 @@ int hocDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> ¼ö¼Ò"); // 0
+	printf("> ìˆ˜ì†Œ"); // 0
 	gotoxy(x, y + 1);
-	printf("»ê¼Ò");// 1
+	printf("ì‚°ì†Œ");// 1
 	gotoxy(x, y + 2);
-	printf("Åº¼Ò");
+	printf("íƒ„ì†Œ");
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -846,7 +846,7 @@ void spaceship()
 			{0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0}, // 1
 			{0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0}, // 2
 			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 3
-			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0},//  4 Çìµå
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0},//  4 í—¤ë“œ
 			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 5
 			{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 6
 			{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 7
@@ -854,7 +854,7 @@ void spaceship()
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}, // 9
 			{1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0}, // 10
 			{0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0}, // 11
-			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 12¸öÃ¼
+			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 12ëª¸ì²´
 			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 13
 			{0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0}, // 14
 			{0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0}, // 15
@@ -883,7 +883,7 @@ void spaceship()
 			}
 
 
-			printf("%s", rocket[i][j] == 1 ? "¡á" : "¡¡");
+			printf("%s", rocket[i][j] == 1 ? "â– " : "ã€€");
 		}
 		printf("\n");
 		y++;
@@ -949,15 +949,15 @@ int Dice()
 
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	for (int k = 0; k < 90; k++) {
 		gotoxy(k, 22);
 		if (k != 44) {
-			printf("¦¬");
+			printf("â”");
 		}
 		else {
-			printf("¦µ");
+			printf("â”»");
 		}
 	}
 
@@ -971,7 +971,7 @@ int Dice()
 			{
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++)
-					printf("%s", dice[i][k][j] == 1 ? "¡á" : "¡¡");
+					printf("%s", dice[i][k][j] == 1 ? "â– " : "ã€€");
 				printf("\n");
 				y++;
 			}
@@ -986,7 +986,7 @@ int Dice()
 	{
 		gotoxy(x, y);
 		for (int j = 0; j < 7; j++)
-			printf("%s", dice[rnd_dice][k][j] == 1 ? "¡á" : "¡¡");
+			printf("%s", dice[rnd_dice][k][j] == 1 ? "â– " : "ã€€");
 		printf("\n");
 		y++;
 	}
@@ -1074,15 +1074,15 @@ int Coin()
 	int x = 64, y = 8;
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	for (int k = 0; k < 90; k++) {
 		gotoxy(k, 22);
 		if (k != 44) {
-			printf("¦¬");
+			printf("â”");
 		}
 		else {
-			printf("¦µ");
+			printf("â”»");
 		}
 	}
 	rnd_coin = rand() % 2;
@@ -1091,7 +1091,7 @@ int Coin()
 			for (int k = 0; k < 7; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++) {
-					printf("%s", coin[i][k][j] == 1 ? "¢Ã" : "¡¡");
+					printf("%s", coin[i][k][j] == 1 ? "â–£" : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -1106,7 +1106,7 @@ int Coin()
 		for (int k = 0; k < 7; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 7; j++) {
-				printf("%s", coin[0][k][j] == 1 ? "¢Ã" : "¡¡");
+				printf("%s", coin[0][k][j] == 1 ? "â–£" : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1115,7 +1115,7 @@ int Coin()
 		for (int k = 0; k < 7; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 7; j++) {
-				printf("%s", coin[4][k][j] == 1 ? "¢Ã" : "¡¡");
+				printf("%s", coin[4][k][j] == 1 ? "â–£" : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1131,7 +1131,7 @@ void RSP()
 {
 	int num = rand() % 12 + 3;
 	int rsp[3][16][13] = {
-		// ÁÖ¸Ô
+		// ì£¼ë¨¹
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -1149,7 +1149,7 @@ void RSP()
 		{0,0,0,0,1,1,1,1,1,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0}},
 
-		// °¡À§
+		// ê°€ìœ„
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0},
 		 {0,0,0,0,0,0,1,0,0,0,0,0,0},
 		 {0,1,0,0,0,1,0,1,0,0,0,0,0},
@@ -1167,7 +1167,7 @@ void RSP()
 		 {0,0,0,0,1,1,1,1,1,0,0,0,0},
 		 {0,0,0,0,0,0,0,0,0,0,0,0,0}},
 
-		 // º¸
+		 // ë³´
 		 {{0,0,0,0,0,0,0,0,0,0,0,0,0},
 		 {0,0,0,0,0,0,1,0,0,0,0,0,0},
 		 {0,0,0,0,1,1,0,1,1,0,0,0,0},
@@ -1191,22 +1191,22 @@ void RSP()
 
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	for (int k = 0; k < 90; k++) {
 		gotoxy(k, 22);
 		if (k != 44) {
-			printf("¦¬");
+			printf("â”");
 		}
 		else {
-			printf("¦µ");
+			printf("â”»");
 		}
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0b);
 	for (int k = 0; k < 16; k++) {
 		gotoxy(x, y);
 		for (int j = 0; j < 13; j++) {
-			printf("%s", rsp[player][k][j] == 1 ? "¡á" : "¡¡");
+			printf("%s", rsp[player][k][j] == 1 ? "â– " : "ã€€");
 		}
 		printf("\n");
 		y++;
@@ -1218,7 +1218,7 @@ void RSP()
 			for (int k = 0; k < 16; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 13; j++) {
-					printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
+					printf("%s", rsp[i][k][j] == 1 ? "â– " : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -1232,7 +1232,7 @@ void RSP()
 	for (int k = 0; k < 16; k++) {
 		gotoxy(x, y);
 		for (int j = 0; j < 13; j++) {
-			printf("%s", rsp[rnd_rsp][k][j] == 1 ? "¡á" : "¡¡");
+			printf("%s", rsp[rnd_rsp][k][j] == 1 ? "â– " : "ã€€");
 		}
 		printf("\n");
 		y++;
@@ -1241,35 +1241,35 @@ void RSP()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	//if (player - rnd_rsp == 0) {
-	//	puts("ºñ°å½À´Ï´Ù.");
+	//	puts("ë¹„ê²¼ìŠµë‹ˆë‹¤.");
 	//	Sleep(1000);
 	//}
 	//else if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
-	//	puts("ÀÌ°å½À´Ï´Ù.");
+	//	puts("ì´ê²¼ìŠµë‹ˆë‹¤.");
 	//}
 	//else {
-	//	puts("Á³½À´Ï´Ù.");
+	//	puts("ì¡ŒìŠµë‹ˆë‹¤.");
 	//}
 	if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		gotoxy(50, 28);
 		setColor(GREEN);
-		printf("ÀÌ°å½À´Ï´Ù");
+		printf("ì´ê²¼ìŠµë‹ˆë‹¤");
 		switch (hoctemp)
 		{
 		case 0:
 			hydro += num + 1;
 			gotoxy(50, 29);
-			printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
+			printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", num + 1, hydro);
 			break;
 		case 1:
 			oxy += num + 1;
 			gotoxy(50, 29);
-			printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
+			printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", num + 1, oxy);
 			break;
 		case 2:
 			carb += num + 1;
 			gotoxy(50, 28);
-			printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
+			printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", num + 1, carb);
 			break;
 		}
 		Sleep(2000);
@@ -1277,23 +1277,23 @@ void RSP()
 	else if (player - rnd_rsp == 0) {
 		gotoxy(50, 28);
 		setColor(GREEN);
-		printf("ºñ°å½À´Ï´Ù.");
+		printf("ë¹„ê²¼ìŠµë‹ˆë‹¤.");
 		switch (hoctemp)
 		{
 		case 0:
 			hydro += (num + 1) / 2;
 			gotoxy(50, 29);
-			printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", (num + 1) / 2, hydro);
+			printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", (num + 1) / 2, hydro);
 			break;
 		case 1:
 			oxy += (num + 1) / 2;
 			gotoxy(50, 29);
-			printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", (num + 1) / 2, oxy);
+			printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", (num + 1) / 2, oxy);
 			break;
 		case 2:
 			carb += (num + 1)/2;
 			gotoxy(50, 28);
-			printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", (num + 1) / 2, carb);
+			printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", (num + 1) / 2, carb);
 			break;
 		}
 		Sleep(2000);
@@ -1301,7 +1301,7 @@ void RSP()
 	else {
 		gotoxy(50, 28);
 		setColor(GREEN);
-		printf("Á³½À´Ï´Ù");
+		printf("ì¡ŒìŠµë‹ˆë‹¤");
 		Sleep(2000);
 	}
 	setColor(YELLOW);
@@ -1385,7 +1385,7 @@ void Block_print_map(int score)
 {
 	for (int k = 0; k < 35; k++) {
 		gotoxy(50, k);
-		puts("¦­");
+		puts("â”ƒ");
 	}
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
@@ -1395,11 +1395,11 @@ void Block_print_map(int score)
 	}
 
 	gotoxy(player.x, SCR_HEIGHT);
-	printf("¿Ê");
+	printf("ì˜·");
 
 	gotoxy(0, SCR_HEIGHT + 1);
 	for (int i = 0; i < SCR_HEIGHT - 12; i++)
-		printf("¢Ë");
+		printf("â–¦");
 	gotoxy(60, 28);
 	printf("score : %6d", score);
 }
@@ -1436,13 +1436,13 @@ void Block_Avoid()
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[i][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[i][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
 		}
 		Sleep(1000);
-	
+
 		y = 10;
 	}
 	do {
@@ -1465,17 +1465,17 @@ void Block_Avoid()
 	case 0:
 		hydro += item+1;
 		gotoxy(60, 29);
-		printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", item + 1, hydro);
+		printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", item + 1, hydro);
 		break;
 	case 1:
 		oxy += item + 1;
 		gotoxy(60, 29);
-		printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", item + 1, oxy);
+		printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", item + 1, oxy);
 		break;
 	case 2:
 		carb += item + 1;
 		gotoxy(60, 28);
-		printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", item + 1, carb);
+		printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", item + 1, carb);
 		break;
 	}
 	Sleep(2000);
@@ -1575,18 +1575,18 @@ void DayAlter(int day)
 	system("cls");
 
 	gotoxy(16, 12);
-	puts("¦®");
+	puts("â”");
 	gotoxy(80, 12);
-	puts("¦¯");
+	puts("â”“");
 	gotoxy(16, 20);
-	puts("¦±");
+	puts("â”—");
 	gotoxy(80, 20);
-	puts("¦°");
+	puts("â”›");
 	for (int k = 17; k < 80; k++) {
 		gotoxy(k, 12);
-		puts("¦¬");
+		puts("â”");
 		gotoxy(k, 20);
-		puts("¦¬");
+		puts("â”");
 	}
 
 	int x = 22, y = 14;
@@ -1594,7 +1594,7 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[3][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[3][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1605,7 +1605,7 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[2][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[2][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1615,7 +1615,7 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[1][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[1][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1625,7 +1625,7 @@ void DayAlter(int day)
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
 			for (int k = 0; k < 4; k++) {
-				printf("%s", CountNum[0][j][k] == 1 ? "¡á" : "¡¡");
+				printf("%s", CountNum[0][j][k] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1635,7 +1635,7 @@ void DayAlter(int day)
 	for (int j = 0; j < 5; j++) {
 		gotoxy(x, y);
 		for (int k = 0; k < 4; k++) {
-			printf("%s", CountNum[day % 10][j][k] == 1 ? "¡á" : "¡¡");
+			printf("%s", CountNum[day % 10][j][k] == 1 ? "â– " : "ã€€");
 		}
 		printf("\n");
 		y++;
@@ -1645,7 +1645,7 @@ void DayAlter(int day)
 		for (int k = 0; k < 5; k++) {
 			gotoxy(x, y);
 			for (int j = 0; j < 5; j++) {
-				printf("%s", Day[i][k][j] == 1 ? "¡á" : "¡¡");
+				printf("%s", Day[i][k][j] == 1 ? "â– " : "ã€€");
 			}
 			printf("\n");
 			y++;
@@ -1662,14 +1662,14 @@ int coingameDraw()
 	int x = 42, y = 26;
 	for (int k = 0; k < 96; k++) {
 		gotoxy(k, 22);
-		printf("¦¬");
+		printf("â”");
 	}
 	gotoxy(x - 2, y);
-	printf("> ¾Õ"); // 0
+	printf("> ì•"); // 0
 	gotoxy(x, y + 1);
-	printf("µÚ"); // 1
+	printf("ë’¤"); // 1
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -1704,11 +1704,11 @@ int NextmainDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> ³×"); // 0
+	printf("> ë„¤"); // 0
 	gotoxy(x, y + 1);
-	printf("¾Æ´Ï¿ä"); // 1
+	printf("ì•„ë‹ˆìš”"); // 1
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -1734,8 +1734,171 @@ int NextmainDraw()
 		case ENTER: {
 			return y - 26;
 		}
-		}
 	}
+		}
+}
+
+void ChckHiddenEnd()
+{
+	if (hydro > 150) {
+		hiddenEnding(0);
+		GAMEEND = true;
+	}
+	else if (oxy > 150) {
+		hiddenEnding(1);
+		GAMEEND = true;
+	}
+	else if (oxy > 70 && carb > 70) {
+		hiddenEnding(2);
+		GAMEEND = true;
+	}
+	else if (day > 31) {
+		hiddenEnding(3);
+		GAMEEND = true;
+	}
+	else {
+		GAMEEND = false;
+	}
+
+}
+
+void hiddenEnding(int n)
+{
+	switch (n)
+	{
+	case 0: // ìˆ˜ì†Œ í­ë°œ (ìˆ˜ì†Œ 150ê°œ ì´ˆê³¼)
+		hydroBomb();
+		break;
+	case 1: // ì‚°í™” ì‘ìš© (ì‚°ì†Œ 150ê°œ ì´ˆê³¼)
+		oxid();
+		break;
+	case 2: // ì˜¨ë‚œí™” (ì‚°ì†Œ 70ê°œ, íƒ„ì†Œ 70ê°œ ì´ˆê³¼)
+		earth_death();
+		break;
+	case 3: // íŒŒì‚° (Day 30 ì´ˆê³¼)
+		no_money();
+		break;
+	default:
+		break;
+	}
+}
+
+void hydroBomb() // ìˆ˜ì†Œ í­ë°œ
+{
+	char ending[][70] = { "ìˆ˜ì†Œê°€ ë„ˆë¬´ ë§ì´ ëª¨ì—¬ì„œ í„°ì ¸ë²„ë ¸ë‹¤.", "ìˆ˜ì†Œ í­ë°œì˜ ê·œëª¨ëŠ” ì™¸ê³„ì¸ë„ ì—†ì–´ì§ˆë§Œí¼ ìƒë‹¹íˆ ì»¸ë‹¤." };
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+
+void oxid() // ì‚°í™”
+{
+	char ending[][70] = { "ì‚°ì†Œê°€ ë„ˆë¬´ ë§ì´ ëª¨ì˜€ë‹¤.", "ì™¸ê³„ì¸ë“¤ì´ íƒ€ê³  ì˜¨ UFOì— ìº¡ìŠì„ ë˜ì¡Œë‹¤.","UFOì—ì„œ ì‚°í™” ì‘ìš©ì´ ì¼ì–´ë‚¬ë‹¤.             ", "ì™¸ê³„ì¸ë“¤ê³¼ í•¨ê»˜ ì§€êµ¬ì—ì„œ ì‚´ê²Œ ë˜ì—ˆë‹¤." };
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+
+void no_money() // íŒŒì‚°
+{
+	char ending[][70] = { "30ì¼ì´ ì§€ë‚¬ë‹¤.","í•˜ì§€ë§Œ ì¶©ë¶„í•œ ìì›ì„ ëª¨ìœ¼ì§€ ëª»í•˜ì˜€ë‹¤.", "ì™¸ê³„ì¸ì´ ì´ìƒí•œ ë¹›ì„ ë°œì‚¬í•œë‹¤.         ","ì§€êµ¬ì— ìˆëŠ” ëª¨ë“  ì‚¬ëŒì€ ì£½ê²Œë˜ì—ˆë‹¤." };
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void earth_death() // ì˜¨ë‚œí™”
+{
+	char ending[][70] = { "ì‚°ì†Œì™€ íƒ„ì†Œê°€ ë„ˆë¬´ ë§ì´ ëª¨ì˜€ë‹¤.", "ì´ì‚°í™”íƒ„ì†Œê°€ ìƒì„±ë˜ì—ˆë‹¤.            ","ì§€êµ¬ê°€ ì ì  ëœ¨ê±°ì›Œì§„ë‹¤..", "ê²°êµ­ ì‚¬ëŒê³¼ ì™¸ê³„ì¸ì€ ëª¨ë‘ ì§€êµ¬ì—ì„œ ì‚´ìˆ˜ ì—†ê²Œë¬ë‹¤."};
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 0);
+		for (int k = 0; k < 70; k++) {
+			printf("%c", ending[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+}
+
+void Ending_TItle()
+{
+	int title[7][5][5] = {
+		// T
+		{{1,1,1,1,1},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0},
+		 {0,0,1,0,0}},
+		 // H
+		 {{1,0,0,0,1},
+		 {1,0,0,0,1},
+		 {1,1,1,1,1},
+		 {1,0,0,0,1},
+		 {1,0,0,0,1}},
+		 // E
+		 {{1,1,1,1,1},
+		 {1,0,0,0,0},
+		 {1,1,1,1,0},
+		 {1,0,0,0,0},
+		 {1,1,1,1,1}},
+		 // 
+		 {{0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0},
+		 {0,0,0,0,0}},
+		 // E
+		 {{1,1,1,1,1},
+		 {1,0,0,0,0},
+		 {1,1,1,1,0},
+		 {1,0,0,0,0},
+		 {1,1,1,1,1}},
+		 // N
+		 {{1,0,0,0,1},
+		 {1,1,0,0,1},
+		 {1,0,1,0,1},
+		 {1,0,0,1,1},
+		 {1,0,0,0,1}},
+		 // D
+		 {{1,1,1,0,0},
+		 {1,0,0,1,0},
+		 {1,0,0,1,0},
+		 {1,0,0,1,0},
+		 {1,1,1,0,0}}
+	};
+
+	int x = 8, y = 12;
+
+	for (int i = 0; i < 7; i++) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 5; k++) {
+				printf("%s", title[i][j][k] == 1 ? "â– " : "ã€€");
+			}
+			y++;
+		}
+		Sleep(10);
+		y = 12;
+		x += 12;
+	}
+	Sleep(2500);
 }
 
 void NextgameDraw()
@@ -1760,17 +1923,17 @@ int creategameDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> Lv2 ¿ø¼Ò"); // 0
+	printf("> Lv2 ì›ì†Œ"); // 0
 	gotoxy(x, y + 1);
-	printf("Lv3 ¿ø¼Ò"); // 1
+	printf("Lv3 ì›ì†Œ"); // 1
 	gotoxy(x, y + 2);
-	printf("¿ìÁÖ¼± [ Lv 3 ¼ö¼Ò, »ê¼Ò, Åº¼Ò °¢°¢ 2°³¾¿ ÇÊ¿ä ]"); // 2
+	printf("ìš°ì£¼ì„  [ Lv 3 ìˆ˜ì†Œ, ì‚°ì†Œ, íƒ„ì†Œ ê°ê° 2ê°œì”© í•„ìš” ]"); // 2
 	gotoxy(x, y + 3);
-	printf("¿ìÁÖº¹ [ Lv 3 ¼ö¼Ò, »ê¼Ò, Åº¼Ò °¢°¢ 1°³¾¿ ÇÊ¿ä ]"); // 3
+	printf("ìš°ì£¼ë³µ [ Lv 3 ìˆ˜ì†Œ, ì‚°ì†Œ, íƒ„ì†Œ ê°ê° 1ê°œì”© í•„ìš” ]"); // 3
 	gotoxy(x, y + 4);
-	printf("µ¹¾Æ°¡±â"); // 4
+	printf("ëŒì•„ê°€ê¸°"); // 4
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -1807,13 +1970,13 @@ int lv2()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> Lv2 ¼ö¼Ò [ Lv1 ¼ö¼Ò 5°³ ÇÊ¿ä ]"); // 0
+	printf("> Lv2 ìˆ˜ì†Œ [ Lv1 ìˆ˜ì†Œ 5ê°œ í•„ìš” ]"); // 0
 	gotoxy(x, y + 1);
-	printf("Lv2 »ê¼Ò [ Lv1 »ê¼Ò 5°³ ÇÊ¿ä ]"); // 1
+	printf("Lv2 ì‚°ì†Œ [ Lv1 ì‚°ì†Œ 5ê°œ í•„ìš” ]"); // 1
 	gotoxy(x, y + 2);
-	printf("Lv2 Åº¼Ò [ Lv1 Åº¼Ò 5°³ ÇÊ¿ä ]");
+	printf("Lv2 íƒ„ì†Œ [ Lv1 íƒ„ì†Œ 5ê°œ í•„ìš” ]");
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -1852,7 +2015,7 @@ void endsuccedsin()
 			{0,0,0,0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0}, // 1
 			{0,0,0,0,0,0,1,1,1,2,2,0,0,0,0,0,0,0,0}, // 2
 			{0,0,0,0,0,1,1,1,1,2,2,2,0,0,0,0,0,0,0}, // 3
-			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0},//  4 Çìµå
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0},//  4 í—¤ë“œ
 			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 5
 			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 6
 			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 7
@@ -1860,7 +2023,7 @@ void endsuccedsin()
 			{1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,0,0}, // 9
 			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 10
 			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 11
-			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 12¸öÃ¼
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 12ëª¸ì²´
 			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 13
 			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 14
 			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 15
@@ -1880,35 +2043,35 @@ void endsuccedsin()
 				for (int j = 0; j < 19; j++) {
 					switch (rocket[i][k][j]) {
 					case 0:
-						printf("¡¡");
+						printf("ã€€");
 						break;
 					case 1:
 						setColor(WHITE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 2:
 						setColor(DARK_GRAY);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 3:
 						setColor(RED);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 4:
 						setColor(SKYBLUE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 5:
 						setColor(DARK_SKYBLUE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 					}
 
-					/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+					/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 				}
 				printf("\n");
 				y++;
@@ -1938,7 +2101,7 @@ void anvilhammer()
 
 void AilenBeam()
 {
-	char event[][50] = { "¹ã »çÀÌ¿¡ ¿Ü°èÀÎÀÌ ½ğ ¼ö»óÇÑ ºö¿¡ ¸Â¾Ò´Ù.","¾ÆÀÌÅÛ ÀüÃ¼°¡ Àı¹İ °¨¼ÒµÇ¾ú´Ù.           " };
+	char event[][50] = { "ë°¤ ì‚¬ì´ì— ì™¸ê³„ì¸ì´ ìœ ìˆ˜ìƒí•œ ë¹”ì— ë§ì•˜ë‹¤.","ì•„ì´í…œ ì „ì²´ê°€ ì ˆë°˜ ê°ì†Œë˜ì—ˆë‹¤.           " };
 	
 	for (int i = 0; i < 2; i++) {
 		gotoxy(0, 21);
@@ -1955,7 +2118,7 @@ void AilenBeam()
 
 void Delivery()
 {
-	char event[][50] = { "¹ã »çÀÌ¿¡ ¹® ¾Õ¿¡ ¼ö»óÇÑ »óÀÚ°¡ ¹è¼ÛµÇ¾ú´Ù.", "»óÀÚ ¾È¿¡´Â ´©±º°¡ º¸³½ ÀÚ¿øÀÌ ÀÖ¾ú´Ù.     " };
+	char event[][50] = { "ë°¤ ì‚¬ì´ì— ë¬¸ ì•ì— ìˆ˜ìƒí•œ ìƒìê°€ ë°°ì†¡ë˜ì—ˆë‹¤.", "ìƒì ì•ˆì—ëŠ” ëˆ„êµ°ê°€ ë³´ë‚¸ ìì›ì´ ìˆì—ˆë‹¤.     " };
 	for (int i = 0; i < 2; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -1986,7 +2149,7 @@ void Delivery()
 
 void Water()
 {
-	char event[][50] = { "¹ã »çÀÌ¿¡ ¹°¿¡¼­ »ê¼Ò¿Í ¼ö¼Ò ÃßÃâÀ» ¼º°øÇÏ¿´´Ù."};
+	char event[][50] = { "ë°¤ ì‚¬ì´ì— ë¬¼ì—ì„œ ì‚°ì†Œì™€ ìˆ˜ì†Œ ì¶”ì¶œì„ ì„±ê³µí•˜ì˜€ë‹¤."};
 	for (int i = 0; i < 1; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -2002,7 +2165,7 @@ void Water()
 
 void Mouse()
 {
-	char event[][50] = { "¹ã »çÀÌ¿¡ Áã°¡ ÀÚ¿øÀ» ¹°°í °¬´Ù."};
+	char event[][50] = { "ë°¤ ì‚¬ì´ì— ì¥ê°€ ìì›ì„ ë¬¼ê³  ê°”ë‹¤."};
 	for (int i = 0; i < 1; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -2019,7 +2182,7 @@ void Mouse()
 	if (carb > rnd) carb -= rnd;
 	else carb = 0;
 	gotoxy(0, 21);
-	printf("¼ö¼Ò, »ê¼Ò, Åº¼Ò °¢°¢ %2d°³¾¿ »ç¶óÁ³´Ù.", rnd);
+	printf("ìˆ˜ì†Œ, ì‚°ì†Œ, íƒ„ì†Œ ê°ê° %2dê°œì”© ì‚¬ë¼ì¡Œë‹¤.", rnd);
 }
 
 void anvil()
@@ -2051,19 +2214,19 @@ void anvil()
 			for (int j = 0; j < 18; j++) {
 				switch (anvil[i][k][j]) {
 				case 0:
-					printf("¡¡");
+					printf("ã€€");
 					break;
 				case 1:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 2:
 					setColor(GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 				}
-				/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+				/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 			}
 			printf("\n");
 			y++;
@@ -2139,21 +2302,21 @@ void hammer() {
 			for (int j = 0; j < 20; j++) {
 				switch (hammer[i][k][j]) {
 				case 0:
-					printf("¡¡");
+					printf("ã€€");
 					break;
 				case 1:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 2:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				}
 
-				/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+				/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 			}
 			printf("\n");
 			y++;
@@ -2177,30 +2340,30 @@ void hammer() {
 			for (int j = 0; j < 20; j++) {
 				switch (hammer[i][k][j]) {
 				case 0:
-					printf("¡¡");
+					printf("ã€€");
 					break;
 				case 1:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 2:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 3:
 					setColor(RED);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 4:
 					setColor(DARK_RED);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				}
-				/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+				/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 			}
 			printf("\n");
 			y++;
@@ -2225,30 +2388,30 @@ void hammer() {
 			for (int j = 0; j < 20; j++) {
 				switch (hammer[i][k][j]) {
 				case 0:
-					printf("¡¡");
+					printf("ã€€");
 					break;
 				case 1:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 2:
 					setColor(DARK_GRAY);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 3:
 					setColor(RED);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				case 4:
 					setColor(DARK_RED);
-					printf("¡á");
+					printf("â– ");
 					setColor(YELLOW);
 					break;
 				}
-				/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+				/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 			}
 			printf("\n");
 			y++;
@@ -2267,13 +2430,13 @@ int lv3() {
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> Lv3 ¼ö¼Ò [ Lv2 ¼ö¼Ò 5°³ ÇÊ¿ä ]"); // 0
+	printf("> Lv3 ìˆ˜ì†Œ [ Lv2 ìˆ˜ì†Œ 5ê°œ í•„ìš” ]"); // 0
 	gotoxy(x, y + 1);
-	printf("Lv3 »ê¼Ò [ Lv2 »ê¼Ò 5°³ ÇÊ¿ä ]"); // 1
+	printf("Lv3 ì‚°ì†Œ [ Lv2 ì‚°ì†Œ 5ê°œ í•„ìš” ]"); // 1
 	gotoxy(x, y + 2);
-	printf("Lv3 Åº¼Ò [ Lv2 Åº¼Ò 5°³ ÇÊ¿ä ]");
+	printf("Lv3 íƒ„ì†Œ [ Lv2 íƒ„ì†Œ 5ê°œ í•„ìš” ]");
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -2309,11 +2472,11 @@ int createnextDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf("> Á¦ÀÛ"); // 0
+	printf("> ì œì‘"); // 0
 	gotoxy(x, y + 1);
-	printf("µ¹¾Æ°¡±â"); // 1
+	printf("ëŒì•„ê°€ê¸°"); // 1
 	while (1) {
-		int n = keyControl(); // Å°º¸µå ÀÌº¥Æ®¸¦ Å°°ªÀ¸·Î ¹Ş¾Æ¿À±â
+		int n = keyControl(); // í‚¤ë³´ë“œ ì´ë²¤íŠ¸ë¥¼ í‚¤ê°’ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		switch (n) {
 		case UP: {
 			if (y > 26) {
@@ -2373,30 +2536,30 @@ void coinmainDraw()
 		minigamecount--;
 		if (menuCode != n) {
 			gotoxy(50, 27);
-			printf("¸ÂÃß¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì…¨ìŠµë‹ˆë‹¤");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
 				gotoxy(50, 28);
-				printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
+				printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", num + 1, hydro);
 				break;
 			case 1:
 				oxy += num + 1;
 				gotoxy(50, 28);
-				printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
+				printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", num + 1, oxy);
 				break;
 			case 2:
 				carb += num + 1;
 				gotoxy(50, 28);
-				printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
+				printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", num + 1, carb);
 				break;
 			}
 			Sleep(2000);
 		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
-			printf("¸ÂÃßÁö ¸øÇÏ¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì§€ ëª»í•˜ì…¨ìŠµë‹ˆë‹¤");
 			Sleep(2000);
 		}
 		setColor(YELLOW);
@@ -2408,30 +2571,30 @@ void coinmainDraw()
 		minigamecount--;
 		if (menuCode != n) {
 			gotoxy(50, 27);
-			printf("¸ÂÃß¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì…¨ìŠµë‹ˆë‹¤");
 			switch (hoctemp)
 			{
 			case 0:
 				hydro += num + 1;
 				gotoxy(50, 28);
-				printf("¼ö¼Ò +%d / ÇöÀç ¼ö¼Ò %d", num + 1, hydro);
+				printf("ìˆ˜ì†Œ +%d / í˜„ì¬ ìˆ˜ì†Œ %d", num + 1, hydro);
 				break;
 			case 1:
 				oxy += num + 1;
 				gotoxy(50, 28);
-				printf("»ê¼Ò +%d / ÇöÀç »ê¼Ò %d", num + 1, oxy);
+				printf("ì‚°ì†Œ +%d / í˜„ì¬ ì‚°ì†Œ %d", num + 1, oxy);
 				break;
 			case 2:
 				carb += num + 1;
 				gotoxy(50, 28);
-				printf("Åº¼Ò +%d / ÇöÀç Åº¼Ò %d", num + 1, carb);
+				printf("íƒ„ì†Œ +%d / í˜„ì¬ íƒ„ì†Œ %d", num + 1, carb);
 				break;
 			}
 			Sleep(2000);
 		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
-			printf("¸ÂÃßÁö ¸øÇÏ¼Ì½À´Ï´Ù");
+			printf("ë§ì¶”ì§€ ëª»í•˜ì…¨ìŠµë‹ˆë‹¤");
 			Sleep(2000);
 		}
 		setColor(YELLOW);
@@ -2458,7 +2621,7 @@ void create() {
 		else if (lv_2 == 0 && hydro <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2474,7 +2637,7 @@ void create() {
 		else if (lv_2 == 1 && oxy <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2490,7 +2653,7 @@ void create() {
 		else if (lv_2 == 2 && carb <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2509,7 +2672,7 @@ void create() {
 		else if (lv_3 == 0 && hydro2 <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2525,7 +2688,7 @@ void create() {
 		else if (lv_3 == 1 && oxy2 <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2541,7 +2704,7 @@ void create() {
 		else if (lv_3 == 2 && carb2 <= 4) {
 			gotoxy(54, 29);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2561,7 +2724,7 @@ void create() {
 		else {
 			gotoxy(54, 31);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2581,7 +2744,7 @@ void create() {
 		else {
 			gotoxy(54, 31);
 			setColor(RED);
-			printf("Á¦ÀÛÇÒ Àç·á°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+			printf("ì œì‘í•  ì¬ë£Œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
 			setColor(YELLOW);
 			Sleep(400);
 		}
@@ -2595,7 +2758,7 @@ void create() {
 
 void OddEvendote(int num) {
 	int rsp[2][18][13] = {
-		// È¦
+		// í™€
 	   {{0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,1,0,0,0,0,0,0,0},
 		{0,0,1,1,1,1,1,1,1,0,0,0,0},
@@ -2616,7 +2779,7 @@ void OddEvendote(int num) {
 		{0,0,1,1,1,1,1,1,1,0,0,0,0}},
 
 
-		// Â¦
+		// ì§
 	   {{0,0,0,0,0,0,0,0,0,0,1,0,0},
 		{1,1,1,1,1,1,1,1,1,0,1,0,0},
 		{0,0,0,1,0,1,0,0,0,0,1,0,0},
@@ -2643,7 +2806,7 @@ void OddEvendote(int num) {
 			for (int k = 0; k < 18; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 13; j++) {
-					printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
+					printf("%s", rsp[i][k][j] == 1 ? "â– " : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -2660,7 +2823,7 @@ void OddEvendote(int num) {
 			for (int k = 0; k < 18; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 13; j++) {
-					printf("%s", rsp[i][k][j] == 1 ? "¡á" : "¡¡");
+					printf("%s", rsp[i][k][j] == 1 ? "â– " : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -2683,7 +2846,7 @@ void endlosesin()
 			{0,0,0,0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0}, // 1
 			{0,0,0,0,0,0,1,1,1,2,2,0,0,0,0,0,0,0,0}, // 2
 			{0,0,0,0,0,1,1,1,1,2,2,2,0,0,0,0,0,0,0}, // 3
-			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0},//  4 Çìµå
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0},//  4 í—¤ë“œ
 			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 5
 			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 6
 			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 7
@@ -2691,7 +2854,7 @@ void endlosesin()
 			{1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,0,0}, // 9
 			{1,1,1,0,1,1,1,1,1,2,2,2,2,0,2,2,2,0,0}, // 10
 			{0,1,0,0,1,1,1,1,1,2,2,2,2,0,0,2,0,0,0}, // 11
-			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 12¸öÃ¼
+			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 12ëª¸ì²´
 			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 13
 			{0,0,0,0,0,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 14
 			{0,0,0,0,1,1,1,1,1,2,2,2,2,0,0,0,0,0,0}, // 15
@@ -2711,35 +2874,35 @@ void endlosesin()
 				for (int j = 0; j < 19; j++) {
 					switch (rocket[i][k][j]) {
 					case 0:
-						printf("¡¡");
+						printf("ã€€");
 						break;
 					case 1:
 						setColor(WHITE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 2:
 						setColor(DARK_GRAY);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 3:
 						setColor(RED);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 4:
 						setColor(SKYBLUE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 						break;
 					case 5:
 						setColor(DARK_SKYBLUE);
-						printf("¡á");
+						printf("â– ");
 						setColor(YELLOW);
 					}
 
-					/*printf("%s", anvil[i][k][j] == 1 ? "¡á" : "¡¡");*/
+					/*printf("%s", anvil[i][k][j] == 1 ? "â– " : "ã€€");*/
 				}
 				printf("\n");
 				y++;
@@ -2760,7 +2923,7 @@ void endlosesin()
 void frontbackdote(int num)
 {
 	//int fb[2][18][18] = {
-	//	// È¦
+	//	// í™€
 	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
 	//	{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
@@ -2780,7 +2943,7 @@ void frontbackdote(int num)
 	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
 	//	{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
 
-	//	// Â¦
+	//	// ì§
 	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
 	//	{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
@@ -2830,7 +2993,7 @@ void frontbackdote(int num)
 			for (int k = 0; k < 7; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++) {
-					printf("%s", fb[i][k][j] == 1 ? "¢Ã" : "¡¡");
+					printf("%s", fb[i][k][j] == 1 ? "â–£" : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -2847,7 +3010,7 @@ void frontbackdote(int num)
 			for (int k = 0; k < 7; k++) {
 				gotoxy(x, y);
 				for (int j = 0; j < 7; j++) {
-					printf("%s", fb[i][k][j] == 1 ? "¢Ã" : "¡¡");
+					printf("%s", fb[i][k][j] == 1 ? "â–£" : "ã€€");
 				}
 				printf("\n");
 				y++;
@@ -2918,7 +3081,7 @@ void EndGame_Draw()
 {
 	for (int k = 0; k < 40; k++) {
 		gotoxy(76, k);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 
 	gotoxy(78, 1);
@@ -2991,7 +3154,7 @@ void EndGame_Enemy_Move(int n)
 		break;
 	case 3: // front
 		if (Enemy[n]->y < 26);
-			Enemy[n]->y++;
+		Enemy[n]->y++;
 		break;
 	default:
 		break;
@@ -3098,7 +3261,7 @@ void EndGame_Collision_Enemy_Bullet()
 void EndGame_Collision_Enemy_Player()
 {
 	for (int k = 0; k < EndGame_Max_Enemy; k++) {
-		if (Enemy[k] != NULL ){
+		if (Enemy[k] != NULL) {
 			if (User.y == Enemy[k]->y && User.x - Enemy[k]->x >= -4 && User.x - Enemy[k]->x <= 2)
 				IsGame = false;
 		}
@@ -3106,164 +3269,3 @@ void EndGame_Collision_Enemy_Player()
 }
 
 #pragma endregion
-
-void hiddenEnding(int n)
-{
-	switch (n)
-	{
-	case 0: // ¼ö¼Ò Æø¹ß (¼ö¼Ò 150°³ ÃÊ°ú)
-		hydroBomb();
-		break;
-	case 1: // »êÈ­ ÀÛ¿ë (»ê¼Ò 150°³ ÃÊ°ú)
-		oxid();
-		break;
-	case 2: // ¿Â³­È­ (»ê¼Ò 70°³, Åº¼Ò 70°³ ÃÊ°ú)
-		earth_death();
-		break;
-	case 3: // ÆÄ»ê (Day 30 ÃÊ°ú)
-		no_money();
-		break;
-	default:
-		break;
-	}
-}
-
-void ChckHiddenEnd()
-{
-	if (hydro > 150) {
-		hiddenEnding(0);
-		GAMEEND = true;
-	}
-	else if (oxy > 150) {
-		hiddenEnding(1);
-		GAMEEND = true;
-	}
-	else if (oxy > 70 && carb > 70) {
-		hiddenEnding(2);
-		GAMEEND = true;
-	}
-	else if (day > 31) {
-		hiddenEnding(3);
-		GAMEEND = true;
-	}
-	else {
-		GAMEEND = false;
-	}
-	
-}
-
-void hydroBomb() // ¼ö¼Ò Æø¹ß
-{
-	char ending[][70] = { "¼ö¼Ò°¡ ³Ê¹« ¸¹ÀÌ ¸ğ¿©¼­ ÅÍÁ®¹ö·È´Ù.", "¼ö¼Ò Æø¹ßÀÇ ±Ô¸ğ´Â ¿Ü°èÀÎµµ ¾ø¾îÁú¸¸Å­ »ó´çÈ÷ ÄÇ´Ù." };
-	for (int i = 0; i < 2; i++) {
-		gotoxy(0, 0);
-		for (int k = 0; k < 70; k++) {
-			printf("%c", ending[i][k]);
-			Sleep(10);
-		}
-		Sleep(250);
-	}
-}
-
-void oxid() // »êÈ­
-{
-	char ending[][70] = { "»ê¼Ò°¡ ³Ê¹« ¸¹ÀÌ ¸ğ¿´´Ù.", "¿Ü°èÀÎµéÀÌ Å¸°í ¿Â UFO¿¡ Ä¸½¶À» ´øÁ³´Ù.","UFO¿¡¼­ »êÈ­ ÀÛ¿ëÀÌ ÀÏ¾î³µ´Ù.             ", "¿Ü°èÀÎµé°ú ÇÔ²² Áö±¸¿¡¼­ »ì°Ô µÇ¾ú´Ù." };
-	for (int i = 0; i < 4; i++) {
-		gotoxy(0, 0);
-		for (int k = 0; k < 70; k++) {
-			printf("%c", ending[i][k]);
-			Sleep(10);
-		}
-		Sleep(250);
-	}
-}
-
-void earth_death() // ¿Â³­È­
-{
-	char ending[][70] = { "»ê¼Ò¿Í Åº¼Ò°¡ ³Ê¹« ¸¹ÀÌ ¸ğ¿´´Ù.", "ÀÌ»êÈ­Åº¼Ò°¡ »ı¼ºµÇ¾ú´Ù.            ","Áö±¸°¡ Á¡Á¡ ¶ß°Å¿öÁø´Ù..","°á±¹ »ç¶÷°ú ¿Ü°èÀÎÀº ¸ğµÎ Áö±¸¿¡¼­ »ì¼ö ¾ø°Ô ‰ç´Ù." };
-	for (int i = 0; i < 4; i++) {
-		gotoxy(0, 0);
-		for (int k = 0; k < 70; k++) {
-			printf("%c", ending[i][k]);
-			Sleep(10);
-		}
-		Sleep(250);
-	}
-}
-
-void no_money() // ÆÄ»ê
-{
-	char ending[][70] = { "30ÀÏÀÌ Áö³µ´Ù.","ÇÏÁö¸¸ ÃæºĞÇÑ ÀÚ¿øÀ» ¸ğÀ¸Áö ¸øÇÏ¿´´Ù.", "¿Ü°èÀÎÀÌ ÀÌ»óÇÑ ºûÀ» ¹ß»çÇÑ´Ù.         ","Áö±¸¿¡ ÀÖ´Â ¸ğµç »ç¶÷Àº Á×°ÔµÇ¾ú´Ù."};
-	for (int i = 0; i < 4; i++) {
-		gotoxy(0, 0);
-		for (int k = 0; k < 70; k++) {
-			printf("%c", ending[i][k]);
-			Sleep(10);
-		}
-		Sleep(250);
-	}
-}
-
-void Ending_TItle()
-{
-	int title[7][5][5] = {
-		// T
-		{{1,1,1,1,1},
-		 {0,0,1,0,0},
-		 {0,0,1,0,0},
-		 {0,0,1,0,0},
-		 {0,0,1,0,0}},
-		 // H
-		 {{1,0,0,0,1},
-		 {1,0,0,0,1},
-		 {1,1,1,1,1},
-		 {1,0,0,0,1},
-		 {1,0,0,0,1}},
-		 // E
-		 {{1,1,1,1,1},
-		 {1,0,0,0,0},
-		 {1,1,1,1,0},
-		 {1,0,0,0,0},
-		 {1,1,1,1,1}},
-		 // 
-		 {{0,0,0,0,0},
-		 {0,0,0,0,0},
-		 {0,0,0,0,0},
-		 {0,0,0,0,0},
-		 {0,0,0,0,0}},
-		 // E
-		 {{1,1,1,1,1},
-		 {1,0,0,0,0},
-		 {1,1,1,1,0},
-		 {1,0,0,0,0},
-		 {1,1,1,1,1}},
-		 // N
-		 {{1,0,0,0,1},
-		 {1,1,0,0,1},
-		 {1,0,1,0,1},
-		 {1,0,0,1,1},
-		 {1,0,0,0,1}},
-		 // D
-		 {{1,1,1,0,0},
-		 {1,0,0,1,0},
-		 {1,0,0,1,0},
-		 {1,0,0,1,0},
-		 {1,1,1,0,0}}
-	};
-
-	int x =8, y=12;
-
-	for (int i = 0; i < 7; i++) {
-		for (int j = 0; j < 5; j++) {
-			gotoxy(x, y);
-			for (int k = 0; k < 5; k++) {
-				printf("%s", title[i][j][k] == 1 ? "¡á" : "¡¡");
-			}
-			y++;
-		}
-		Sleep(10);
-		y = 12;
-		x += 12;
-	}
-	Sleep(2500);
-}
