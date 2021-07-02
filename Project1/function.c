@@ -3265,3 +3265,246 @@ void EndGame_Collision_Enemy_Player()
 }
 
 #pragma endregion
+
+void boom(int num) {
+	int boom[5][13][11] = {
+	   {{0,0,0,0,0,0,0,0,0,0,0},
+		{3,0,0,0,1,1,0,0,0,0,0},
+		{1,0,0,1,0,0,1,0,0,0,0},
+		{1,0,1,0,0,0,1,0,0,0,0},
+		{0,1,0,0,1,1,1,1,1,0,0},
+		{0,0,0,1,1,1,1,1,1,1,0},
+		{0,0,1,1,2,1,1,1,1,1,1},
+		{0,0,1,2,1,1,1,1,1,1,1},
+		{0,0,1,2,1,1,1,1,1,1,1},
+		{0,0,1,1,1,1,1,1,1,1,1},
+		{0,0,1,1,4,1,1,1,1,1,1},
+		{0,0,0,1,1,1,1,1,1,1,0},
+		{0,0,0,0,1,1,1,1,1,0,0}},
+
+	};
+	int x = 0, y = 10, sleep = 500, k = 0;
+
+	for (int g = 0; g < 7; g++) {
+		if (num == 0) {
+			Hboom();
+		}
+		else if (num == 1) {
+			Oboom();
+		}
+		else if (num == 2) {
+			Cboom();
+		}
+
+		for (int i = 0; i < 1; i++)
+		{
+			for (int k = 0; k < 13; k++)
+			{
+				gotoxy(x, y);
+				for (int j = 0; j < 11; j++) {
+					switch (boom[i][k][j]) {
+					case 0:
+						printf("　");
+						break;
+					case 1:
+						setColor(DARK_GRAY);
+						printf("■");
+						setColor(YELLOW);
+						break;
+					case 2:
+						setColor(WHITE);
+						printf("■");
+						setColor(YELLOW);
+						break;
+					case 3:
+						setColor(RED);
+						printf("■");
+						setColor(YELLOW);
+						break;
+					case 4:
+						setColor(GRAY);
+						printf("■");
+						setColor(YELLOW);
+						break;
+					}
+
+					/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+				}
+				printf("\n");
+				y++;
+			}
+			k += 2;
+			Sleep(sleep);
+			y = 0;
+			system("cls");
+		}
+		x += 6;
+		y = 10;
+		y += k;
+
+	}
+	system("cls");
+	sleep += 50;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+}
+
+void Hboom()
+{
+	int H[5][18][20] = {
+   {{0,0,0,0,0,0,0,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,1,1,1,1,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,0,0,0,0,0,0,0}},
+	};
+	int x = 38, y = 32, sleep = 500, k = 0;
+	for (int i = 0; i < 1; i++)
+	{
+		for (int k = 0; k < 18; k++)
+		{
+			gotoxy(x, y);
+			for (int j = 0; j < 20; j++) {
+				switch (H[i][k][j]) {
+				case 0:
+					printf("　");
+					break;
+				case 1:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 2:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 3:
+					setColor(RED);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 4:
+					setColor(GRAY);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				}
+
+				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+			}
+			printf("\n");
+			y++;
+		}
+		y = 0;
+	}
+}
+
+void Oboom() {
+	int O[5][18][20] = {
+   {{0,0,0,0,0,0,0,0},
+	{0,0,1,1,1,1,0,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,1,0},
+	{0,0,1,1,1,1,0,0}},
+	};
+	int x = 38, y = 32, sleep = 500, k = 0;
+	for (int i = 0; i < 1; i++)
+	{
+		for (int k = 0; k < 18; k++)
+		{
+			gotoxy(x, y);
+			for (int j = 0; j < 20; j++) {
+				switch (O[i][k][j]) {
+				case 0:
+					printf("　");
+					break;
+				case 1:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 2:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 3:
+					setColor(RED);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 4:
+					setColor(GRAY);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				}
+
+				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+			}
+			printf("\n");
+			y++;
+		}
+		y = 0;
+	}
+}
+
+void Cboom() {
+	int C[5][18][20] = {
+   {{0,0,0,0,0,0,0,0},
+	{0,0,1,1,1,1,0,0},
+	{0,1,0,0,0,0,1,0},
+	{0,1,0,0,0,0,0,0},
+	{0,1,0,0,0,0,0,0},
+	{0,1,0,0,0,0,1,0},
+	{0,0,1,1,1,1,0,0},
+	{0,0,0,0,0,0,0,0}},
+	};
+	int x = 38, y = 32, sleep = 500, k = 0;
+	for (int i = 0; i < 1; i++)
+	{
+		for (int k = 0; k < 18; k++)
+		{
+			gotoxy(x, y);
+			for (int j = 0; j < 20; j++) {
+				switch (C[i][k][j]) {
+				case 0:
+					printf("　");
+					break;
+				case 1:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 2:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 3:
+					setColor(RED);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 4:
+					setColor(GRAY);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				}
+
+				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+			}
+			printf("\n");
+			y++;
+		}
+		y = 0;
+	}
+}
