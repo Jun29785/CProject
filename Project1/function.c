@@ -25,6 +25,7 @@ void init()
 {
 	system("mode con:cols=96 lines=40");
 	setColor(YELLOW);
+	GAMEEND = false;
 }
 
 int keyControl()
@@ -310,7 +311,10 @@ int menuDraw()
 void menuTitleDraw()
 {
 	gotoxy(25, 10);
-	//DayAlter(4);
+	ChckHiddenEnd();
+	if (GAMEEND == true) {
+		return;
+	}
 	setColor(YELLOW);
 	if (day < 10) {
 		gotoxy(0, 0); printf("┏━━━━━━━━━━━━━━┓");
@@ -350,12 +354,12 @@ void menuTitleDraw()
 	gotoxy(x + 13, y);
 	printf("  인벤토리 ");
 	y++;
-	gotoxy(x, y); printf("┃          Lv1   Lv2   Lv3          ┃"); y++;
-	gotoxy(x, y); printf("┃    수소 : %d     %d     %d           ┃", hydro, hydro2, hydro3); y++;
+	gotoxy(x, y); printf("┃            Lv1    Lv2    Lv3      ┃"); y++;
+	gotoxy(x, y); printf("┃    수소 : %3d     %2d     %2d       ┃", hydro, hydro2, hydro3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    산소 : %d     %d     %d           ┃", oxy, oxy2, oxy3); y++;
+	gotoxy(x, y); printf("┃    산소 : %3d     %2d     %2d       ┃", oxy, oxy2, oxy3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    탄소 : %d     %d     %d           ┃", carb, carb2, carb3); y++;
+	gotoxy(x, y); printf("┃    탄소 : %3d     %2d     %2d       ┃", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃   우주선 : %d   우주복 : %d         ┃", rocket, spacesuit); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
@@ -389,12 +393,16 @@ void menuTitleDraw()
 	printf("┛");
 	x = 68, y = 17;
 
-	if (news <10) {
+	if (news < 10) {
 		AilenBeam();
 		news = 100;
 	}
 	else if (news >= 10 && news < 20) {
 		Delivery();
+		news = 100;
+	}
+	else if (news >= 20 && news < 40) {
+		Water();
 		news = 100;
 	}
 	else {
@@ -476,6 +484,9 @@ void startDraw()
 
 	while (1) {
 		menuTitleDraw();
+		if (GAMEEND == true) {
+			break;
+		}
 		int menuCode = mainDraw();
 		if (rocket == 1 && spacesuit == 1) {
 			rsswap++;
@@ -492,7 +503,7 @@ void startDraw()
 			gamemainDraw();
 			//게임시작
 		}
-		else if (menuCode == 1/* && minigamecount == 0*/) {
+		else if (menuCode == 1 && minigamecount == 0) {
 			// 제작
 			create();
 		}
@@ -537,7 +548,7 @@ void startDraw()
 	//		break;
 	//	}
 	//}
-
+	system("cls");
 }
 
 int minigameDraw()
@@ -546,13 +557,13 @@ int minigameDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
+	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 0
 	gotoxy(x, y + 1);
-	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 1
+	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 1
 	gotoxy(x, y + 2);
-	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 8 )"); // 2
+	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 15 )"); // 2
 	gotoxy(x, y + 3);
-	printf("블럭피하기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 3
+	printf("블럭피하기 ( 캡슐 획득 가능 수( 0 ~ ? )"); // 3
 	gotoxy(x, y + 4);
 	printf(" 돌아가기 "); // 4
 	while (1) {
@@ -704,7 +715,7 @@ void DicemainDraw()
 	int count = 0;
 	system("cls");
 	int menuCode = DicegameDraw();
-
+	int item = rand() % 12;
 	switch (menuCode) {
 	case 0:
 		OddEvendote(menuCode);
@@ -719,19 +730,19 @@ void DicemainDraw()
 			switch (hoctemp)
 			{
 			case 0:
-				hydro += num + 1;
+				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 				break;
 			case 1:
-				oxy += num + 1;
+				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
 				break;
 			case 2:
-				carb += num + 1;
+				carb += item + 1;
 				gotoxy(50, 28);
-				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
 				break;
 			}
 		}
@@ -753,19 +764,19 @@ void DicemainDraw()
 			switch (hoctemp)
 			{
 			case 0:
-				hydro += num + 1;
+				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 				break;
 			case 1:
-				oxy += num + 1;
+				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
 				break;
 			case 2:
-				carb += num + 1;
+				carb += item + 1;
 				gotoxy(50, 28);
-				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
 				break;
 			}
 		}
@@ -935,6 +946,7 @@ int Dice()
 		{1,0,1,1,1,0,1},
 		{1,1,1,1,1,1,1}}
 	};
+
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("┃");
@@ -1117,7 +1129,7 @@ int Coin()
 
 void RSP()
 {
-	int num = rand() % 8 + 3;
+	int num = rand() % 12 + 3;
 	int rsp[3][16][13] = {
 		// 주먹
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -1240,6 +1252,7 @@ void RSP()
 	//}
 	if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("이겼습니다");
 		switch (hoctemp)
 		{
@@ -1263,14 +1276,35 @@ void RSP()
 	}
 	else if (player - rnd_rsp == 0) {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("비겼습니다.");
+		switch (hoctemp)
+		{
+		case 0:
+			hydro += (num + 1) / 2;
+			gotoxy(50, 29);
+			printf("수소 +%d / 현재 수소 %d", (num + 1) / 2, hydro);
+			break;
+		case 1:
+			oxy += (num + 1) / 2;
+			gotoxy(50, 29);
+			printf("산소 +%d / 현재 산소 %d", (num + 1) / 2, oxy);
+			break;
+		case 2:
+			carb += (num + 1)/2;
+			gotoxy(50, 28);
+			printf("탄소 +%d / 현재 탄소 %d", (num + 1) / 2, carb);
+			break;
+		}
 		Sleep(2000);
 	}
 	else {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("졌습니다");
 		Sleep(2000);
 	}
+	setColor(YELLOW);
 	minigamecount--;
 }
 
@@ -1429,7 +1463,7 @@ void Block_Avoid()
 	switch (hoctemp)
 	{
 	case 0:
-		hydro += item;
+		hydro += item+1;
 		gotoxy(60, 29);
 		printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 		break;
@@ -1556,6 +1590,17 @@ void DayAlter(int day)
 	}
 
 	int x = 22, y = 14;
+	if (day > 29) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[3][j][k] == 1 ? "■" : "　");
+			}
+			printf("\n");
+			y++;
+		}
+	}
+
 	if (day > 19) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -1939,6 +1984,22 @@ void Delivery()
 	}
 }
 
+void Water()
+{
+	char event[][50] = { "밤 사이에 물에서 산소와 수소 추출을 성공하였다."};
+	for (int i = 0; i < 1; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	int num = rand() % 5 +1;
+	oxy += num;
+	hydro += (num * 2);
+}
+
 void anvil()
 {
 	int anvil[6][14][18] = {
@@ -2280,7 +2341,7 @@ void coinmainDraw()
 	system("cls");
 	int menuCode = coingameDraw();
 	int n;
-	int num = rand() % 6 + 1;
+	int num = rand() % 12;
 
 	switch (menuCode) {
 	case 0:
@@ -3045,16 +3106,24 @@ void ChckHiddenEnd()
 {
 	if (hydro > 150) {
 		hiddenEnding(0);
+		GAMEEND = true;
 	}
 	else if (oxy > 150) {
 		hiddenEnding(1);
+		GAMEEND = true;
 	}
 	else if (oxy > 70 && carb > 70) {
 		hiddenEnding(2);
+		GAMEEND = true;
 	}
 	else if (day > 31) {
 		hiddenEnding(3);
+		GAMEEND = true;
 	}
+	else {
+		GAMEEND = false;
+	}
+	
 }
 
 void hydroBomb() // 수소 폭발

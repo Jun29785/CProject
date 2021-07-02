@@ -40,6 +40,8 @@ p_Object P_Bullet_Array[MAX_BULLETS];
 int rnd_dice;
 int rnd_coin;
 
+bool GAMEEND;
+
 //제작 전역변수
 int lv_2;
 int lv_3;
@@ -146,7 +148,7 @@ void endlosesin();
 void endsuccedsin();
 void AilenBeam();
 void Delivery();
-
+void Water();
 
 
 
