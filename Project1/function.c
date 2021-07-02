@@ -1916,7 +1916,8 @@ void Ending_Title()
 	};
 
 	int x = 8, y = 12;
-
+	system("cls");
+	Sleep(1000);
 	for (int i = 0; i < 7; i++) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -3155,6 +3156,12 @@ void EndGame_Draw()
 
 	gotoxy(78, 1);
 	printf("Remain Kills : %3d", 150 - EndGameScore);
+	gotoxy(78, 3);
+	printf("조작 :   W");
+	gotoxy(78, 4);
+	printf("       A S D");
+	gotoxy(78, 5);
+	printf("발사 : SPACE");
 	gotoxy(User.x, User.y);
 	printf("%s", User.image);
 
