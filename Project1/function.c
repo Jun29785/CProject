@@ -2874,6 +2874,10 @@ void EndGame_Main()
 		EndGame_Collision_Enemy_Bullet();
 		EndGame_Collision_Enemy_Player();
 		Sleep(50);
+
+		if (EndGameScore == 150) {
+			endsuccedsin();
+		}
 	}
 
 	for (int k = 0; k < MAX_BULLETS; k++) {
