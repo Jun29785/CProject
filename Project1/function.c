@@ -2000,6 +2000,28 @@ void Water()
 	hydro += (num * 2);
 }
 
+void Mouse()
+{
+	char event[][50] = { "밤 사이에 쥐가 자원을 물고 갔다."};
+	for (int i = 0; i < 1; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	int rnd = rand() % 10+1;
+	if (hydro > rnd) hydro -= rnd;
+	else hydro = 0;
+	if (oxy > rnd) oxy -= rnd;
+	else oxy = 0;
+	if (carb > rnd) carb -= rnd;
+	else carb = 0;
+	gotoxy(0, 21);
+	printf("수소, 산소, 탄소 각각 %2d개씩 사라졌다.", rnd);
+}
+
 void anvil()
 {
 	int anvil[6][14][18] = {
