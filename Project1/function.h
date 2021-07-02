@@ -40,6 +40,8 @@ p_Object P_Bullet_Array[MAX_BULLETS];
 int rnd_dice;
 int rnd_coin;
 
+bool GAMEEND;
+
 //제작 전역변수
 int lv_2;
 int lv_3;
@@ -144,7 +146,9 @@ void hammer();
 void anvilhammer();
 void endlosesin();
 void endsuccedsin();
-
+void AilenBeam();
+void Delivery();
+void Water();
 
 
 
@@ -164,6 +168,14 @@ void boom(int num);
 void Hboom();
 void Oboom();
 void Cboom();
+void hiddenEnding(int n);
+void ChckHiddenEnd();
+
+void hydroBomb();
+void oxid();
+void earth_death();
+void no_money();
+void Ending_TItle();
 
 
 

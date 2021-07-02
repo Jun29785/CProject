@@ -25,6 +25,7 @@ void init()
 {
 	system("mode con:cols=96 lines=40");
 	setColor(YELLOW);
+	GAMEEND = false;
 }
 
 int keyControl()
@@ -313,7 +314,10 @@ void menuTitleDraw()
 		rsswap++;
 	}
 	gotoxy(25, 10);
-	//DayAlter(4);
+	ChckHiddenEnd();
+	if (GAMEEND == true) {
+		return;
+	}
 	setColor(YELLOW);
 	if (day < 10) {
 		gotoxy(0, 0); printf("┏━━━━━━━━━━━━━━┓");
@@ -353,12 +357,12 @@ void menuTitleDraw()
 	gotoxy(x + 13, y);
 	printf("  인벤토리 ");
 	y++;
-	gotoxy(x, y); printf("┃          Lv1   Lv2   Lv3          ┃"); y++;
-	gotoxy(x, y); printf("┃    수소 : %d     %d     %d           ┃", hydro, hydro2, hydro3); y++;
+	gotoxy(x, y); printf("┃            Lv1    Lv2    Lv3      ┃"); y++;
+	gotoxy(x, y); printf("┃    수소 : %3d     %2d     %2d       ┃", hydro, hydro2, hydro3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    산소 : %d     %d     %d           ┃", oxy, oxy2, oxy3); y++;
+	gotoxy(x, y); printf("┃    산소 : %3d     %2d     %2d       ┃", oxy, oxy2, oxy3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
-	gotoxy(x, y); printf("┃    탄소 : %d     %d     %d           ┃", carb, carb2, carb3); y++;
+	gotoxy(x, y); printf("┃    탄소 : %3d     %2d     %2d       ┃", carb, carb2, carb3); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃   우주선 : %d   우주복 : %d         ┃", rocket, spacesuit); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
@@ -375,8 +379,8 @@ void menuTitleDraw()
 		printf("━");
 	}
 	printf("┓");
-	gotoxy(x + 13, y);
-	printf(" 오늘의 소식 ");
+	gotoxy(x + 11, y);
+	printf("  오늘의 소식 ");
 	y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
 	gotoxy(x, y); printf("┃                                   ┃"); y++;
@@ -390,16 +394,23 @@ void menuTitleDraw()
 	gotoxy(x, y); printf("┗");
 	for (int i = 0; i < 35; i++) printf("━");
 	printf("┛");
-	x = 62, y = 16;
+	x = 68, y = 17;
 
-
-	if (news == 1) {
-		gotoxy(x + 5, y);
-		printf("하잉");
+	if (news < 10) {
+		AilenBeam();
+		news = 100;
+	}
+	else if (news >= 10 && news < 20) {
+		Delivery();
+		news = 100;
+	}
+	else if (news >= 20 && news < 40) {
+		Water();
+		news = 100;
 	}
 	else {
-		gotoxy(x + 10, y);
-		printf("없습니다");
+		gotoxy(x, y);
+		printf("%2d일 남았습니다.", 31 - day);
 	}
 }
 
@@ -476,6 +487,9 @@ void startDraw()
 
 	while (1) {
 		menuTitleDraw();
+		if (GAMEEND == true) {
+			break;
+		}
 		int menuCode = mainDraw();
 
 		if (menuCode == 0 && minigamecount == 0) {
@@ -489,7 +503,7 @@ void startDraw()
 			gamemainDraw();
 			//게임시작
 		}
-		else if (menuCode == 1/* && minigamecount == 0*/) {
+		else if (menuCode == 1 && minigamecount == 0) {
 			// 제작
 			create();
 		}
@@ -534,7 +548,7 @@ void startDraw()
 	//		break;
 	//	}
 	//}
-
+	system("cls");
 }
 
 int minigameDraw()
@@ -543,13 +557,13 @@ int minigameDraw()
 	menuTitleDraw();
 	int x = 42, y = 26;
 	gotoxy(x - 2, y);
-	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 0
+	printf(">   주사위   ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 0
 	gotoxy(x, y + 1);
-	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 6 )"); // 1
+	printf("동전던지기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 1
 	gotoxy(x, y + 2);
-	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 8 )"); // 2
+	printf("가위바위보 ( 캡슐 획득 가능 수( 3 ~ 15 )"); // 2
 	gotoxy(x, y + 3);
-	printf("블럭피하기 ( 캡슐 획득 가능 수( 1 ~ 12 )"); // 3
+	printf("블럭피하기 ( 캡슐 획득 가능 수( 0 ~ ? )"); // 3
 	gotoxy(x, y + 4);
 	printf(" 돌아가기 "); // 4
 	while (1) {
@@ -701,7 +715,7 @@ void DicemainDraw()
 	int count = 0;
 	system("cls");
 	int menuCode = DicegameDraw();
-
+	int item = rand() % 12;
 	switch (menuCode) {
 	case 0:
 		OddEvendote(menuCode);
@@ -716,19 +730,19 @@ void DicemainDraw()
 			switch (hoctemp)
 			{
 			case 0:
-				hydro += num + 1;
+				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 				break;
 			case 1:
-				oxy += num + 1;
+				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
 				break;
 			case 2:
-				carb += num + 1;
+				carb += item + 1;
 				gotoxy(50, 28);
-				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
 				break;
 			}
 		}
@@ -750,19 +764,19 @@ void DicemainDraw()
 			switch (hoctemp)
 			{
 			case 0:
-				hydro += num + 1;
+				hydro += item + 1;
 				gotoxy(50, 28);
-				printf("수소 +%d / 현재 수소 %d", num + 1, hydro);
+				printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 				break;
 			case 1:
-				oxy += num + 1;
+				oxy += item + 1;
 				gotoxy(50, 28);
-				printf("산소 +%d / 현재 산소 %d", num + 1, oxy);
+				printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
 				break;
 			case 2:
-				carb += num + 1;
+				carb += item + 1;
 				gotoxy(50, 28);
-				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
+				printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
 				break;
 			}
 		}
@@ -932,6 +946,7 @@ int Dice()
 		{1,0,1,1,1,0,1},
 		{1,1,1,1,1,1,1}}
 	};
+
 	for (int k = 0; k < 22; k++) {
 		gotoxy(44, k);
 		printf("┃");
@@ -1114,7 +1129,7 @@ int Coin()
 
 void RSP()
 {
-	int num = rand() % 8 + 3;
+	int num = rand() % 12 + 3;
 	int rsp[3][16][13] = {
 		// 주먹
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -1237,6 +1252,7 @@ void RSP()
 	//}
 	if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("이겼습니다");
 		switch (hoctemp)
 		{
@@ -1260,20 +1276,41 @@ void RSP()
 	}
 	else if (player - rnd_rsp == 0) {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("비겼습니다.");
+		switch (hoctemp)
+		{
+		case 0:
+			hydro += (num + 1) / 2;
+			gotoxy(50, 29);
+			printf("수소 +%d / 현재 수소 %d", (num + 1) / 2, hydro);
+			break;
+		case 1:
+			oxy += (num + 1) / 2;
+			gotoxy(50, 29);
+			printf("산소 +%d / 현재 산소 %d", (num + 1) / 2, oxy);
+			break;
+		case 2:
+			carb += (num + 1)/2;
+			gotoxy(50, 28);
+			printf("탄소 +%d / 현재 탄소 %d", (num + 1) / 2, carb);
+			break;
+		}
 		Sleep(2000);
 	}
 	else {
 		gotoxy(50, 28);
+		setColor(GREEN);
 		printf("졌습니다");
 		Sleep(2000);
 	}
+	setColor(YELLOW);
 	minigamecount--;
 }
 
 #pragma region Avoid_Block
 
-block_width = SCR_WIDTH / 3;
+block_width = SCR_WIDTH / 2+30;
 
 void Block_init()
 {
@@ -1332,12 +1369,12 @@ int Block_contain_player()
 
 void Block_move_player()
 {
-	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('a') || Block_iskeydown('a')) && player.x >= 1) {
+	if ((Block_iskeydown(VK_LEFT) || Block_iskeydown('A')) && player.x >= 1) {
 		gotoxy(player.x, SCR_HEIGHT);
 		printf(" ");
 		player.x--;
 	}
-	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('d') || Block_iskeydown('D')) && player.x < block_width - 2) {
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('D')) && player.x < block_width-2) {
 		gotoxy(player.x, SCR_HEIGHT);
 		printf(" ");
 		player.x++;
@@ -1346,7 +1383,10 @@ void Block_move_player()
 
 void Block_print_map(int score)
 {
-
+	for (int k = 0; k < 35; k++) {
+		gotoxy(50, k);
+		puts("┃");
+	}
 	for (int i = 0; i < block_width; i++) {
 		if (block[i].act) {
 			gotoxy(block[i].x, SCR_HEIGHT - block[i].y);
@@ -1358,15 +1398,14 @@ void Block_print_map(int score)
 	printf("옷");
 
 	gotoxy(0, SCR_HEIGHT + 1);
-	for (int i = 0; i < SCR_HEIGHT - 7; i++)
+	for (int i = 0; i < SCR_HEIGHT - 12; i++)
 		printf("▦");
-	gotoxy(60, 1);
+	gotoxy(60, 28);
 	printf("score : %6d", score);
 }
 
 void Block_Avoid()
 {
-
 	char CountNum[3][5][4] = {
 		// NUM 1
 		{{0,0,1,0},
@@ -1420,6 +1459,26 @@ void Block_Avoid()
 
 		Sleep(20);
 	} while (!(Block_contain_player()));
+	int item = score / 35;
+	switch (hoctemp)
+	{
+	case 0:
+		hydro += item+1;
+		gotoxy(60, 29);
+		printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
+		break;
+	case 1:
+		oxy += item + 1;
+		gotoxy(60, 29);
+		printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
+		break;
+	case 2:
+		carb += item + 1;
+		gotoxy(60, 28);
+		printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
+		break;
+	}
+	Sleep(2000);
 	minigamecount--;
 }
 
@@ -1531,6 +1590,17 @@ void DayAlter(int day)
 	}
 
 	int x = 22, y = 14;
+	if (day > 29) {
+		for (int j = 0; j < 5; j++) {
+			gotoxy(x, y);
+			for (int k = 0; k < 4; k++) {
+				printf("%s", CountNum[3][j][k] == 1 ? "■" : "　");
+			}
+			printf("\n");
+			y++;
+		}
+	}
+
 	if (day > 19) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -1682,7 +1752,7 @@ void NextgameDraw()
 		break;
 	}
 }
-#pragma region EndGame
+#pragma region CREATE
 
 int creategameDraw()
 {
@@ -1864,6 +1934,70 @@ void anvilhammer()
 		hammer();
 	}
 	system("cls");
+}
+
+void AilenBeam()
+{
+	char event[][50] = { "밤 사이에 외계인이 쏜 수상한 빔에 맞았다.","아이템 전체가 절반 감소되었다.           " };
+	
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	hydro /= 2; hydro2 /= 2; hydro3 /= 2;
+	oxy /= 2; oxy2 /= 2; oxy3 /= 2;
+	carb /= 2; carb2 /= 2; carb3 /= 2;
+}
+
+void Delivery()
+{
+	char event[][50] = { "밤 사이에 문 앞에 수상한 상자가 배송되었다.", "상자 안에는 누군가 보낸 자원이 있었다.     " };
+	for (int i = 0; i < 2; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	int deliv;
+	for (int k = 0; k < 3; k++) {
+		deliv = rand() % 9;
+		switch (deliv)
+		{
+		case 0: hydro += 3;	 break;
+		case 1: hydro2 += 2; break;
+		case 2: hydro3 += 1; break;
+		case 3: oxy += 3;	 break;
+		case 4: oxy2 += 2;	 break;
+		case 5: oxy3 += 1;	 break;
+		case 6: carb += 3;	 break;
+		case 7: carb2 += 2;	 break;
+		case 8: carb3 += 1;	 break;
+		default:
+			break;
+		}
+	}
+}
+
+void Water()
+{
+	char event[][50] = { "밤 사이에 물에서 산소와 수소 추출을 성공하였다."};
+	for (int i = 0; i < 1; i++) {
+		gotoxy(0, 21);
+		for (int k = 0; k < 50; k++) {
+			printf("%c", event[i][k]);
+			Sleep(10);
+		}
+		Sleep(250);
+	}
+	int num = rand() % 5 +1;
+	oxy += num;
+	hydro += (num * 2);
 }
 
 void anvil()
@@ -2201,12 +2335,13 @@ void NextSleep()
 	startDraw();
 
 }
+
 void coinmainDraw()
 {
 	system("cls");
 	int menuCode = coingameDraw();
 	int n;
-	int num = rand() % 6 + 1;
+	int num = rand() % 12;
 
 	switch (menuCode) {
 	case 0:
@@ -2623,7 +2758,6 @@ void frontbackdote(int num)
 	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
 	//	{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
 
-
 	//	// 짝
 	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
@@ -2788,7 +2922,7 @@ void EndGame_Enemy()
 	for (int k = 0; k < EndGame_Max_Enemy; k++) {
 		if (Enemy[k] != NULL) {
 			EndGame_Enemy_Move(k);
-			if (Enemy[k]->y > 36) {
+			if (Enemy[k]->y > EndGame_HEIGHT) {
 				EndGame_Enemy_Delete(k);
 			}
 		}
@@ -2851,21 +2985,21 @@ void EndGame_Enemy_Delete(int n)
 
 void EndGame_Player_Controll()
 {
-	if (GetAsyncKeyState(VK_UP) & 0x8000) {
+	if (GetAsyncKeyState('W') & 0x8000) {
 		if (User.y > 0)
 			User.y--;
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-		if (User.y < SCR_HEIGHT + 6) {
+	if (GetAsyncKeyState('S') & 0x8000) {
+		if (User.y < EndGame_HEIGHT-1) {
 			User.y++;
 		}
 	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+	if (GetAsyncKeyState('A') & 0x8000) {
 		if (User.x > 0) {
 			User.x--;
 		}
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+	if (GetAsyncKeyState('D') & 0x8000) {
 		if (User.x < 70) {
 			User.x++;
 		}
@@ -2946,246 +3080,3 @@ void EndGame_Collision_Enemy_Player()
 }
 
 #pragma endregion
-
-void boom(int num) {
-	int boom[5][13][11] = {
-	   {{0,0,0,0,0,0,0,0,0,0,0},
-		{3,0,0,0,1,1,0,0,0,0,0},
-		{1,0,0,1,0,0,1,0,0,0,0},
-		{1,0,1,0,0,0,1,0,0,0,0},
-		{0,1,0,0,1,1,1,1,1,0,0},
-		{0,0,0,1,1,1,1,1,1,1,0},
-		{0,0,1,1,2,1,1,1,1,1,1},
-		{0,0,1,2,1,1,1,1,1,1,1},
-		{0,0,1,2,1,1,1,1,1,1,1},
-		{0,0,1,1,1,1,1,1,1,1,1},
-		{0,0,1,1,4,1,1,1,1,1,1},
-		{0,0,0,1,1,1,1,1,1,1,0},
-		{0,0,0,0,1,1,1,1,1,0,0}},
-
-	};
-	int x = 0, y = 10, sleep = 500, k = 0;
-	
-	for (int g = 0; g < 7; g++) {
-		if (num == 0) {
-			Hboom();
-		}
-		else if (num == 1) {
-			Oboom();
-		}
-		else if (num == 2) {
-			Cboom();
-		}
-
-		for (int i = 0; i < 1; i++)
-		{
-			for (int k = 0; k < 13; k++)
-			{
-				gotoxy(x, y);
-				for (int j = 0; j < 11; j++) {
-					switch (boom[i][k][j]) {
-					case 0:
-						printf("　");
-						break;
-					case 1:
-						setColor(DARK_GRAY);
-						printf("■");
-						setColor(YELLOW);
-						break;
-					case 2:
-						setColor(WHITE);
-						printf("■");
-						setColor(YELLOW);
-						break;
-					case 3:
-						setColor(RED);
-						printf("■");
-						setColor(YELLOW);
-						break;
-					case 4:
-						setColor(GRAY);
-						printf("■");
-						setColor(YELLOW);
-						break;
-					}
-
-					/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
-				}
-				printf("\n");
-				y++;
-			}
-			k += 2;
-			Sleep(sleep);
-			y = 0;
-			system("cls");
-		}
-		x += 6;
-		y = 10;
-		y += k;
-		
-	}
-	system("cls");
-	sleep += 50;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-}
-
-void Hboom()
-{
-	int H[5][18][20] = {
-   {{0,0,0,0,0,0,0,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,1,1,1,1,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,0,0,0,0,0,0,0}},
-	};
-	int x = 38, y = 32, sleep = 500, k = 0;
-	for (int i = 0; i < 1; i++)
-	{
-		for (int k = 0; k < 18; k++)
-		{
-			gotoxy(x, y);
-			for (int j = 0; j < 20; j++) {
-				switch (H[i][k][j]) {
-				case 0:
-					printf("　");
-					break;
-				case 1:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 2:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 3:
-					setColor(RED);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 4:
-					setColor(GRAY);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				}
-
-				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
-			}
-			printf("\n");
-			y++;
-		}
-		y = 0;
-	}
-}
-
-void Oboom() {
-	int O[5][18][20] = {
-   {{0,0,0,0,0,0,0,0},
-	{0,0,1,1,1,1,0,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,1,0},
-	{0,0,1,1,1,1,0,0}},
-	};
-	int x = 38, y = 32, sleep = 500, k = 0;
-	for (int i = 0; i < 1; i++)
-	{
-		for (int k = 0; k < 18; k++)
-		{
-			gotoxy(x, y);
-			for (int j = 0; j < 20; j++) {
-				switch (O[i][k][j]) {
-				case 0:
-					printf("　");
-					break;
-				case 1:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 2:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 3:
-					setColor(RED);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 4:
-					setColor(GRAY);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				}
-
-				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
-			}
-			printf("\n");
-			y++;
-		}
-		y = 0;
-	}
-}
-
-void Cboom() {
-	int C[5][18][20] = {
-   {{0,0,0,0,0,0,0,0},
-	{0,0,1,1,1,1,0,0},
-	{0,1,0,0,0,0,1,0},
-	{0,1,0,0,0,0,0,0},
-	{0,1,0,0,0,0,0,0},
-	{0,1,0,0,0,0,1,0},
-	{0,0,1,1,1,1,0,0},
-	{0,0,0,0,0,0,0,0}},
-	};
-	int x = 38, y = 32, sleep = 500, k = 0;
-	for (int i = 0; i < 1; i++)
-	{
-		for (int k = 0; k < 18; k++)
-		{
-			gotoxy(x, y);
-			for (int j = 0; j < 20; j++) {
-				switch (C[i][k][j]) {
-				case 0:
-					printf("　");
-					break;
-				case 1:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 2:
-					setColor(WHITE);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 3:
-					setColor(RED);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				case 4:
-					setColor(GRAY);
-					printf("■");
-					setColor(YELLOW);
-					break;
-				}
-
-				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
-			}
-			printf("\n");
-			y++;
-		}
-		y = 0;
-	}
-}

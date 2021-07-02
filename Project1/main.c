@@ -35,14 +35,15 @@ int main()
 	//carb3 = 3;
 	//rocket = 1;
 	//spacesuit = 1;
-	boom(1);
-	Sleep(5000);
+	news = 100;
 	while (1) {
 		int menuCode = menuDraw();
 		if (menuCode == 0) {
+			//게임시작 
 			EntryStory();
 			startDraw();
-			//게임시작
+			// 엔딩
+			Ending_TItle();
 		}
 		else if (menuCode == 1) {
 			// 게임정보
