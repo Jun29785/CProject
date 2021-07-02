@@ -175,7 +175,7 @@ void hydroBomb();
 void oxid();
 void earth_death();
 void no_money();
-void Ending_TItle();
+void Ending_Title();
 
 
 

@@ -1291,7 +1291,7 @@ void RSP()
 			printf("산소 +%d / 현재 산소 %d", (num + 1) / 2, oxy);
 			break;
 		case 2:
-			carb += (num + 1)/2;
+			carb += (num + 1) / 2;
 			gotoxy(50, 28);
 			printf("탄소 +%d / 현재 탄소 %d", (num + 1) / 2, carb);
 			break;
@@ -1310,7 +1310,7 @@ void RSP()
 
 #pragma region Avoid_Block
 
-block_width = SCR_WIDTH / 2+30;
+block_width = SCR_WIDTH / 2 + 30;
 
 void Block_init()
 {
@@ -1374,7 +1374,7 @@ void Block_move_player()
 		printf(" ");
 		player.x--;
 	}
-	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('D')) && player.x < block_width-2) {
+	if ((Block_iskeydown(VK_RIGHT) || Block_iskeydown('D')) && player.x < block_width - 2) {
 		gotoxy(player.x, SCR_HEIGHT);
 		printf(" ");
 		player.x++;
@@ -1383,7 +1383,7 @@ void Block_move_player()
 
 void Block_print_map(int score)
 {
-	for (int k = 0; k < 35; k++) {
+	for (int k = 0; k < 38; k++) {
 		gotoxy(50, k);
 		puts("┃");
 	}
@@ -1398,10 +1398,12 @@ void Block_print_map(int score)
 	printf("옷");
 
 	gotoxy(0, SCR_HEIGHT + 1);
-	for (int i = 0; i < SCR_HEIGHT - 12; i++)
+	for (int i = 0; i < SCR_HEIGHT - 10; i++)
 		printf("▦");
 	gotoxy(60, 28);
 	printf("score : %6d", score);
+	gotoxy(60, 24);
+	printf("이동 : A  D");
 }
 
 void Block_Avoid()
@@ -1429,7 +1431,7 @@ void Block_Avoid()
 	char key;
 	Block_init();
 	system("cls");
-	int x = 25, y = 10;
+	int x = 21, y = 10;
 	int score = 0;
 	for (int i = 2; i > -1; i--) {
 		Block_print_map(score);
@@ -1463,7 +1465,7 @@ void Block_Avoid()
 	switch (hoctemp)
 	{
 	case 0:
-		hydro += item+1;
+		hydro += item + 1;
 		gotoxy(60, 29);
 		printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
 		break;
@@ -1734,8 +1736,8 @@ int NextmainDraw()
 		case ENTER: {
 			return y - 26;
 		}
-	}
 		}
+	}
 }
 
 void ChckHiddenEnd()
@@ -1796,7 +1798,6 @@ void hydroBomb() // 수소 폭발
 	}
 }
 
-
 void oxid() // 산화
 {
 	char ending[][70] = { "산소가 너무 많이 모였다.", "외계인들이 타고 온 UFO에 캡슐을 던졌다.","UFO에서 산화 작용이 일어났다.             ", "외계인들과 함께 지구에서 살게 되었다." };
@@ -1809,7 +1810,6 @@ void oxid() // 산화
 		Sleep(250);
 	}
 }
-
 
 void no_money() // 파산
 {
@@ -1826,7 +1826,7 @@ void no_money() // 파산
 
 void earth_death() // 온난화
 {
-	char ending[][70] = { "산소와 탄소가 너무 많이 모였다.", "이산화탄소가 생성되었다.            ","지구가 점점 뜨거워진다..", "결국 사람과 외계인은 모두 지구에서 살수 없게됬다."};
+	char ending[][70] = { "산소와 탄소가 너무 많이 모였다.", "이산화탄소가 생성되었다.            ","지구가 점점 뜨거워진다..", "결국 사람과 외계인은 모두 지구에서 살수 없게됬다." };
 	for (int i = 0; i < 4; i++) {
 		gotoxy(0, 0);
 		for (int k = 0; k < 70; k++) {
@@ -1837,7 +1837,7 @@ void earth_death() // 온난화
 	}
 }
 
-void Ending_TItle()
+void Ending_Title()
 {
 	int title[7][5][5] = {
 		// T
@@ -1898,7 +1898,18 @@ void Ending_TItle()
 		y = 12;
 		x += 12;
 	}
-	Sleep(2500);
+	Sleep(250);
+
+
+	int c;
+
+	gotoxy(30, 24);
+	printf("< 계속하려면 아무키나 누르세요. >");
+	c = getch();
+	if (c != NULL) {
+		system("cls");
+		return;
+	}
 }
 
 void NextgameDraw()
@@ -1915,6 +1926,7 @@ void NextgameDraw()
 		break;
 	}
 }
+
 #pragma region CREATE
 
 int creategameDraw()
@@ -2102,7 +2114,7 @@ void anvilhammer()
 void AilenBeam()
 {
 	char event[][50] = { "밤 사이에 외계인이 쏜 수상한 빔에 맞았다.","아이템 전체가 절반 감소되었다.           " };
-	
+
 	for (int i = 0; i < 2; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -2149,7 +2161,7 @@ void Delivery()
 
 void Water()
 {
-	char event[][50] = { "밤 사이에 물에서 산소와 수소 추출을 성공하였다."};
+	char event[][50] = { "밤 사이에 물에서 산소와 수소 추출을 성공하였다." };
 	for (int i = 0; i < 1; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -2158,14 +2170,14 @@ void Water()
 		}
 		Sleep(250);
 	}
-	int num = rand() % 5 +1;
+	int num = rand() % 5 + 1;
 	oxy += num;
 	hydro += (num * 2);
 }
 
 void Mouse()
 {
-	char event[][50] = { "밤 사이에 쥐가 자원을 물고 갔다."};
+	char event[][50] = { "밤 사이에 쥐가 자원을 물고 갔다." };
 	for (int i = 0; i < 1; i++) {
 		gotoxy(0, 21);
 		for (int k = 0; k < 50; k++) {
@@ -2174,7 +2186,7 @@ void Mouse()
 		}
 		Sleep(250);
 	}
-	int rnd = rand() % 10+1;
+	int rnd = rand() % 10 + 1;
 	if (hydro > rnd) hydro -= rnd;
 	else hydro = 0;
 	if (oxy > rnd) oxy -= rnd;
@@ -2507,7 +2519,6 @@ int createnextDraw()
 }
 #pragma endregion
 
-
 void NextSleep()
 {
 	day++;
@@ -2606,6 +2617,7 @@ void coinmainDraw()
 void create() {
 
 	int menuCode = creategameDraw();
+	int random;
 	switch (menuCode) {
 	case 0:
 		lv_2 = lv2();
@@ -2716,7 +2728,19 @@ void create() {
 				return 0;
 			}
 			anvilhammer();
-			rocket++;
+			random = rand() % 2;
+			gotoxy(54, 31);
+			if (random == 1) {
+				rocket++;
+				setColor(GREEN);
+				printf("우주선 제작에 성공하였습니다.");
+			}
+			else {
+				setColor(RED);
+				printf("우주선 제작에 실패했습니다.");
+			}
+			Sleep(400);
+			setColor(YELLOW);
 			hydro3 -= 2;
 			oxy3 -= 2;
 			carb3 -= 2;
@@ -2736,7 +2760,20 @@ void create() {
 				return 0;
 			}
 			anvilhammer();
-			spacesuit++;
+			
+			random = rand() % 2;
+			gotoxy(54, 31);
+			if (random == 1) {
+				spacesuit++;
+				setColor(GREEN);
+				printf("우주복 제작에 성공하였습니다.");
+			}
+			else {
+				setColor(RED);
+				printf("우주복 제작에 실패했습니다.");
+			}
+			Sleep(400);
+			setColor(YELLOW);
 			hydro3 -= 1;
 			oxy3 -= 1;
 			carb3 -= 1;
@@ -2754,7 +2791,6 @@ void create() {
 	}
 
 }
-
 
 void OddEvendote(int num) {
 	int rsp[2][18][13] = {
@@ -3042,7 +3078,9 @@ void EndGame_Main()
 			endsuccedsin();
 		}
 	}
-
+	if (EndGameScore < 150) {
+		endlosesin();
+	}
 	for (int k = 0; k < MAX_BULLETS; k++) {
 		if (P_Bullet_Array[k] != NULL) {
 			free(P_Bullet_Array[k]);
@@ -3179,7 +3217,7 @@ void EndGame_Player_Controll()
 			User.y--;
 	}
 	if (GetAsyncKeyState('S') & 0x8000) {
-		if (User.y < EndGame_HEIGHT-1) {
+		if (User.y < EndGame_HEIGHT - 1) {
 			User.y++;
 		}
 	}

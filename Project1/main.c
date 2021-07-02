@@ -35,6 +35,7 @@ int main()
 	//carb3 = 3;
 	//rocket = 1;
 	//spacesuit = 1;
+	Ending_Title();
 	news = 100;
 	while (1) {
 		int menuCode = menuDraw();
@@ -43,7 +44,7 @@ int main()
 			EntryStory();
 			startDraw();
 			// 엔딩
-			Ending_TItle();
+			Ending_Title();
 		}
 		else if (menuCode == 1) {
 			// 게임정보
