@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 #define SCR_HEIGHT 36
 #define SCR_WIDTH 96

@@ -30,4 +30,18 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Downloads\키보드5.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Downloads\게임코인획득\코인획득20.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Downloads\게임코인획득\코인획득실패24.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Downloads\Hammer 9.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
