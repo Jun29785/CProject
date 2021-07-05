@@ -43,7 +43,7 @@ int main()
 			EntryStory();
 			startDraw();
 			// 엔딩
-			Ending_TItle();
+			Ending_Title();
 		}
 		else if (menuCode == 1) {
 			// 게임정보
