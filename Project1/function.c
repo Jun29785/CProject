@@ -208,6 +208,7 @@ void EntryStory()
 		{0,0,1,0,0}}
 	};
 
+	
 	int x = 42, y = 21;
 	Sleep(200);
 	// entrystory
@@ -218,17 +219,21 @@ void EntryStory()
 		gotoxy(22, 33);  printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		spaceship();
 		gotoxy(0, 22);
-		for (int j = 0; j < STORYMAX; j++) {
+		PlaySound(NULL, 0, 0);
+		PlaySound(TEXT("키보드5.wav"), 0, SND_FILENAME | SND_ASYNC);
+		for (int j = 0; j < strlen(story[i]); j++) {
 			printf("%c", story[i][j]);
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
 				system("cls");
-
+				PlaySound(NULL, 0, 0);
 				day++;
 				DayAlter(day);
 				return;
 			}
-			Sleep(20);
+			Sleep(40);
 		}
+		PlaySound(NULL, 0, 0);
+		Sleep(300);
 	}
 	day++;
 	DayAlter(day);
@@ -758,6 +763,8 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
+			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 			switch (hoctemp)
 			{
 			case 0:
@@ -781,6 +788,8 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
+			PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 		}
 		break;
 	case 1:
@@ -792,6 +801,8 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
+			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 			switch (hoctemp)
 			{
 			case 0:
@@ -815,11 +826,13 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
+			PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 		}
 		break;
 	}
 	setColor(YELLOW);
-	Sleep(2500);
+	Sleep(1000);
 }
 
 int hocDraw()
@@ -1285,6 +1298,8 @@ void RSP()
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("이겼습니다");
+		PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
+		Sleep(1000);
 		switch (hoctemp)
 		{
 		case 0:
@@ -1303,12 +1318,14 @@ void RSP()
 			printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
 			break;
 		}
-		Sleep(2000);
+		Sleep(1000);
 	}
 	else if (player - rnd_rsp == 0) {
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("비겼습니다.");
+		PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
+		Sleep(1000);
 		switch (hoctemp)
 		{
 		case 0:
@@ -1327,12 +1344,13 @@ void RSP()
 			printf("탄소 +%d / 현재 탄소 %d", (num + 1) / 2, carb);
 			break;
 		}
-		Sleep(2000);
+		Sleep(1000);
 	}
 	else {
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("졌습니다");
+		PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
 		Sleep(2000);
 	}
 	setColor(YELLOW);
@@ -1493,22 +1511,29 @@ void Block_Avoid()
 		Sleep(20);
 	} while (!(Block_contain_player()));
 	int item = score / 35;
+	PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
 	switch (hoctemp)
 	{
 	case 0:
 		hydro += item + 1;
 		gotoxy(60, 29);
+		setColor(GREEN);
 		printf("수소 +%d / 현재 수소 %d", item + 1, hydro);
+		setColor(YELLOW);
 		break;
 	case 1:
 		oxy += item + 1;
 		gotoxy(60, 29);
+		setColor(GREEN);
 		printf("산소 +%d / 현재 산소 %d", item + 1, oxy);
+		setColor(YELLOW);
 		break;
 	case 2:
 		carb += item + 1;
-		gotoxy(60, 29);
+		gotoxy(60, 28);
+		setColor(GREEN);
 		printf("탄소 +%d / 현재 탄소 %d", item + 1, carb);
+		setColor(YELLOW);
 		break;
 	}
 	Sleep(2000);
@@ -2521,6 +2546,7 @@ void hammer() {
 			}
 			printf("\n");
 			y++;
+			PlaySound(TEXT("Hammer 9"), 0, SND_FILENAME | SND_ASYNC);
 		}
 		Sleep(sleep);
 		y = 0;
@@ -2642,6 +2668,8 @@ void coinmainDraw()
 		if (menuCode != n) {
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
+			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 			switch (hoctemp)
 			{
 			case 0:
@@ -2660,11 +2688,12 @@ void coinmainDraw()
 				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
 				break;
 			}
-			Sleep(2000);
+			Sleep(1000);
 		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
+			PlaySound(TEXT("코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(2000);
 		}
 		setColor(YELLOW);
@@ -2677,6 +2706,8 @@ void coinmainDraw()
 		if (menuCode != n) {
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
+			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			Sleep(1000);
 			switch (hoctemp)
 			{
 			case 0:
@@ -2695,11 +2726,12 @@ void coinmainDraw()
 				printf("탄소 +%d / 현재 탄소 %d", num + 1, carb);
 				break;
 			}
-			Sleep(2000);
+			Sleep(1000);
 		}
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
+			PlaySound(TEXT("코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(2000);
 		}
 		setColor(YELLOW);

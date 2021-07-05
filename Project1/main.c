@@ -33,8 +33,8 @@ int main()
 	//hydro3 = 3;
 	//oxy3 = 2;
 	//carb3 = 3;
-	//rocket = 1;
-	//spacesuit = 1;
+	rocket = 1;
+	spacesuit = 1;
 	news = 100;
 	while (1) {
 		int menuCode = menuDraw();
