@@ -220,7 +220,7 @@ void EntryStory()
 		spaceship();
 		gotoxy(0, 22);
 		PlaySound(NULL, 0, 0);
-		PlaySound(TEXT("키보드5.wav"), 0, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("Sounds/키보드5.wav"), 0, SND_FILENAME | SND_ASYNC);
 		for (int j = 0; j < strlen(story[i]); j++) {
 			printf("%c", story[i][j]);
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
@@ -237,37 +237,6 @@ void EntryStory()
 	}
 	day++;
 	DayAlter(day);
-	//// count
-	//for (int i = 2; i > -1; i--) {
-	//	for (int j = 0; j < 5; j++) {
-	//		gotoxy(x, y);
-	//		for (int k = 0; k < 4; k++) {
-	//			printf("%s", CountNum[i][j][k] == 1 ? "■" : "　");
-	//		}
-	//		printf("\n");
-	//		y++;
-	//	}
-	//	Sleep(1000);
-	//	system("cls");
-	//	y = 7;
-	//}
-	//// start
-	//x = 18, y = 10;
-	//for (int i = 0; i < 5; i++) {
-
-	//	for (int j = 0; j < 5; j++) {
-	//		gotoxy(x, y);
-	//		for (int k = 0; k < 5; k++) {
-	//			printf("%s", Start[i][j][k] == 1 ? "■" : "　");
-	//		}
-	//		printf("\n");
-	//		y++;
-	//	}
-	//	Sleep(200);
-	//	x += 12; y = 10;
-	//}
-	//system("cls");
-			/*onetwothree();*/
 }
 
 #pragma region Draw 
@@ -763,7 +732,7 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
-			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 			switch (hoctemp)
 			{
@@ -788,7 +757,7 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
-			PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 		}
 		break;
@@ -801,7 +770,7 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
-			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 			switch (hoctemp)
 			{
@@ -826,7 +795,7 @@ void DicemainDraw()
 		{
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
-			PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 		}
 		break;
@@ -1284,21 +1253,11 @@ void RSP()
 	Sleep(2000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-	//if (player - rnd_rsp == 0) {
-	//	puts("비겼습니다.");
-	//	Sleep(1000);
-	//}
-	//else if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
-	//	puts("이겼습니다.");
-	//}
-	//else {
-	//	puts("졌습니다.");
-	//}
 	if (player - rnd_rsp == -1 || player - rnd_rsp == 2) {
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("이겼습니다");
-		PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("Sounds/코인획득20"), 0, SND_FILENAME | SND_ASYNC);
 		Sleep(1000);
 		switch (hoctemp)
 		{
@@ -1324,7 +1283,7 @@ void RSP()
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("비겼습니다.");
-		PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("Sounds/코인획득20"), 0, SND_FILENAME | SND_ASYNC);
 		Sleep(1000);
 		switch (hoctemp)
 		{
@@ -1350,7 +1309,7 @@ void RSP()
 		gotoxy(50, 28);
 		setColor(GREEN);
 		printf("졌습니다");
-		PlaySound(TEXT("코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("Sounds/코인획득실패24"), 0, SND_FILENAME | SND_ASYNC);
 		Sleep(2000);
 	}
 	setColor(YELLOW);
@@ -1511,7 +1470,7 @@ void Block_Avoid()
 		Sleep(20);
 	} while (!(Block_contain_player()));
 	int item = score / 35;
-	PlaySound(TEXT("코인획득20"), 0, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Sounds/코인획득20"), 0, SND_FILENAME | SND_ASYNC);
 	switch (hoctemp)
 	{
 	case 0:
@@ -2447,7 +2406,6 @@ void hammer() {
 					break;
 				}
 
-				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
 			}
 			printf("\n");
 			y++;
@@ -2542,11 +2500,10 @@ void hammer() {
 					setColor(YELLOW);
 					break;
 				}
-				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
 			}
 			printf("\n");
 			y++;
-			PlaySound(TEXT("Hammer 9"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Hammer_9.wav"), 0, SND_FILENAME | SND_ASYNC);
 		}
 		Sleep(sleep);
 		y = 0;
@@ -2668,7 +2625,7 @@ void coinmainDraw()
 		if (menuCode != n) {
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
-			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 			switch (hoctemp)
 			{
@@ -2693,7 +2650,7 @@ void coinmainDraw()
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
-			PlaySound(TEXT("코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(2000);
 		}
 		setColor(YELLOW);
@@ -2706,7 +2663,7 @@ void coinmainDraw()
 		if (menuCode != n) {
 			gotoxy(50, 27);
 			printf("맞추셨습니다");
-			PlaySound(TEXT("코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득20.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(1000);
 			switch (hoctemp)
 			{
@@ -2731,7 +2688,7 @@ void coinmainDraw()
 		else if (menuCode == n) {
 			gotoxy(50, 27);
 			printf("맞추지 못하셨습니다");
-			PlaySound(TEXT("코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("Sounds/코인획득실패24.wav"), 0, SND_FILENAME | SND_ASYNC);
 			Sleep(2000);
 		}
 		setColor(YELLOW);
@@ -3084,47 +3041,6 @@ void endlosesin()
 
 void frontbackdote(int num)
 {
-	//int fb[2][18][18] = {
-	//	// 홀
-	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
-	//	{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0},
-	//	{0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0},
-	//	{0,0,0,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	//	{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-	//	{0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0},
-	//	{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0}},
-
-	//	// 짝
-	//   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
-	//	{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
-	//	{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0}}
-	//};
 	int fb[2][7][7] = {
 		// front
 		{{0,0,1,1,1,0,0},
