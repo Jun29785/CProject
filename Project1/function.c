@@ -2373,6 +2373,7 @@ void anvilhammer()
 		anvil();
 		hammer();
 	}
+	PlaySound(NULL, 0, 0);
 	system("cls");
 }
 
@@ -2717,8 +2718,10 @@ void hammer() {
 	x = 28, y = 10;
 
 	anvil();
+
 	for (int i = 2; i < 3; i++)
 	{
+		PlaySound(TEXT("hammer1"), 0, SND_FILENAME | SND_ASYNC);
 		for (int k = 0; k < 15; k++)
 		{
 			gotoxy(x, y);
@@ -2752,7 +2755,7 @@ void hammer() {
 			}
 			printf("\n");
 			y++;
-			PlaySound(TEXT("Hammer 9"), 0, SND_FILENAME | SND_ASYNC);
+			
 		}
 		Sleep(sleep);
 		y = 0;

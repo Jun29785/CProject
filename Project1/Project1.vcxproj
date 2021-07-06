@@ -147,10 +147,10 @@
     <ClInclude Include="GameDefine.h" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\..\Downloads\Hammer 9.wav" />
     <Media Include="..\..\..\..\Downloads\게임코인획득\코인획득20.wav" />
     <Media Include="..\..\..\..\Downloads\게임코인획득\코인획득실패24.wav" />
     <Media Include="..\..\..\..\Downloads\키보드5.wav" />
+    <Media Include="..\..\..\..\OneDrive\Desktop\3st\Mixdown\hammer1.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
