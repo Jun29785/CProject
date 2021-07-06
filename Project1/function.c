@@ -1676,6 +1676,7 @@ void DayAlter(int day)
 			y++;
 		}
 	}
+
 	else if (day > 9) {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -1686,6 +1687,7 @@ void DayAlter(int day)
 			y++;
 		}
 	}
+
 	else {
 		for (int j = 0; j < 5; j++) {
 			gotoxy(x, y);
@@ -2386,9 +2388,69 @@ void AilenBeam()
 		}
 		Sleep(250);
 	}
-	hydro /= 2; hydro2 /= 2; hydro3 /= 2;
-	oxy /= 2; oxy2 /= 2; oxy3 /= 2;
-	carb /= 2; carb2 /= 2; carb3 /= 2;
+#pragma region Hydro
+	if (hydro % 2 == 0) {
+		hydro /= 2;
+	}
+	else {
+		hydro /= 2 + 1;
+	}
+	if (hydro2 % 2 == 0) {
+		hydro2 /= 2;
+	}
+	else {
+		hydro2 /= 2 + 1;
+	}
+	if (hydro3 % 2 == 0) {
+		hydro3 /= 2;
+	}
+	else {
+		hydro3 /= 2 + 1;
+	}
+#pragma endregion
+
+#pragma region Oxy
+	if (oxy % 2 == 0) {
+		oxy /= 2;
+	}
+	else {
+		oxy /= 2 + 1;
+	}
+	if (oxy2 % 2 == 0) {
+		oxy2 /= 2;
+	}
+	else {
+		oxy2 /= 2 + 1;
+	}
+	if (oxy3 % 2 == 0) {
+		oxy3 /= 2;
+	}
+	else {
+		oxy3 /= 2 + 1;
+	}
+#pragma endregion
+
+#pragma region Carb
+	if (carb % 2 == 0) {
+		carb /= 2;
+	}
+	else {
+		carb /= 2 + 1;
+	}
+	if (carb2 % 2 == 0) {
+		carb2 /= 2;
+	}
+	else {
+		carb2 /= 2 + 1;
+	}
+	if (carb3 % 2 == 0) {
+		carb3 /= 2;
+	}
+	else {
+		carb3 /= 2 + 1;
+	}
+#pragma endregion
+
 }
 
 void Delivery()
