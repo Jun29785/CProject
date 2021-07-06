@@ -42,6 +42,8 @@ int rnd_coin;
 
 bool GAMEEND;
 
+int savecount;
+
 //제작 전역변수
 int lv_2;
 int lv_3;
@@ -59,6 +61,7 @@ int OddEvencheck;
 int hoctemp;
 int DAN;
 int rsswap;
+int memo;
 
 // 색상
 enum {
@@ -176,7 +179,9 @@ void oxid();
 void earth_death();
 void no_money();
 void Ending_Title();
-
+void write();
+void read();
+void loading();
 
 
 
