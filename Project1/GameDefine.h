@@ -7,6 +7,7 @@
 #include <time.h>
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
+#pragma warning(disable:4996)
 
 #define SCR_HEIGHT 36
 #define SCR_WIDTH 96

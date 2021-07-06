@@ -208,7 +208,7 @@ void EntryStory()
 		{0,0,1,0,0}}
 	};
 
-	
+
 	int x = 42, y = 21;
 	Sleep(200);
 	// entrystory
@@ -249,6 +249,8 @@ int menuDraw()
 	gotoxy(x, y + 1);
 	printf("게임정보");
 	gotoxy(x, y + 2);
+	printf("이어하기");
+	gotoxy(x, y + 3);
 	printf("  종료  ");
 
 	while (1) {
@@ -264,7 +266,7 @@ int menuDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 24) {
+			if (y < 25) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -436,6 +438,8 @@ int mainDraw()
 	if (rsswap == 1) {
 		printf("탈출");
 	}
+	gotoxy(x, y + 4);
+	printf("저장하기");
 
 
 	while (1) {
@@ -451,7 +455,7 @@ int mainDraw()
 			break;
 		}
 		case DOWN: {
-			if (y < 29) {
+			if (y < 30) {
 				gotoxy(x - 2, y);
 				printf(" ");
 				gotoxy(x - 2, ++y);
@@ -542,6 +546,9 @@ void startDraw()
 			printf("아직 개방되지 않았습니다.");
 			setColor(YELLOW);
 			Sleep(400);
+		}
+		else if (menuCode == 4) {
+			write();
 		}
 		//else if (menuCode == 3 && rsswap == 0) {
 		//	Sleep(1000);
@@ -1839,6 +1846,205 @@ void no_money() // 파산
 		}
 		Sleep(250);
 	}
+}
+
+void write()
+{
+	//FILE* pFile = fopen("data.txt", "w"); // write mode
+	//fprintf(pFile, "%d-", day);
+	//fprintf(pFile, "%d-", minigamecount);
+	//fclose(pFile);
+	FILE* fp = fopen("data.dat", "wb"); // 파일 열기
+	memo++;
+	if (fp == NULL) { // NULL이 반환되면 종료
+
+		return 0;
+
+	}
+
+	fwrite(&day, sizeof(int), 1, fp);
+	fwrite(&minigamecount, sizeof(int), 1, fp);
+	fwrite(&hydro, sizeof(int), 3, fp);
+	fwrite(&oxy, sizeof(int), 3, fp);
+	fwrite(&carb, sizeof(int), 3, fp);
+	fwrite(&hydro2, sizeof(int), 3, fp);
+	fwrite(&oxy2, sizeof(int), 3, fp);
+	fwrite(&carb2, sizeof(int), 3, fp);
+	fwrite(&hydro3, sizeof(int), 3, fp);
+	fwrite(&oxy3, sizeof(int), 3, fp);
+	fwrite(&carb3, sizeof(int), 3, fp);
+	fwrite(&rocket, sizeof(int), 3, fp);
+	fwrite(&spacesuit, sizeof(int), 3, fp);
+	fwrite(&rsswap, sizeof(int), 1, fp);
+	fwrite(&memo, sizeof(int), 1, fp);
+
+
+	fclose(fp); //파일 닫기
+	gotoxy(56, 30);
+	setColor(GREEN);
+	printf("데이터가 저장되었습니다.");
+	setColor(YELLOW);
+	Sleep(1000);
+
+	return 0;
+}
+
+void read() {
+	FILE* fp = fopen("data.dat", "rb");
+
+	if (fp == NULL) {
+
+		return 0;
+
+	}
+
+	fread(&day, sizeof(int), 1, fp);
+	fread(&minigamecount, sizeof(int), 1, fp);
+	fread(&hydro, sizeof(int), 3, fp);
+	fread(&oxy, sizeof(int), 3, fp);
+	fread(&carb, sizeof(int), 3, fp);
+	fread(&hydro2, sizeof(int), 3, fp);
+	fread(&oxy2, sizeof(int), 3, fp);
+	fread(&carb2, sizeof(int), 3, fp);
+	fread(&hydro3, sizeof(int), 3, fp);
+	fread(&oxy3, sizeof(int), 3, fp);
+	fread(&carb3, sizeof(int), 3, fp);
+	fread(&rocket, sizeof(int), 3, fp);
+	fread(&spacesuit, sizeof(int), 3, fp);
+	fread(&rsswap, sizeof(int), 1, fp);
+	fread(&memo, sizeof(int), 1, fp);
+
+	fclose(fp);
+
+
+
+
+	//printf("HP=%d\nMP=%d\n소지금=%d\n경험치=%d\n",
+
+	//	Data.HP, Data.MP, Data.Money, Data.Exp);
+
+
+	//int kg = 0;
+	//int cm = 0;
+	//char str[100];
+	//fgets(str, 4, pFile);
+	//fclose(pFile);
+	//gotoxy(50, 30);
+	//for (int i = cm; i < 4; i++) {
+	//	if (str[i] == '-') {
+	//		savecount++;
+	//		kg = i;
+	//	}
+	//	switch (savecount) {
+	//	case 1: 
+	//		for(int i = kg )
+	//		break;
+	//	}
+	//}
+	//printf("%c", str[0]);
+}
+
+void loading()
+{
+	system("cls");
+	int anvil[6][10][28] = {
+		// 1
+	   {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+		{0,1,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+		{0,1,0,0,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,1,1,0,0,1,0,0,1},
+		{0,1,0,0,0,0,1,0,0,1,0,1,1,1,0,0,1,0,1,1,0,0,1,0,1,0,0,1},
+		{0,1,0,0,0,0,1,0,0,1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,1,1,1},
+		{0,1,1,1,1,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,0,0,0,1},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0}},
+	};
+
+	int jom[6][4][8] = {
+		// 1
+	   {{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,1,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0}},
+
+		//2 
+	   {{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,1,0,1,0,0,0,0},
+		{0,0,0,0,0,0,0,0}},
+		//3
+	   {{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,1,0,1,0,1,0,0},
+		{0,0,0,0,0,0,0,0}},
+	};
+
+	int x = 10, y = 13, sleep = 70;
+	for (int i = 0; i < 1; i++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			gotoxy(x, y);
+			for (int j = 0; j < 28; j++) {
+				switch (anvil[i][k][j]) {
+				case 0:
+					printf("　");
+					break;
+				case 1:
+					setColor(WHITE);
+					printf("■");
+					setColor(YELLOW);
+					break;
+				case 2:
+					setColor(GRAY);
+					printf("■");
+					setColor(YELLOW);
+				}
+				/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+			}
+			printf("\n");
+			y++;
+		}
+		Sleep(sleep);
+		y = 13;
+	}
+	sleep += 150;
+	sleep += 100;
+	x = 70, y = 18;
+	for (int g = 0; g < 3; g++) {
+		for (int i = 0; i < 3; i++)
+		{
+			for (int k = 0; k < 4; k++)
+			{
+				gotoxy(x, y);
+				for (int j = 0; j < 8; j++) {
+					switch (jom[i][k][j]) {
+					case 0:
+						printf("　");
+						break;
+					case 1:
+						setColor(WHITE);
+						printf("■");
+						setColor(YELLOW);
+						break;
+					case 2:
+						setColor(GRAY);
+						printf("■");
+						setColor(YELLOW);
+					}
+					/*printf("%s", anvil[i][k][j] == 1 ? "■" : "　");*/
+				}
+				printf("\n");
+				y++;
+			}
+			Sleep(sleep);
+			y = 18;
+		}
+	}
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 }
 
 void earth_death() // 온난화
