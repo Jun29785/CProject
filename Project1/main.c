@@ -8,17 +8,7 @@ int main()
 	gotoxy(x, y);
 	HideCursor();
 	minigamecount = 3;
-	//while (1)
-	//{
-	//	if (GetAsyncKeyState(VK_RIGHT))
-	//		x++;
-	//	if (GetAsyncKeyState(VK_LEFT))
-	//		x--;
-	//	system("cls");
-	//	gotoxy(x, y);
-	//	printf("■");
-	//	printf("TEST");	
-	//}
+
 	init();
 
 	//// 원소 1레벨
