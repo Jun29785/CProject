@@ -226,8 +226,21 @@ void EntryStory()
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
 				system("cls");
 				PlaySound(NULL, 0, 0);
-				day++;
+				day = 1;
 				DayAlter(day);
+				minigamecount = 3;
+				hydro = 0;
+				oxy = 0;
+				carb = 0;
+				hydro2 = 0;
+				oxy2 = 0;
+				carb2 = 0;
+				hydro3 = 0;
+				oxy3 = 0;
+				carb3 = 0;
+				rsswap = 0;
+				rocket = 0;
+				spacesuit = 0;
 				return;
 			}
 			Sleep(40);
@@ -235,8 +248,21 @@ void EntryStory()
 		PlaySound(NULL, 0, 0);
 		Sleep(300);
 	}
-	day++;
+	day = 1;
 	DayAlter(day);
+	minigamecount = 3;
+	hydro = 0;
+	oxy = 0;
+	carb = 0;
+	hydro2 = 0;
+	oxy2 = 0;
+	carb2 = 0;
+	hydro3 = 0;
+	oxy3 = 0;
+	carb3 = 0;
+	rsswap = 0;
+	rocket = 0;
+	spacesuit = 0;
 }
 
 #pragma region Draw 
@@ -439,7 +465,7 @@ int mainDraw()
 		printf("탈출");
 	}
 	gotoxy(x, y + 4);
-	printf("저장하기");
+	printf("메인메뉴로 나가기");
 
 
 	while (1) {
@@ -548,7 +574,7 @@ void startDraw()
 			Sleep(400);
 		}
 		else if (menuCode == 4) {
-			write();
+			test();
 		}
 		//else if (menuCode == 3 && rsswap == 0) {
 		//	Sleep(1000);
@@ -606,6 +632,45 @@ int minigameDraw()
 			return y - 26;
 		}
 		}
+	}
+}
+void test() {
+	system("cls");
+	while (1) {
+		int menuCode = menuDraw();
+		if (menuCode == 0) {
+			//게임시작 
+			EntryStory();
+			startDraw();
+			// 엔딩
+			Ending_Title();
+		}
+		else if (menuCode == 1) {
+			// 게임정보
+			infoDraw();
+		}
+		else if (menuCode == 2) {
+			read();
+			if (memo == 0) {
+				gotoxy(54, 25);
+				setColor(RED);
+				printf("저장된 데이터가 없습니다.");
+				setColor(YELLOW);
+				Sleep(400);
+			}
+			else if (memo >= 1) {
+				read();
+				loading();
+				Sleep(1000);
+				DayAlter(day);
+				startDraw();
+			}
+
+		}
+		else if (menuCode == 3) {
+			return 0; // 종료
+		}
+		system("cls");
 	}
 }
 
@@ -2814,6 +2879,7 @@ void NextSleep()
 	if (day == 31) {
 		exit(0);
 	}
+	write();
 	startDraw();
 
 }

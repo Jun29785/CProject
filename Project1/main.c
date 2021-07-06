@@ -26,40 +26,5 @@ int main()
 	rocket = 0;
 	spacesuit = 0;
 	news = 100;
-	while (1) {
-		int menuCode = menuDraw();
-		if (menuCode == 0) {
-			//게임시작 
-			EntryStory();
-			startDraw();
-			// 엔딩
-			Ending_Title();
-		}
-		else if (menuCode == 1) {
-			// 게임정보
-			infoDraw();
-		}
-		else if (menuCode == 2) {
-			read();
-			if (memo == 0) {
-				gotoxy(54, 25);
-				setColor(RED);
-				printf("저장된 데이터가 없습니다.");
-				setColor(YELLOW);
-				Sleep(400);
-			}
-			else if (memo >= 1) {
-				read();
-				loading();
-				Sleep(1000);
-				DayAlter(day);
-				startDraw();
-			}
-
-		}
-		else if (menuCode == 3) {
-			return 0; // 종료
-		}
-		system("cls");
-	}
+	test();
 }

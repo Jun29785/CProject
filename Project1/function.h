@@ -182,7 +182,7 @@ void Ending_Title();
 void write();
 void read();
 void loading();
-
+void test();
 
 
 
